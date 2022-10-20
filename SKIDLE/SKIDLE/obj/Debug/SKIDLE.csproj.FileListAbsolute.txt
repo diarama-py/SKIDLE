@@ -1,0 +1,11 @@
+D:\SKIDLE\SKIDLE\bin\Debug\SKIDLE.exe.config
+D:\SKIDLE\SKIDLE\bin\Debug\SKIDLE.exe
+D:\SKIDLE\SKIDLE\bin\Debug\SKIDLE.pdb
+D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.AssemblyReference.cache
+D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.SuggestedBindingRedirects.cache
+D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.Form1.resources
+D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.Properties.Resources.resources
+D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.GenerateResource.cache
+D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.CoreCompileInputs.cache
+D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.exe
+D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.pdb
