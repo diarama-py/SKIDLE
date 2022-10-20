@@ -9,3 +9,4 @@ D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.GenerateResource.cache
 D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.CoreCompileInputs.cache
 D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.exe
 D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.pdb
+D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.CopyComplete
