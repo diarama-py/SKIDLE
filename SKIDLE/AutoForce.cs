@@ -17,6 +17,7 @@ namespace SKIDLE
 
         public void autoForce()
         {
+            this.MinFragmentLength = 1;
             List<String> keywords = new List<string>();
             List<String> key = new List<string>();
             IList<string> lines = code.Lines;

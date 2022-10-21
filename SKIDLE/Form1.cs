@@ -24,14 +24,16 @@ namespace SKIDLE
         private void открытьФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
-            openFile.ShowDialog();
-            FileInfo fi = new FileInfo(openFile.FileName);
-            codeTab tab = new codeTab();
-            tabControl.Tabs.Add(tab);
-            tabControl.SelectedTab = tab;
-            tab.code.OpenFile(fi.FullName);
-            tab.Text = fi.Name;
-            tab.Name = fi.FullName;
+            if (openFile.ShowDialog() != DialogResult.Cancel)
+            {
+                FileInfo fi = new FileInfo(openFile.FileName);
+                codeTab tab = new codeTab();
+                tabControl.Tabs.Add(tab);
+                tabControl.SelectedTab = tab;
+                tab.code.OpenFile(fi.FullName);
+                tab.Text = fi.Name;
+                tab.Name = fi.FullName;
+            }
         }
 
         private void открытьТерминалToolStripMenuItem_Click(object sender, EventArgs e)
