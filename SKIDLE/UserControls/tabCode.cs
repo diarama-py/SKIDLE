@@ -18,7 +18,7 @@ namespace SKIDLE.UserControls
         public codeTab()
         {
             ini();
-            
+
         }
 
         private void ini()
@@ -32,14 +32,14 @@ namespace SKIDLE.UserControls
             split.Panel1.Controls.Add(code);
             split.Panel2.Controls.Add(documentMap);
 
-            code.BackColor = Color.FromArgb(30,30,30);
+            code.BackColor = Color.FromArgb(30, 30, 30);
             documentMap.BackColor = Color.FromArgb(30, 30, 30);
             code.ForeColor = Color.WhiteSmoke;
             code.TextChanging += Code_TextChanging;
             code.Load += Code_Load;
             code.Dock = DockStyle.Fill;
 
-            
+
             ACmenu = new AutoForce(code);
             ACmenu.SetAutocompleteMenu(code, ACmenu);
             ACmenu.MinFragmentLength = 1;
@@ -61,7 +61,7 @@ namespace SKIDLE.UserControls
 
         private void Code_TextChanging(object sender, FastColoredTextBoxNS.TextChangingEventArgs e)
         {
-            if(code.Lines.Count > linesForDocMap)
+            if (code.Lines.Count > linesForDocMap)
             {
                 split.Panel2Collapsed = false;
             }
@@ -69,7 +69,7 @@ namespace SKIDLE.UserControls
 
         public void RefreshCode()
         {
-           // ACmenu.Items = File.ReadAllLines(Globals.SpecialKey + "spk-reserv.dict");
+            // ACmenu.Items = File.ReadAllLines(Globals.SpecialKey + "spk-reserv.dict");
             ACmenu.autoForce();
         }
     }
