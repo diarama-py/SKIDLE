@@ -47,8 +47,7 @@
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.menuStrip1.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-
+            this.menuStrip1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
             this.настройкиToolStripMenuItem,
@@ -56,10 +55,8 @@
             this.терминалToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-
-            this.menuStrip1.Size = new System.Drawing.Size(733, 28);
-            this.menuStrip1.Size = new System.Drawing.Size(794, 33);
-
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(782, 27);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -70,10 +67,10 @@
             this.сохранитьКакToolStripMenuItem,
             this.открытьФайлToolStripMenuItem,
             this.создатьToolStripMenuItem});
-            this.файлToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.файлToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.файлToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(52, 21);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // сохранитьToolStripMenuItem
@@ -85,31 +82,6 @@
             this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(295, 24);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
-
-            this.файлToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.файлToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(69, 29);
-            this.файлToolStripMenuItem.Text = "Файл";
-            // 
-            // создатьToolStripMenuItem
-            // 
-            this.создатьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.создатьToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
-            this.создатьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(337, 30);
-            this.создатьToolStripMenuItem.Text = "Создать новый файл ";
-            // 
-            // открытьФайлToolStripMenuItem
-            // 
-            this.открытьФайлToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.открытьФайлToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
-            this.открытьФайлToolStripMenuItem.Name = "открытьФайлToolStripMenuItem";
-            this.открытьФайлToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.открытьФайлToolStripMenuItem.Size = new System.Drawing.Size(337, 30);
-            this.открытьФайлToolStripMenuItem.Text = "Открыть файл";
-
             // 
             // сохранитьКакToolStripMenuItem
             // 
@@ -118,7 +90,6 @@
             this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
             this.сохранитьКакToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-
             this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(295, 24);
             this.сохранитьКакToolStripMenuItem.Text = "Сохранить как";
             this.сохранитьКакToolStripMenuItem.Click += new System.EventHandler(this.сохранитьКакToolStripMenuItem_Click);
@@ -142,33 +113,15 @@
             this.создатьToolStripMenuItem.Size = new System.Drawing.Size(295, 24);
             this.создатьToolStripMenuItem.Text = "Создать новый файл ";
             this.создатьToolStripMenuItem.Click += new System.EventHandler(this.создатьToolStripMenuItem_Click);
-
-            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(337, 30);
-            this.сохранитьКакToolStripMenuItem.Text = "Сохранить как";
-            // 
-            // сохранитьToolStripMenuItem
-            // 
-            this.сохранитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.сохранитьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
-            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(337, 30);
-            this.сохранитьToolStripMenuItem.Text = "Сохранить";
             // 
             // настройкиToolStripMenuItem
             // 
             this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.настройкиToolStripMenuItem1});
-
-            this.настройкиToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.настройкиToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.настройкиToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
-
-            this.настройкиToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.настройкиToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(117, 29);
+            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(86, 21);
             this.настройкиToolStripMenuItem.Text = "Настройки";
             // 
             // настройкиToolStripMenuItem1
@@ -177,22 +130,16 @@
             this.настройкиToolStripMenuItem1.ForeColor = System.Drawing.Color.Silver;
             this.настройкиToolStripMenuItem1.Name = "настройкиToolStripMenuItem1";
             this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(180, 24);
-            this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(180, 30);
             this.настройкиToolStripMenuItem1.Text = "Настройки";
             // 
             // выполнитьToolStripMenuItem
             // 
             this.выполнитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.запуститьToolStripMenuItem});
-            this.выполнитьToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.выполнитьToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.выполнитьToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.выполнитьToolStripMenuItem.Name = "выполнитьToolStripMenuItem";
-            this.выполнитьToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
-            this.выполнитьToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.выполнитьToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.выполнитьToolStripMenuItem.Name = "выполнитьToolStripMenuItem";
-            this.выполнитьToolStripMenuItem.Size = new System.Drawing.Size(120, 29);
-
+            this.выполнитьToolStripMenuItem.Size = new System.Drawing.Size(88, 21);
             this.выполнитьToolStripMenuItem.Text = "Выполнить";
             // 
             // запуститьToolStripMenuItem
@@ -204,23 +151,15 @@
             this.запуститьToolStripMenuItem.Size = new System.Drawing.Size(241, 24);
             this.запуститьToolStripMenuItem.Text = "Запустить отладку";
             this.запуститьToolStripMenuItem.Click += new System.EventHandler(this.запуститьToolStripMenuItem_Click);
-
-            this.запуститьToolStripMenuItem.Size = new System.Drawing.Size(273, 30);
-            this.запуститьToolStripMenuItem.Text = "Запустить отладку";
             // 
             // терминалToolStripMenuItem
             // 
             this.терминалToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.открытьТерминалToolStripMenuItem});
-            this.терминалToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.терминалToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.терминалToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.терминалToolStripMenuItem.Name = "терминалToolStripMenuItem";
-            this.терминалToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
-
-            this.терминалToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.терминалToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.терминалToolStripMenuItem.Name = "терминалToolStripMenuItem";
-            this.терминалToolStripMenuItem.Size = new System.Drawing.Size(110, 29);
+            this.терминалToolStripMenuItem.Size = new System.Drawing.Size(81, 21);
             this.терминалToolStripMenuItem.Text = "Терминал";
             // 
             // открытьТерминалToolStripMenuItem
@@ -235,24 +174,25 @@
             // tabControl
             // 
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 28);
+            this.tabControl.Location = new System.Drawing.Point(0, 27);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = -1;
             this.tabControl.ShowCloseTabButtons = true;
-            this.tabControl.Size = new System.Drawing.Size(733, 364);
+            this.tabControl.Size = new System.Drawing.Size(782, 384);
             this.tabControl.TabIndex = 1;
             // 
             // skidle
-            this.открытьТерминалToolStripMenuItem.Size = new System.Drawing.Size(248, 30);
-            this.открытьТерминалToolStripMenuItem.Text = "Открыть Терминал";
-
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(11)))));
-            this.ClientSize = new System.Drawing.Size(733, 392);
+            this.ClientSize = new System.Drawing.Size(782, 411);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "skidle";
             this.Text = "SKIDLE";
             this.menuStrip1.ResumeLayout(false);

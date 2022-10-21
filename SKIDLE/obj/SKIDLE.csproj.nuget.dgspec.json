@@ -37,18 +37,7 @@
         }
       },
       "frameworks": {
-        "net472": {
-          "dependencies": {
-            "PagedControl": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "TabControl": {
-              "target": "Package",
-              "version": "[2.1.2, )"
-            }
-          }
-        }
+        "net472": {}
       },
       "runtimes": {
         "win": {
