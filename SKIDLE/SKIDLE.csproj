@@ -33,17 +33,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Reference Include="AutocompleteMenu, Version=1.3.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\AutocompleteMenu.dll</HintPath>
     </Reference>
+=======
+>>>>>>> 1b2221e55cfb9be957a601695357934791f995b1
     <Reference Include="FastColoredTextBox, Version=2.16.26.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\FastColoredTextBox.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="PagedControl, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedControl.2.2.0\lib\net35\PagedControl.dll</HintPath>
     </Reference>
+=======
+>>>>>>> 1b2221e55cfb9be957a601695357934791f995b1
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />

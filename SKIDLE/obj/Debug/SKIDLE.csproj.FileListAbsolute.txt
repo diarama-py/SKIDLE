@@ -10,6 +10,7 @@ D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.CoreCompileInputs.cache
 D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.exe
 D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.pdb
 D:\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.CopyComplete
+<<<<<<< HEAD
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\SKIDLE.exe.config
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\SKIDLE.exe
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\SKIDLE.pdb
@@ -22,3 +23,5 @@ C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.pdb
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\PagedControl.dll
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\TabControl.dll
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.skidle.resources
+=======
+>>>>>>> 1b2221e55cfb9be957a601695357934791f995b1
