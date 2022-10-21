@@ -1,0 +1,5 @@
+class main{
+ fun load(){
+ out:"hi,Derpy!"
+ }
+}
