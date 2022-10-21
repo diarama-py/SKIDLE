@@ -1,0 +1,191 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.7.2": {
+      "PagedControl/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/PagedControl.dll": {}
+        },
+        "runtime": {
+          "lib/net35/PagedControl.dll": {}
+        }
+      },
+      "TabControl/2.1.2": {
+        "type": "package",
+        "dependencies": {
+          "PagedControl": "2.2.0"
+        },
+        "compile": {
+          "lib/net35/TabControl.dll": {}
+        },
+        "runtime": {
+          "lib/net35/TabControl.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win": {
+      "PagedControl/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/PagedControl.dll": {}
+        },
+        "runtime": {
+          "lib/net35/PagedControl.dll": {}
+        }
+      },
+      "TabControl/2.1.2": {
+        "type": "package",
+        "dependencies": {
+          "PagedControl": "2.2.0"
+        },
+        "compile": {
+          "lib/net35/TabControl.dll": {}
+        },
+        "runtime": {
+          "lib/net35/TabControl.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win-x64": {
+      "PagedControl/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/PagedControl.dll": {}
+        },
+        "runtime": {
+          "lib/net35/PagedControl.dll": {}
+        }
+      },
+      "TabControl/2.1.2": {
+        "type": "package",
+        "dependencies": {
+          "PagedControl": "2.2.0"
+        },
+        "compile": {
+          "lib/net35/TabControl.dll": {}
+        },
+        "runtime": {
+          "lib/net35/TabControl.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win-x86": {
+      "PagedControl/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/PagedControl.dll": {}
+        },
+        "runtime": {
+          "lib/net35/PagedControl.dll": {}
+        }
+      },
+      "TabControl/2.1.2": {
+        "type": "package",
+        "dependencies": {
+          "PagedControl": "2.2.0"
+        },
+        "compile": {
+          "lib/net35/TabControl.dll": {}
+        },
+        "runtime": {
+          "lib/net35/TabControl.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PagedControl/2.2.0": {
+      "sha512": "nAD+7fVH66+TKz7J92B96KCqLt7wAywb3U1KNdY2u/D2tN5NTIXXAAu//wBPuszWVSM2L4d/gJPdpPsqBv9u/w==",
+      "type": "package",
+      "path": "pagedcontrol/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/PagedControl.dll",
+        "pagedcontrol.2.2.0.nupkg.sha512",
+        "pagedcontrol.nuspec"
+      ]
+    },
+    "TabControl/2.1.2": {
+      "sha512": "npOFRxWsf0EKNchvZSb9OPPge5F76PuzjUJq5Q2QPpxFz4YPYUoB1J4u0ZPqIwR5xEIwV0YThyfFwTGagTbqxg==",
+      "type": "package",
+      "path": "tabcontrol/2.1.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/TabControl.dll",
+        "tabcontrol.2.1.2.nupkg.sha512",
+        "tabcontrol.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.7.2": [
+      "PagedControl >= 2.2.0",
+      "TabControl >= 2.1.2"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "D:\\Visual Studio\\SDK\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\My\\FSFproj\\SKIDLE\\SKIDLE\\SKIDLE.csproj",
+      "projectName": "SKIDLE",
+      "projectPath": "C:\\Users\\User\\Desktop\\My\\FSFproj\\SKIDLE\\SKIDLE\\SKIDLE.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\My\\FSFproj\\SKIDLE\\SKIDLE\\obj\\",
+      "projectStyle": "PackageReference",
+      "skipContentFileWrite": true,
+      "fallbackFolders": [
+        "D:\\Visual Studio\\SDK\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net472"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "D:\\Cosmos User Kit\\packages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net472": {
+          "projectReferences": {}
+        }
+      }
+    },
+    "frameworks": {
+      "net472": {
+        "dependencies": {
+          "PagedControl": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "TabControl": {
+            "target": "Package",
+            "version": "[2.1.2, )"
+          }
+        }
+      }
+    },
+    "runtimes": {
+      "win": {
+        "#import": []
+      },
+      "win-x64": {
+        "#import": []
+      },
+      "win-x86": {
+        "#import": []
+      }
+    }
+  }
+}
