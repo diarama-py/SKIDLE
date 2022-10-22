@@ -47,6 +47,7 @@ namespace SKIDLE
                         string newcontent = content.Replace(line,reline);
                         File.WriteAllText(file, newcontent);
                     }
+                    else { }
                 }
             }
         }
