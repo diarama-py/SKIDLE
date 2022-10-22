@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SKIDLE
 {
     public class AutoForce : AutocompleteMenuNS.AutocompleteMenu
     {
-        FastColoredTextBoxNS.FastColoredTextBox code = new FastColoredTextBoxNS.FastColoredTextBox();
-        public AutoForce(FastColoredTextBoxNS.FastColoredTextBox code)
+        public FastColoredTextBoxNS.FastColoredTextBox code;
+        public AutoForce(FastColoredTextBoxNS.FastColoredTextBox codek)
         {
-            this.code = code;
+            this.code = codek;
         }
 
         public void autoForce()
@@ -20,7 +18,6 @@ namespace SKIDLE
             this.MinFragmentLength = 1;
             List<String> keywords = new List<string>();
             List<String> key = new List<string>();
-            IList<string> lines = code.Lines;
 
             string file = Globals.SpecialKey + "spk-reserv.dict";
             string dict = Globals.SpecialKey + "autoforce.dict";
@@ -34,26 +31,25 @@ namespace SKIDLE
                 string line = Ikey.Trim(' ');
                 key.Add(line);
             }
-            for (int i = 0; i < lines.Count; i++)
+            foreach (var line in code.Lines)
             {
                 try
                 {
-                    for (int z = 0; z < key.Count; z++)
-                    {
-                        if (lines[i].Contains(key[z]))
+                    foreach (var Ikey in key)
+                    {                   
+                        if (line.Contains(Ikey))
                         {
-                            string q = lines[i].Trim(' ', '(', ')');
+                            string q = line.Trim(' ', '(', ')');
                             q = q.Split(' ')[1];
                             q = q.Split('=', '(', ')', ' ', '{', '}')[0];
                             keywords.Add(q);
                         }
-
                     }
                 }
-                catch { }
+                catch{}
             }
 
-            foreach (var item in Directory.GetFiles(Globals.SpecialKey + "modules\\", "*spk"))
+            foreach (var item in Directory.GetFiles(Globals.SpecialKey + "modules\\", "*.spk"))
             {
                 FileInfo fi = new FileInfo(item);
                 string dfName = fi.Name.Split(".spk"[0])[0];

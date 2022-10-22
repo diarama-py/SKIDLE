@@ -9,3 +9,7 @@ C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.CoreCompi
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.exe
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.pdb
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UserControls.codeTab.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UserControls.About.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UserControls.General.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UserControls.SettingsTabControl.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UserControls.TextEditor.resources

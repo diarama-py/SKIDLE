@@ -194,5 +194,70 @@ namespace SKIDLE
                 tab.Name = fi.FullName;
             }
         }
+
+        private void вырезатьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
+            myCode.code.Cut();
+        }
+
+        private void копироватьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
+            myCode.code.Copy();
+        }
+
+        private void вставитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
+            myCode.code.Paste();
+        }
+
+        private void найтиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
+            myCode.code.ShowFindDialog();
+        }
+
+        private void перейтиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
+            myCode.code.ShowGoToDialog();
+        }
+
+        private void заменитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
+            myCode.code.ShowReplaceDialog();
+        }
+
+        private void выйтиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl.Tabs.Remove(tabControl.SelectedTab);
+        }
+
+        private void закрытьВсеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            explorer.Nodes.Clear();
+            tabControl.Tabs.Clear();
+            split.Panel1Collapsed = true;
+        }
+
+        private void настройкиToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Manina.Windows.Forms.Tab tab = new Manina.Windows.Forms.Tab();
+            tab.BackColor = Color.FromArgb(63, 0, 123);
+            tab.Text = "Settings";
+            tabControl.Tabs.Add(tab);
+            tabControl.SelectedTab = tab;
+            SettingsTabControl settings = new SettingsTabControl();
+            settings.Dock = DockStyle.Fill;
+            tab.Controls.Add(settings);
+        }
     }
 }
