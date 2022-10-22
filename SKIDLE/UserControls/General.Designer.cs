@@ -31,8 +31,6 @@ namespace SKIDLE.UserControls
         {
             this.title = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // title
@@ -52,22 +50,10 @@ namespace SKIDLE.UserControls
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(0, 34);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(685, 461);
             this.panel1.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(243, 98);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 30);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // General
             // 
@@ -81,7 +67,6 @@ namespace SKIDLE.UserControls
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "General";
             this.Size = new System.Drawing.Size(685, 495);
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -91,6 +76,5 @@ namespace SKIDLE.UserControls
 
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
     }
 }

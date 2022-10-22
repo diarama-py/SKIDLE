@@ -37,7 +37,7 @@ namespace SKIDLE
                     File.WriteAllText(file, newcontent);
                 }
             }
-        }
+        }   
         public void ReProperty(string property,string newname)
         {
             if (File.Exists(file))

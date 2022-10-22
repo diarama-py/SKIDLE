@@ -36,6 +36,16 @@
             this.открытьПапкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.создатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.закрытьВсеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.закрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выйтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.правкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.вырезатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.копироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.вставитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.найтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.перейтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.заменитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.выполнитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,16 +57,7 @@
             this.ExplorerMenu = new System.Windows.Forms.Button();
             this.split = new System.Windows.Forms.SplitContainer();
             this.explorer = new System.Windows.Forms.TreeView();
-            this.правкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.вырезатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.копироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.вставитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.найтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.перейтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.заменитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.выйтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.закрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.закрытьВсеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.run = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.leftMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.split)).BeginInit();
@@ -151,6 +152,101 @@
             this.создатьToolStripMenuItem.Text = "Создать новый файл ";
             this.создатьToolStripMenuItem.Click += new System.EventHandler(this.создатьToolStripMenuItem_Click);
             // 
+            // закрытьВсеToolStripMenuItem
+            // 
+            this.закрытьВсеToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.закрытьВсеToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
+            this.закрытьВсеToolStripMenuItem.Name = "закрытьВсеToolStripMenuItem";
+            this.закрытьВсеToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.закрытьВсеToolStripMenuItem.Text = "Закрыть все";
+            this.закрытьВсеToolStripMenuItem.Click += new System.EventHandler(this.закрытьВсеToolStripMenuItem_Click);
+            // 
+            // закрытьToolStripMenuItem
+            // 
+            this.закрытьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.закрытьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
+            this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
+            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.закрытьToolStripMenuItem.Text = "Закрыть";
+            this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
+            // 
+            // выйтиToolStripMenuItem
+            // 
+            this.выйтиToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.выйтиToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
+            this.выйтиToolStripMenuItem.Name = "выйтиToolStripMenuItem";
+            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.выйтиToolStripMenuItem.Text = "Выйти";
+            this.выйтиToolStripMenuItem.Click += new System.EventHandler(this.выйтиToolStripMenuItem_Click);
+            // 
+            // правкаToolStripMenuItem
+            // 
+            this.правкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.вырезатьToolStripMenuItem,
+            this.копироватьToolStripMenuItem,
+            this.вставитьToolStripMenuItem,
+            this.найтиToolStripMenuItem,
+            this.перейтиToolStripMenuItem,
+            this.заменитьToolStripMenuItem});
+            this.правкаToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
+            this.правкаToolStripMenuItem.Size = new System.Drawing.Size(65, 21);
+            this.правкаToolStripMenuItem.Text = "Правка";
+            // 
+            // вырезатьToolStripMenuItem
+            // 
+            this.вырезатьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.вырезатьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
+            this.вырезатьToolStripMenuItem.Name = "вырезатьToolStripMenuItem";
+            this.вырезатьToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.вырезатьToolStripMenuItem.Text = "Вырезать";
+            this.вырезатьToolStripMenuItem.Click += new System.EventHandler(this.вырезатьToolStripMenuItem_Click);
+            // 
+            // копироватьToolStripMenuItem
+            // 
+            this.копироватьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.копироватьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
+            this.копироватьToolStripMenuItem.Name = "копироватьToolStripMenuItem";
+            this.копироватьToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.копироватьToolStripMenuItem.Text = "Копировать";
+            this.копироватьToolStripMenuItem.Click += new System.EventHandler(this.копироватьToolStripMenuItem_Click);
+            // 
+            // вставитьToolStripMenuItem
+            // 
+            this.вставитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.вставитьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
+            this.вставитьToolStripMenuItem.Name = "вставитьToolStripMenuItem";
+            this.вставитьToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.вставитьToolStripMenuItem.Text = "Вставить";
+            this.вставитьToolStripMenuItem.Click += new System.EventHandler(this.вставитьToolStripMenuItem_Click);
+            // 
+            // найтиToolStripMenuItem
+            // 
+            this.найтиToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.найтиToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
+            this.найтиToolStripMenuItem.Name = "найтиToolStripMenuItem";
+            this.найтиToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.найтиToolStripMenuItem.Text = "Найти";
+            this.найтиToolStripMenuItem.Click += new System.EventHandler(this.найтиToolStripMenuItem_Click);
+            // 
+            // перейтиToolStripMenuItem
+            // 
+            this.перейтиToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.перейтиToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
+            this.перейтиToolStripMenuItem.Name = "перейтиToolStripMenuItem";
+            this.перейтиToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.перейтиToolStripMenuItem.Text = "Перейти";
+            this.перейтиToolStripMenuItem.Click += new System.EventHandler(this.перейтиToolStripMenuItem_Click);
+            // 
+            // заменитьToolStripMenuItem
+            // 
+            this.заменитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.заменитьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
+            this.заменитьToolStripMenuItem.Name = "заменитьToolStripMenuItem";
+            this.заменитьToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.заменитьToolStripMenuItem.Text = "Заменить";
+            this.заменитьToolStripMenuItem.Click += new System.EventHandler(this.заменитьToolStripMenuItem_Click);
+            // 
             // настройкиToolStripMenuItem
             // 
             this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -166,7 +262,7 @@
             this.настройкиToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
             this.настройкиToolStripMenuItem1.ForeColor = System.Drawing.Color.Silver;
             this.настройкиToolStripMenuItem1.Name = "настройкиToolStripMenuItem1";
-            this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(142, 22);
             this.настройкиToolStripMenuItem1.Text = "Настройки";
             this.настройкиToolStripMenuItem1.Click += new System.EventHandler(this.настройкиToolStripMenuItem1_Click);
             // 
@@ -224,6 +320,7 @@
             // leftMenu
             // 
             this.leftMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.leftMenu.Controls.Add(this.run);
             this.leftMenu.Controls.Add(this.ExplorerMenu);
             this.leftMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftMenu.Location = new System.Drawing.Point(0, 27);
@@ -234,6 +331,8 @@
             // ExplorerMenu
             // 
             this.ExplorerMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.ExplorerMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ExplorerMenu.BackgroundImage")));
+            this.ExplorerMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ExplorerMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.ExplorerMenu.FlatAppearance.BorderSize = 0;
             this.ExplorerMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -241,7 +340,6 @@
             this.ExplorerMenu.Name = "ExplorerMenu";
             this.ExplorerMenu.Size = new System.Drawing.Size(36, 33);
             this.ExplorerMenu.TabIndex = 2;
-            this.ExplorerMenu.Text = "Fs";
             this.ExplorerMenu.UseVisualStyleBackColor = false;
             this.ExplorerMenu.Click += new System.EventHandler(this.ExplorerMenu_Click);
             // 
@@ -280,100 +378,20 @@
             this.explorer.TabIndex = 0;
             this.explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.explorer_NodeMouseClick);
             // 
-            // правкаToolStripMenuItem
+            // run
             // 
-            this.правкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.вырезатьToolStripMenuItem,
-            this.копироватьToolStripMenuItem,
-            this.вставитьToolStripMenuItem,
-            this.найтиToolStripMenuItem,
-            this.перейтиToolStripMenuItem,
-            this.заменитьToolStripMenuItem});
-            this.правкаToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
-            this.правкаToolStripMenuItem.Size = new System.Drawing.Size(65, 21);
-            this.правкаToolStripMenuItem.Text = "Правка";
-            // 
-            // вырезатьToolStripMenuItem
-            // 
-            this.вырезатьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.вырезатьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
-            this.вырезатьToolStripMenuItem.Name = "вырезатьToolStripMenuItem";
-            this.вырезатьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.вырезатьToolStripMenuItem.Text = "Вырезать";
-            this.вырезатьToolStripMenuItem.Click += new System.EventHandler(this.вырезатьToolStripMenuItem_Click);
-            // 
-            // копироватьToolStripMenuItem
-            // 
-            this.копироватьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.копироватьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
-            this.копироватьToolStripMenuItem.Name = "копироватьToolStripMenuItem";
-            this.копироватьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.копироватьToolStripMenuItem.Text = "Копировать";
-            this.копироватьToolStripMenuItem.Click += new System.EventHandler(this.копироватьToolStripMenuItem_Click);
-            // 
-            // вставитьToolStripMenuItem
-            // 
-            this.вставитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.вставитьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
-            this.вставитьToolStripMenuItem.Name = "вставитьToolStripMenuItem";
-            this.вставитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.вставитьToolStripMenuItem.Text = "Вставить";
-            this.вставитьToolStripMenuItem.Click += new System.EventHandler(this.вставитьToolStripMenuItem_Click);
-            // 
-            // найтиToolStripMenuItem
-            // 
-            this.найтиToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.найтиToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
-            this.найтиToolStripMenuItem.Name = "найтиToolStripMenuItem";
-            this.найтиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.найтиToolStripMenuItem.Text = "Найти";
-            this.найтиToolStripMenuItem.Click += new System.EventHandler(this.найтиToolStripMenuItem_Click);
-            // 
-            // перейтиToolStripMenuItem
-            // 
-            this.перейтиToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.перейтиToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
-            this.перейтиToolStripMenuItem.Name = "перейтиToolStripMenuItem";
-            this.перейтиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.перейтиToolStripMenuItem.Text = "Перейти";
-            this.перейтиToolStripMenuItem.Click += new System.EventHandler(this.перейтиToolStripMenuItem_Click);
-            // 
-            // заменитьToolStripMenuItem
-            // 
-            this.заменитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.заменитьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
-            this.заменитьToolStripMenuItem.Name = "заменитьToolStripMenuItem";
-            this.заменитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.заменитьToolStripMenuItem.Text = "Заменить";
-            this.заменитьToolStripMenuItem.Click += new System.EventHandler(this.заменитьToolStripMenuItem_Click);
-            // 
-            // выйтиToolStripMenuItem
-            // 
-            this.выйтиToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.выйтиToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
-            this.выйтиToolStripMenuItem.Name = "выйтиToolStripMenuItem";
-            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.выйтиToolStripMenuItem.Text = "Выйти";
-            this.выйтиToolStripMenuItem.Click += new System.EventHandler(this.выйтиToolStripMenuItem_Click);
-            // 
-            // закрытьToolStripMenuItem
-            // 
-            this.закрытьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.закрытьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
-            this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
-            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.закрытьToolStripMenuItem.Text = "Закрыть";
-            this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
-            // 
-            // закрытьВсеToolStripMenuItem
-            // 
-            this.закрытьВсеToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.закрытьВсеToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
-            this.закрытьВсеToolStripMenuItem.Name = "закрытьВсеToolStripMenuItem";
-            this.закрытьВсеToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.закрытьВсеToolStripMenuItem.Text = "Закрыть все";
-            this.закрытьВсеToolStripMenuItem.Click += new System.EventHandler(this.закрытьВсеToolStripMenuItem_Click);
+            this.run.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.run.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("run.BackgroundImage")));
+            this.run.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.run.Dock = System.Windows.Forms.DockStyle.Top;
+            this.run.FlatAppearance.BorderSize = 0;
+            this.run.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.run.Location = new System.Drawing.Point(0, 33);
+            this.run.Name = "run";
+            this.run.Size = new System.Drawing.Size(36, 33);
+            this.run.TabIndex = 3;
+            this.run.UseVisualStyleBackColor = false;
+            this.run.Click += new System.EventHandler(this.запуститьToolStripMenuItem_Click);
             // 
             // skidle
             // 
@@ -386,6 +404,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "skidle";
             this.Text = "SKIDLE";
@@ -432,6 +451,7 @@
         private System.Windows.Forms.ToolStripMenuItem закрытьВсеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem закрытьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выйтиToolStripMenuItem;
+        private System.Windows.Forms.Button run;
     }
 }
 

@@ -44,15 +44,19 @@ namespace SKIDLE
 
         private void запуститьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (tabControl.SelectedTab.Name.Contains(".spk"))
+            try
             {
-                сохранитьToolStripMenuItem_Click(sender, e);
-                Process.Start(Globals.SpecialKey + "SpecialKey.exe", tabControl.SelectedTab.Name);
+                if (tabControl.SelectedTab.Name.Contains(".spk"))
+                {
+                    сохранитьToolStripMenuItem_Click(sender, e);
+                    Process.Start(Globals.SpecialKey + "SpecialKey.exe", tabControl.SelectedTab.Name);
+                }
+                else
+                {
+                    сохранитьКакToolStripMenuItem_Click(sender, e);
+                }
             }
-            else
-            {
-                сохранитьКакToolStripMenuItem_Click(sender, e);
-            }
+            catch { }
         }
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)

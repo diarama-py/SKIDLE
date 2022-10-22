@@ -16,13 +16,5 @@ namespace SKIDLE.UserControls
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ConfigFile cf = new ConfigFile("configure.conf");
-            button1.Text = cf.GetProperty("general");
-            cf.SetProperty("hi","Derpy");
-            button1.Text = cf.GetProperty("hi");
-        }
     }
 }
