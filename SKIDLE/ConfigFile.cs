@@ -28,9 +28,14 @@ namespace SKIDLE
         {
             if (File.Exists(file))
             {
+                string check = property + ":" + "\"" + name + "\"";
                 string content = File.ReadAllText(file);
-                string newcontent = content + "\n" + property + ":" +"\""+ name+"\"";
-                File.WriteAllText(file, newcontent);
+
+                if (!content.Contains(check))
+                {
+                    string newcontent = content + "\n" + check;
+                    File.WriteAllText(file, newcontent);
+                }
             }
         }
         public void ReProperty(string property,string newname)
