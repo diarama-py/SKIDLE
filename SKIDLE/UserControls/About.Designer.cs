@@ -70,7 +70,7 @@ namespace SKIDLE.UserControls
             this.aboutText.Size = new System.Drawing.Size(685, 461);
             this.aboutText.TabIndex = 0;
             this.aboutText.Text = "Здесь должен быть текст...\nЛенин пожалуйста давай ты будешь делать настройки\nмне " +
-    "это вобще делать\nя очень удевлен как я вообще до сюда дошел";
+    "это вобще делать лень\nя очень удивлен как я вообще до сюда дошел";
             // 
             // About
             // 
