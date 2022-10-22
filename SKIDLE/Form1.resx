@@ -120,4 +120,16 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tabControl.CloseTabImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAUBJREFUOE+V
+        07tKA0EUgOFNxCapJCKooF289GrtE/ouKRRUxCIaRC28ghcU7ewU7df/38xJDMkacuBjJ3M5s7Nzkk0a
+        eZ5XUPWZuorOaTSiXXSOCMZqWMAyZlGNjPPYwz1mMJTEPqxiFztYwlQMLuIEL7jCQBLbWMM+jtGCCbrH
+        oBETrvGankWSxDEXtXGAJmrF4gg6nLiOSHKDLWzjCC72DVYwuDiCgb9JnuBxznGGQ5QvjmCCSdz5Dl/4
+        xCU2UHpDvXASTPCMH3zjEZuop2mjgwlxBF/5AW94T0+/iff/7/m951NYDx3Mpb5bxO24gQU1VIl+IGvB
+        s5vE3eyXbRNEEq+1/yb8sBKtMF+ztzgNxwaR5ANuZPFVHLSUG7CUTWKFlZWyxeXxLuB/oXsMGp7JJHWU
+        XpVjaY6Lx1/p+MiyX5pGEwx+AYT/AAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

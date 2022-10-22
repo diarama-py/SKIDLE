@@ -121,6 +121,7 @@ namespace SKIDLE.UserControls
             this.ACmenu.ImageList = null;
             this.ACmenu.Items = new string[0];
             this.ACmenu.TargetControlWrapper = null;
+            this.ACmenu.AllowsTabKey = true;
             // 
             // codeTab
             // 
@@ -144,6 +145,10 @@ namespace SKIDLE.UserControls
             if (code.Lines.Count > linesForDocMap)
             {
                 split.Panel2Collapsed = false;
+            }
+            else
+            {
+                split.Panel2Collapsed = true;
             }
         }
 

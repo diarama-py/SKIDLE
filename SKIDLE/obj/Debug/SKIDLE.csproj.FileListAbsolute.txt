@@ -8,5 +8,4 @@ C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.GenerateR
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.CoreCompileInputs.cache
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.exe
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.pdb
-C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.Form2.resources
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UserControls.codeTab.resources
