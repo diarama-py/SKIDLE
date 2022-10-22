@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SKIDLE
+namespace SKIDLE.UserControls
 {
-    public partial class Form2 : Form
+    public partial class TextEditor : UserControl
     {
-        public Form2()
+        public TextEditor()
         {
             InitializeComponent();
         }

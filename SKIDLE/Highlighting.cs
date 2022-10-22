@@ -16,12 +16,13 @@ namespace SKIDLE
         private Style CommentStyle = new TextStyle(Brushes.Gray, null, FontStyle.Bold);
         private Style LightCoralStyle = new TextStyle(Brushes.LightCoral, null, FontStyle.Bold);
         private Style LightBlueStyle = new TextStyle(Brushes.LightBlue, null, FontStyle.Bold);
-        private Style BlueStyleCorect = new TextStyle(Brushes.Blue, null, FontStyle.Regular);
+        private Style BlueStyleCorect = new TextStyle(Brushes.BlueViolet, null, FontStyle.Regular);
         private Style LightGreenStyle = new TextStyle(Brushes.LightGreen, null, FontStyle.Regular);
         private Style AddStyle = new TextStyle(Brushes.Orange, null, FontStyle.Regular);
-        private Style GoldenRodStyle = new TextStyle(Brushes.Goldenrod, null, FontStyle.Italic);
+        private Style VSfc = new TextStyle(new SolidBrush(Color.FromArgb(155,77,220)), null, FontStyle.Italic);
         private Style TurquoiseStyle = new TextStyle(Brushes.Turquoise, null, FontStyle.Regular);
         private Style MediumPurpleStyle = new TextStyle(Brushes.Fuchsia, null, FontStyle.Regular);
+        private Style CharStyle = new TextStyle(Brushes.DarkOrange, null, FontStyle.Regular);
 
         public void _HighLighting(object sender, TextChangedEventArgs e)
         {
@@ -37,47 +38,61 @@ namespace SKIDLE
 
             e.ChangedRange.tb.AutoIndentCharsPatterns = @"{|}|""|""|(|)";
 
-            e.ChangedRange.SetStyle(CommentStyle, @"#.*$");
-
             e.ChangedRange.SetStyle(TealStyle, @"var");
-
-            e.ChangedRange.SetStyle(GoldenRodStyle, @"fun");
-            e.ChangedRange.SetStyle(GoldenRodStyle, @"class");
-            e.ChangedRange.SetStyle(GoldenRodStyle, @"if");
-            e.ChangedRange.SetStyle(GoldenRodStyle, @"for");
-            e.ChangedRange.SetStyle(GoldenRodStyle, @"while");
-            e.ChangedRange.SetStyle(GoldenRodStyle, @"do");
-            e.ChangedRange.SetStyle(GoldenRodStyle, @"else");
-            e.ChangedRange.SetStyle(GoldenRodStyle, @"stop");
-            e.ChangedRange.SetStyle(GoldenRodStyle, @"continue");
-            e.ChangedRange.SetStyle(GoldenRodStyle, @"switch");
-            e.ChangedRange.SetStyle(GoldenRodStyle, @"case");
-            e.ChangedRange.SetStyle(GoldenRodStyle, @"enum");
-
-            e.ChangedRange.SetStyle(TurquoiseStyle, @"toStr");
-            e.ChangedRange.SetStyle(TurquoiseStyle, @"toInt");
-            e.ChangedRange.SetStyle(TurquoiseStyle, @"toFloat");
-            e.ChangedRange.SetStyle(TurquoiseStyle, @"toByte");
-            e.ChangedRange.SetStyle(TurquoiseStyle, @"toShort");
-            e.ChangedRange.SetStyle(TurquoiseStyle, @"toLong");
-            e.ChangedRange.SetStyle(TurquoiseStyle, @"toDouble");
-            e.ChangedRange.SetStyle(TurquoiseStyle, @"ref");
-
-            e.ChangedRange.SetStyle(BlueStyleCorect, @"length");
-
-            e.ChangedRange.SetStyle(LightBlueStyle, @"Null");
-            e.ChangedRange.SetStyle(LightBlueStyle, @"True");
-            e.ChangedRange.SetStyle(LightBlueStyle, @"False");
-            e.ChangedRange.SetStyle(LightGreenStyle, @"protected:");
-            e.ChangedRange.SetStyle(LightGreenStyle, @"private:");
-
-            e.ChangedRange.SetStyle(MediumPurpleStyle, @"input");
-            e.ChangedRange.SetStyle(MediumPurpleStyle, @"out");
-
+            e.ChangedRange.SetStyle(VSfc, @"fun|class|if|for|while|do|else|stop|continue|switch|case|enum");
+            e.ChangedRange.SetStyle(TurquoiseStyle, @"toStr|toInt|toFloat|toByte|toShort|toLong|toDouble|ref|length|Array|strReplace|strSplit");
+            e.ChangedRange.SetStyle(LightBlueStyle, @"Null|True|False|protected:|private:");
+            e.ChangedRange.SetStyle(MediumPurpleStyle, @"input|out");
             e.ChangedRange.SetStyle(AddStyle, @"Add");
+            e.ChangedRange.SetStyle(CharStyle, @"{|}|""|""|\'|\'|:|;|(|)|!|@|#|$|%|^|&");
 
-
-
+            IList<string> line = e.ChangedRange.tb.Lines;
+            for (int i = 0; i < line.Count; i++)
+            {
+                try
+                {
+                    if (line[i].Contains("var") || line[i].Contains("fun") || line[i].Contains("enum"))
+                    {
+                        string q = line[i].Trim(' ');
+                        q = q.Split(' ')[1];
+                        q = q.Split('=', ' ', '(', ')', '{', '}')[0];
+                        e.ChangedRange.SetStyle(BlueSlateStyle, q);
+                    }
+                    else if (line[i].Contains("#"))
+                    {
+                        string q = line[i];
+                        e.ChangedRange.SetStyle(CommentStyle, q);
+                    }
+                    else if (line[i].Contains("\""))
+                    {
+                        if (line[i].EndsWith("\"") || line[i].EndsWith(" ") || line[i].EndsWith(")") || line[i].StartsWith("("))
+                        {
+                            string q = line[i].Trim(' ', '=', ':', '(', ')');
+                            q = q.Split('\"', '(', ')')[1];
+                            while (line[i].EndsWith("\"") || line[i].EndsWith(" ") || line[i].EndsWith(")") || line[i].StartsWith("("))
+                            {
+                                q = q.TrimEnd(' ');
+                                Range range;
+                                switch (HighlightingRangeType.ChangedRange)
+                                {
+                                    default:
+                                        range = e.ChangedRange;
+                                        break;
+                                }
+                                e.ChangedRange.SetStyle(CommentStyle, q);
+                                break;
+                            }
+                        }
+                        else
+                        {
+                        }
+                    }
+                    else
+                    {
+                    }
+                }
+                catch { }
+            }
 
             foreach (var item in Directory.GetFiles(Globals.SpecialKey + "modules\\", "*.spk"))
             {
@@ -91,7 +106,7 @@ namespace SKIDLE
                     {
                         try
                         {
-                            if (LinesFromFile[i].Contains("fun") || LinesFromFile[i].Contains("enum"))
+                            if (LinesFromFile[i].Contains("fun") || LinesFromFile[i].Contains("enum")|| LinesFromFile[i].Contains("class"))
                             {
                                 string q = LinesFromFile[i].Trim(' ');
                                 q = q.Split(' ')[1];
