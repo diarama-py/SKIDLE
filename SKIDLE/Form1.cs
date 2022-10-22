@@ -24,6 +24,7 @@ namespace SKIDLE
         private void открытьФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Special Key source code (*.spk) | *.spk";
             if (openFile.ShowDialog() != DialogResult.Cancel)
             {
                 FileInfo fi = new FileInfo(openFile.FileName);
@@ -71,11 +72,14 @@ namespace SKIDLE
         {
             var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
             SaveFileDialog save = new SaveFileDialog();
-            save.ShowDialog();
-            FileInfo fi = new FileInfo(save.FileName);
-            File.WriteAllText(fi.FullName, myCode.code.Text);
-            myCode.Text = fi.Name;
-            myCode.Name = fi.FullName;
+            save.Filter = "Special Key source code (*.spk) | *.spk";
+            if (save.ShowDialog() != DialogResult.Cancel)
+            {
+                FileInfo fi = new FileInfo(save.FileName);
+                File.WriteAllText(fi.FullName, myCode.code.Text);
+                myCode.Text = fi.Name;
+                myCode.Name = fi.FullName;
+            }
         }
 
         private void создатьToolStripMenuItem_Click(object sender, EventArgs e)
