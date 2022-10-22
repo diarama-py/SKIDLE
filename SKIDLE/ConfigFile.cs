@@ -5,7 +5,7 @@ namespace SKIDLE
     public class ConfigFile
     {
         string file;
-        public ConfigFile(string file)
+        public ConfigFile(string file) // получаем файл
         {
             this.file = file;
         }
