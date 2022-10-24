@@ -7,13 +7,11 @@ namespace SKIDLE
 {
     public class AutoForce : AutocompleteMenuNS.AutocompleteMenu
     {
-        public FastColoredTextBoxNS.FastColoredTextBox code;
-        public AutoForce(FastColoredTextBoxNS.FastColoredTextBox codek)
-        {
-            this.code = codek;
+        public AutoForce()
+        { 
         }
 
-        public void autoForce()
+        public void autoForce(FastColoredTextBoxNS.FastColoredTextBox code)
         {
             this.MinFragmentLength = 1;
             List<String> keywords = new List<string>();
@@ -79,9 +77,9 @@ namespace SKIDLE
                 }
             }
 
-            for (int i = 0; i < keywords.Count; i++)
+            foreach(var item in keywords)
             {
-                this.AddItem(keywords[i]);
+                this.AddItem(item);
             }
         }
     }

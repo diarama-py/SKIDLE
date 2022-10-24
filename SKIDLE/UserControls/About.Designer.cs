@@ -29,6 +29,7 @@ namespace SKIDLE.UserControls
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
             this.title = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.aboutText = new System.Windows.Forms.RichTextBox();
@@ -69,8 +70,7 @@ namespace SKIDLE.UserControls
             this.aboutText.Name = "aboutText";
             this.aboutText.Size = new System.Drawing.Size(685, 461);
             this.aboutText.TabIndex = 0;
-            this.aboutText.Text = "Здесь должен быть текст...\nЛенин пожалуйста давай ты будешь делать настройки\nмне " +
-    "это вобще делать лень\nя очень удивлен как я вообще до сюда дошел";
+            this.aboutText.Text = resources.GetString("aboutText.Text");
             // 
             // About
             // 
@@ -84,6 +84,7 @@ namespace SKIDLE.UserControls
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "About";
             this.Size = new System.Drawing.Size(685, 495);
+            this.Load += new System.EventHandler(this.About_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

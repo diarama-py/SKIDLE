@@ -31,6 +31,8 @@ namespace SKIDLE.UserControls
         {
             this.title = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pathToSPK = new MetroFramework.Controls.MetroTextBox();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // title
@@ -50,10 +52,49 @@ namespace SKIDLE.UserControls
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.panel1.Controls.Add(this.pathToSPK);
             this.panel1.Location = new System.Drawing.Point(0, 34);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(685, 461);
             this.panel1.TabIndex = 1;
+            // 
+            // pathToSPK
+            // 
+            this.pathToSPK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.pathToSPK.CustomButton.Image = null;
+            this.pathToSPK.CustomButton.Location = new System.Drawing.Point(657, 1);
+            this.pathToSPK.CustomButton.Name = "";
+            this.pathToSPK.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.pathToSPK.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.pathToSPK.CustomButton.TabIndex = 1;
+            this.pathToSPK.CustomButton.Text = "Ok";
+            this.pathToSPK.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.pathToSPK.CustomButton.UseSelectable = true;
+            this.pathToSPK.Lines = new string[0];
+            this.pathToSPK.Location = new System.Drawing.Point(3, 30);
+            this.pathToSPK.MaxLength = 32767;
+            this.pathToSPK.Name = "pathToSPK";
+            this.pathToSPK.PasswordChar = '\0';
+            this.pathToSPK.PromptText = "Compiler path";
+            this.pathToSPK.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.pathToSPK.SelectedText = "";
+            this.pathToSPK.SelectionLength = 0;
+            this.pathToSPK.SelectionStart = 0;
+            this.pathToSPK.ShortcutsEnabled = true;
+            this.pathToSPK.ShowButton = true;
+            this.pathToSPK.Size = new System.Drawing.Size(679, 23);
+            this.pathToSPK.TabIndex = 0;
+            this.pathToSPK.UseCustomBackColor = true;
+            this.pathToSPK.UseCustomForeColor = true;
+            this.pathToSPK.UseSelectable = true;
+            this.pathToSPK.UseStyleColors = true;
+            this.pathToSPK.WaterMark = "Compiler path";
+            this.pathToSPK.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.pathToSPK.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // General
             // 
@@ -67,6 +108,7 @@ namespace SKIDLE.UserControls
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "General";
             this.Size = new System.Drawing.Size(685, 495);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -76,5 +118,6 @@ namespace SKIDLE.UserControls
 
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Panel panel1;
+        private MetroFramework.Controls.MetroTextBox pathToSPK;
     }
 }

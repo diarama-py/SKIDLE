@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(skidle));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,16 +55,23 @@
             this.открытьТерминалToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new Manina.Windows.Forms.TabControl();
             this.leftMenu = new System.Windows.Forms.Panel();
+            this.run = new System.Windows.Forms.Button();
             this.ExplorerMenu = new System.Windows.Forms.Button();
             this.split = new System.Windows.Forms.SplitContainer();
-            this.explorer = new System.Windows.Forms.TreeView();
-            this.run = new System.Windows.Forms.Button();
+            this.explorer = new SKIDLE.BufferedTreeView();
+            this.explorerContMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.createFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.createFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.openInExplorer = new System.Windows.Forms.ToolStripMenuItem();
+            this.rename = new System.Windows.Forms.ToolStripMenuItem();
+            this.delete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.leftMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.split)).BeginInit();
             this.split.Panel1.SuspendLayout();
             this.split.Panel2.SuspendLayout();
             this.split.SuspendLayout();
+            this.explorerContMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -328,6 +336,21 @@
             this.leftMenu.Size = new System.Drawing.Size(36, 384);
             this.leftMenu.TabIndex = 2;
             // 
+            // run
+            // 
+            this.run.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.run.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("run.BackgroundImage")));
+            this.run.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.run.Dock = System.Windows.Forms.DockStyle.Top;
+            this.run.FlatAppearance.BorderSize = 0;
+            this.run.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.run.Location = new System.Drawing.Point(0, 33);
+            this.run.Name = "run";
+            this.run.Size = new System.Drawing.Size(36, 33);
+            this.run.TabIndex = 3;
+            this.run.UseVisualStyleBackColor = false;
+            this.run.Click += new System.EventHandler(this.запуститьToolStripMenuItem_Click);
+            // 
             // ExplorerMenu
             // 
             this.ExplorerMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
@@ -372,26 +395,59 @@
             this.explorer.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.explorer.Location = new System.Drawing.Point(0, 0);
             this.explorer.Name = "explorer";
+            this.explorer.ShowNodeToolTips = true;
             this.explorer.ShowPlusMinus = false;
             this.explorer.ShowRootLines = false;
             this.explorer.Size = new System.Drawing.Size(105, 384);
             this.explorer.TabIndex = 0;
             this.explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.explorer_NodeMouseClick);
+            this.explorer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.explorer_MouseClick);
             // 
-            // run
+            // explorerContMenu
             // 
-            this.run.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.run.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("run.BackgroundImage")));
-            this.run.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.run.Dock = System.Windows.Forms.DockStyle.Top;
-            this.run.FlatAppearance.BorderSize = 0;
-            this.run.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.run.Location = new System.Drawing.Point(0, 33);
-            this.run.Name = "run";
-            this.run.Size = new System.Drawing.Size(36, 33);
-            this.run.TabIndex = 3;
-            this.run.UseVisualStyleBackColor = false;
-            this.run.Click += new System.EventHandler(this.запуститьToolStripMenuItem_Click);
+            this.explorerContMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createFile,
+            this.createFolder,
+            this.openInExplorer,
+            this.rename,
+            this.delete});
+            this.explorerContMenu.Name = "explorerContMenu";
+            this.explorerContMenu.Size = new System.Drawing.Size(200, 114);
+            // 
+            // createFile
+            // 
+            this.createFile.Name = "createFile";
+            this.createFile.Size = new System.Drawing.Size(199, 22);
+            this.createFile.Text = "Создать файл";
+            this.createFile.Click += new System.EventHandler(this.createFile_Click);
+            // 
+            // createFolder
+            // 
+            this.createFolder.Name = "createFolder";
+            this.createFolder.Size = new System.Drawing.Size(199, 22);
+            this.createFolder.Text = "Новая папка";
+            this.createFolder.Click += new System.EventHandler(this.createFolder_Click);
+            // 
+            // openInExplorer
+            // 
+            this.openInExplorer.Name = "openInExplorer";
+            this.openInExplorer.Size = new System.Drawing.Size(199, 22);
+            this.openInExplorer.Text = "Открыть в проводнике";
+            this.openInExplorer.Click += new System.EventHandler(this.openInExplorer_Click);
+            // 
+            // rename
+            // 
+            this.rename.Name = "rename";
+            this.rename.Size = new System.Drawing.Size(199, 22);
+            this.rename.Text = "Переименовать";
+            this.rename.Click += new System.EventHandler(this.rename_Click);
+            // 
+            // delete
+            // 
+            this.delete.Name = "delete";
+            this.delete.Size = new System.Drawing.Size(199, 22);
+            this.delete.Text = "Удалить";
+            this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
             // skidle
             // 
@@ -416,6 +472,7 @@
             this.split.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.split)).EndInit();
             this.split.ResumeLayout(false);
+            this.explorerContMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -440,7 +497,7 @@
         private System.Windows.Forms.SplitContainer split;
         private System.Windows.Forms.Button ExplorerMenu;
         private System.Windows.Forms.ToolStripMenuItem открытьПапкуToolStripMenuItem;
-        private System.Windows.Forms.TreeView explorer;
+        private BufferedTreeView explorer;
         private System.Windows.Forms.ToolStripMenuItem правкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem вырезатьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem копироватьToolStripMenuItem;
@@ -452,6 +509,12 @@
         private System.Windows.Forms.ToolStripMenuItem закрытьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выйтиToolStripMenuItem;
         private System.Windows.Forms.Button run;
+        private System.Windows.Forms.ContextMenuStrip explorerContMenu;
+        private System.Windows.Forms.ToolStripMenuItem createFile;
+        private System.Windows.Forms.ToolStripMenuItem createFolder;
+        private System.Windows.Forms.ToolStripMenuItem openInExplorer;
+        private System.Windows.Forms.ToolStripMenuItem rename;
+        private System.Windows.Forms.ToolStripMenuItem delete;
     }
 }
 

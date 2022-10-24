@@ -15,6 +15,15 @@ namespace SKIDLE.UserControls
         public General()
         {
             InitializeComponent();
+            pathToSPK.CustomButton.Click += OkPathSPK;
+            ConfigFile config = new ConfigFile("configure.conf");
+            pathToSPK.Text = config.GetProperty("pathtoSPK");
+        }
+
+        private void OkPathSPK(object sender, EventArgs e)
+        {
+            ConfigFile config = new ConfigFile("configure.conf");
+            config.SetProperty("pathtoSPK", pathToSPK.Text);
         }
     }
 }

@@ -34,6 +34,7 @@ namespace SKIDLE
                 tab.code.OpenFile(fi.FullName);
                 tab.Text = fi.Name;
                 tab.Name = fi.FullName;
+                tab.LoadTopMenuLabel();
             }
         }
 
@@ -83,6 +84,7 @@ namespace SKIDLE
                 File.WriteAllText(fi.FullName, myCode.code.Text);
                 myCode.Text = fi.Name;
                 myCode.Name = fi.FullName;
+                myCode.LoadTopMenuLabel();
             }
         }
 
@@ -123,6 +125,7 @@ namespace SKIDLE
             tab.code.OpenFile(fi.FullName);
             tab.Text = fi.Name;
             tab.Name = fi.FullName;
+            tab.LoadTopMenuLabel();
         }
 
         public void LoadFCMD(string[] files)
@@ -136,6 +139,7 @@ namespace SKIDLE
                 tab.code.OpenFile(fi.FullName);
                 tab.Text = fi.Name;
                 tab.Name = fi.FullName;
+                tab.LoadTopMenuLabel();
             }
         }
 
@@ -146,20 +150,9 @@ namespace SKIDLE
             {
                 explorer.Nodes.Clear();
                 split.Panel1Collapsed = false;
-
-                foreach (var item in Directory.GetDirectories(fbr.SelectedPath))
-                {
-                    DirectoryInfo di = new DirectoryInfo(item);
-                    var node = explorer.Nodes.Add(di.Name, di.Name);
-                    node.Tag = di;
-                }
-
-                foreach (var item in Directory.GetFiles(fbr.SelectedPath))
-                {
-                    FileInfo fi = new FileInfo(item);                
-                    var node = explorer.Nodes.Add(fi.Name, fi.Name);
-                    node.Tag = fi;
-                }
+                DirectoryInfo dfo = new DirectoryInfo(fbr.SelectedPath);
+                var nody = explorer.Nodes.Add(dfo.Name, dfo.Name);
+                nody.Tag = dfo;
             }
         }
 
@@ -196,6 +189,7 @@ namespace SKIDLE
                 tab.code.OpenFile(fi.FullName);
                 tab.Text = fi.Name;
                 tab.Name = fi.FullName;
+                tab.LoadTopMenuLabel();
             }
         }
 
@@ -262,6 +256,37 @@ namespace SKIDLE
             SettingsTabControl settings = new SettingsTabControl();
             settings.Dock = DockStyle.Fill;
             tab.Controls.Add(settings);
+        }
+
+        private void createFile_Click(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void createFolder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openInExplorer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rename_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void delete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void explorer_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                explorerContMenu.Show(explorer, e.Location);
         }
     }
 }
