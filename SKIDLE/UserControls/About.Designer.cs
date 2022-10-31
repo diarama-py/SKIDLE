@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace SKIDLE.UserControls
 {
     partial class About
@@ -33,6 +35,7 @@ namespace SKIDLE.UserControls
             this.title = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.aboutText = new System.Windows.Forms.RichTextBox();
+            this.propApp = new MetroFramework.Controls.MetroLabel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +60,7 @@ namespace SKIDLE.UserControls
             this.panel1.Controls.Add(this.aboutText);
             this.panel1.Location = new System.Drawing.Point(0, 34);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(685, 461);
+            this.panel1.Size = new System.Drawing.Size(685, 439);
             this.panel1.TabIndex = 3;
             // 
             // aboutText
@@ -68,15 +71,28 @@ namespace SKIDLE.UserControls
             this.aboutText.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.aboutText.Location = new System.Drawing.Point(0, 0);
             this.aboutText.Name = "aboutText";
-            this.aboutText.Size = new System.Drawing.Size(685, 461);
+            this.aboutText.Size = new System.Drawing.Size(685, 439);
             this.aboutText.TabIndex = 0;
             this.aboutText.Text = resources.GetString("aboutText.Text");
+            // 
+            // propApp
+            // 
+            this.propApp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.propApp.AutoSize = true;
+            this.propApp.Location = new System.Drawing.Point(3, 476);
+            this.propApp.Name = "propApp";
+            this.propApp.Size = new System.Drawing.Size(63, 19);
+            this.propApp.TabIndex = 1;
+            this.propApp.Text = "Authors "+ Application.CompanyName + " version " + Application.ProductVersion;
+            this.propApp.UseCustomBackColor = true;
+            this.propApp.UseCustomForeColor = true;
             // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(123)))));
+            this.Controls.Add(this.propApp);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.title);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -96,5 +112,6 @@ namespace SKIDLE.UserControls
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox aboutText;
+        private MetroFramework.Controls.MetroLabel propApp;
     }
 }

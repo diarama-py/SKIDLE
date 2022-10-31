@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SKIDLE.UI.VS;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -23,7 +24,7 @@ namespace SKIDLE.UserControls
         public int linesForDocMap = 150;
         FastColoredTextBoxNS.DocumentMap documentMap;
         private System.ComponentModel.IContainer components;
-        private ContextMenuStrip contextMenu;
+        private VSContextMenuStripTE contextMenu;
         private ToolStripMenuItem cut;
         private ToolStripMenuItem copy;
         private ToolStripMenuItem paste;
@@ -54,7 +55,7 @@ namespace SKIDLE.UserControls
 
         private void Comment_Click(object sender, EventArgs e)
         {
-          
+            code.CommentSelected();
         }
 
         private void InitializeComponent()
@@ -62,8 +63,8 @@ namespace SKIDLE.UserControls
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(codeTab));
             this.code = new SKIDLE.UserControls.FastCTBox();
-            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ACmenu = new AutoForce();
+            this.contextMenu = new SKIDLE.UI.VS.VSContextMenuStripTE();
+            this.ACmenu = new AutoForce(code);
             this.cut = new System.Windows.Forms.ToolStripMenuItem();
             this.copy = new System.Windows.Forms.ToolStripMenuItem();
             this.paste = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,6 +133,7 @@ namespace SKIDLE.UserControls
             // 
             // contextMenu
             // 
+            contextMenu.gWidth = 20;
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cut,
             this.copy,
@@ -342,9 +344,18 @@ namespace SKIDLE.UserControls
 
         private void Code_Load(object sender, EventArgs e)
         {
-            code.TextChanged += new EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(highLighting._HighLighting);
-
+            LoadTopMenuLabel();
             RefreshCode();
+            ConfigFile config = new ConfigFile(Application.StartupPath + "\\configure.conf");
+            if (config.GetProperty("theme") == "dark")
+                Dark();
+            else
+                Light();
+            if (config.GetProperty("language") == "ru")
+                RuLang();
+            else
+                EnLang();
+
             if (code.Lines.Count > linesForDocMap)
             {
                 split.Panel2Collapsed = false;
@@ -353,6 +364,60 @@ namespace SKIDLE.UserControls
             {
                 split.Panel2Collapsed = true;
             }
+        }
+
+        private void EnLang()
+        {
+            ConfigFile config = new ConfigFile(Application.StartupPath+"\\Languages\\en.conf");
+            cut.Text = config.GetProperty("cut");
+            copy.Text = config.GetProperty("copy");
+            paste.Text = config.GetProperty("paste");
+            find.Text = config.GetProperty("find");
+            Igoto.Text = config.GetProperty("goto");
+            replace.Text = config.GetProperty("replace");
+        }
+
+        private void RuLang()
+        {
+            ConfigFile config = new ConfigFile(Application.StartupPath + "\\Languages\\ru.conf");
+            cut.Text = config.GetProperty("cut");
+            copy.Text = config.GetProperty("copy");
+            paste.Text = config.GetProperty("paste");
+            find.Text = config.GetProperty("find");
+            Igoto.Text = config.GetProperty("goto");
+            replace.Text = config.GetProperty("replace");
+        }
+
+        private void Light()
+        {
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(63)))), ((int)(((byte)(226)))));
+            this.documentMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.contextMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.contextMenu.ForeColor = Color.Black;
+            this.bottomMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(63)))), ((int)(((byte)(226)))));
+            this.topMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(63)))), ((int)(((byte)(226)))));
+            this.code.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.code.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.code.IndentBackColor = Color.White;
+            this.code.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.code.LineNumberColor = System.Drawing.Color.Teal;
+            code.ForeColor = Color.Black;
+        }
+
+        private void Dark()
+        {
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(115)))));
+            this.documentMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.contextMenu.BackColor = System.Drawing.Color.FromArgb(25,25,25);
+            this.contextMenu.ForeColor = Color.White;
+            this.bottomMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(123)))));
+            this.topMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.code.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.code.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.code.IndentBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.code.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.code.LineNumberColor = System.Drawing.Color.WhiteSmoke;
+            code.ForeColor = Color.White;
         }
 
         public void LoadTopMenuLabel()
@@ -372,6 +437,7 @@ namespace SKIDLE.UserControls
         private void Code_TextChanging(object sender, FastColoredTextBoxNS.TextChangingEventArgs e)
         {
             LoadTopMenuLabel();
+            RefreshCode();
             var line = code.PositionToPlace(code.SelectionStart);
             int ichar = line.iChar + 1;
             int iline = code.Selection.FromLine + 1;
@@ -386,12 +452,15 @@ namespace SKIDLE.UserControls
             }
         }
 
-        public void RefreshCode()
+        public async void RefreshCode()
         {
-            LoadTopMenuLabel();
-            code.TextChanged += new EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(highLighting._HighLighting);
-
-            ACmenu.autoForce(code);
+            await System.Threading.Tasks.Task.Run(() => {
+                code.TextChanged += new EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(highLighting._HighLighting);
+                Hints hint = new Hints();
+                hint.AddHint("var", "var var");
+                ACmenu.autoForce();
+            });
+           
         }
     }
     public class FastCTBox : FastColoredTextBoxNS.FastColoredTextBox

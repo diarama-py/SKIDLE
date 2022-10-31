@@ -53,7 +53,7 @@ namespace SKIDLE
             e.ChangedRange.tb.RightBracket2 = '}';
             e.ChangedRange.tb.BracketsHighlightStrategy = BracketsHighlightStrategy.Strategy2;
 
-            e.ChangedRange.tb.AutoIndentCharsPatterns = @"{|}|""|""|(|)";
+            e.ChangedRange.tb.AutoIndentCharsPatterns = @"{|}|[|]|""|""|(|)";
 
             e.ChangedRange.ClearStyle(MediumPurpleStyle, CommentStyle, TurquoiseStyle, VSfc, AddStyle, LightBlueStyle);
             if (SPKStringRegex == null)
@@ -71,7 +71,7 @@ namespace SKIDLE
             e.ChangedRange.SetStyle(LightBlueStyle, @"Null|True|False|protected:|private:");
             e.ChangedRange.SetStyle(MediumPurpleStyle, @"input|out");
             e.ChangedRange.SetStyle(AddStyle, @"Add");
-            e.ChangedRange.SetStyle(CharStyle, @"{|}|""|""|\'|\'|:|;|(|)|!|@|#|$|%|^|&");
+            e.ChangedRange.SetStyle(CharStyle, @"{|}|[|]|""|""|\'|\'|:|;|(|)|!|@|#|$|%|^|&");
 
             //clear folding markers
             e.ChangedRange.ClearFoldingMarkers();
@@ -151,7 +151,7 @@ namespace SKIDLE
                 args.Shift = -args.TabLength / 2;
                 return;
             }
-            if (Regex.IsMatch(args.PrevLineText, @"^\s*(if|for|foreach|while|[\}\s]*else)\b[^{]*$"))
+            if (Regex.IsMatch(args.PrevLineText, @"^\s*(if|do|for|foreach|while|[\}\s]*else)\b[^{]*$"))
                 if (!Regex.IsMatch(args.PrevLineText, @"(;\s*$)|(;\s*//)"))
                 {
                     args.Shift = args.TabLength;
@@ -206,7 +206,7 @@ namespace SKIDLE
             SPKClassNameRegex = new Regex(@"\b(class|enum|fun)\s+(?<range>\w+?)\b", RegexCompiledOption);
             SPKKeywordRegex =
                 new Regex(
-                    @"\b(abstract|add|alias|as|ascending|async|await|base|bool|break|by|byte|case|catch|char|checked|class|const|continue|decimal|default|delegate|descending|do|double|dynamic|else|enum|equals|event|explicit|extern|false|finally|fixed|float|for|foreach|from|get|global|goto|group|if|implicit|in|int|interface|internal|into|is|join|let|lock|long|nameof|namespace|new|null|object|on|operator|orderby|out|override|params|partial|private|protected|public|readonly|ref|remove|return|sbyte|sealed|select|set|short|sizeof|stackalloc|static|static|string|struct|switch|this|throw|true|try|typeof|uint|ulong|unchecked|unsafe|ushort|using|using|value|var|virtual|void|volatile|when|where|while|yield)\b|#region\b|#endregion\b",
+                    @"\b(Add|fun|class|if|for|while|do|else|stop|continue|switch|case|enum|toStr|toInt|toFloat|toByte|toShort|toLong|toDouble|ref|length|Array|strReplace|strSplit|var|Null|True|False|protected:|private:|input|out)\b|#region\b|#endregion\b",
                     RegexCompiledOption);
         }
     }

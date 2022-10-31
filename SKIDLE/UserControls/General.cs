@@ -12,18 +12,26 @@ namespace SKIDLE.UserControls
 {
     public partial class General : UserControl
     {
+        ConfigFile config;
         public General()
         {
             InitializeComponent();
             pathToSPK.CustomButton.Click += OkPathSPK;
-            ConfigFile config = new ConfigFile("configure.conf");
-            pathToSPK.Text = config.GetProperty("pathtoSPK");
+            config = new ConfigFile("configure.conf");
+            pathToSPK.Text = config.GetProperty("compilerPK");
         }
 
         private void OkPathSPK(object sender, EventArgs e)
         {
-            ConfigFile config = new ConfigFile("configure.conf");
-            config.SetProperty("pathtoSPK", pathToSPK.Text);
+            config.SetProperty("compilerSPK", pathToSPK.Text);
+        }
+
+        private void themeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (themeComboBox.SelectedItem.ToString() == "Dark")
+                config.ReProperty("theme", "dark");
+            else
+                config.ReProperty("theme", "light");
         }
     }
 }

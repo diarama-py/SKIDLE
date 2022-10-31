@@ -30,3 +30,7 @@ C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\MetroFramework.Design.d
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\MetroFramework.dll
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\MetroFramework.Fonts.dll
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.exe
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UserControls.StructureControl.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.CreateForm.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UI.VS.VSContextMenuStrip.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UI.VS.VSContextMenuStripTE.resources

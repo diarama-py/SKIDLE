@@ -1,21 +1,25 @@
-﻿using System;
+﻿using SKIDLE.UserControls;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
 
 namespace SKIDLE
 {
     public class AutoForce : AutocompleteMenuNS.AutocompleteMenu
     {
-        public AutoForce()
-        { 
+        FastCTBox code;
+        public AutoForce(FastCTBox code)
+        {
+            this.code = code;
         }
 
-        public void autoForce(FastColoredTextBoxNS.FastColoredTextBox code)
+        public void autoForce()
         {
+            this.Items = null;
             this.MinFragmentLength = 1;
             List<String> keywords = new List<string>();
             List<String> key = new List<string>();
+            IList<string> lines = code.Lines;
 
             string file = Globals.SpecialKey + "spk-reserv.dict";
             string dict = Globals.SpecialKey + "autoforce.dict";
@@ -29,25 +33,27 @@ namespace SKIDLE
                 string line = Ikey.Trim(' ');
                 key.Add(line);
             }
-            foreach (var line in code.Lines)
+
+            for (int i = 0; i < lines.Count; i++)
             {
                 try
                 {
-                    foreach (var Ikey in key)
-                    {                   
-                        if (line.Contains(Ikey))
+                    for (int z = 0; z < key.Count; z++)
+                    {
+                        if (lines[i].Contains(key[z]))
                         {
-                            string q = line.Trim(' ', '(', ')');
+                            string q = lines[i].Trim(' ', '(', ')');
                             q = q.Split(' ')[1];
                             q = q.Split('=', '(', ')', ' ', '{', '}')[0];
                             keywords.Add(q);
                         }
+
                     }
                 }
-                catch{}
+                catch { }
             }
 
-            foreach (var item in Directory.GetFiles(Globals.SpecialKey + "modules\\", "*.spk"))
+            foreach (var item in Directory.GetFiles(Globals.SpecialKey + "modules\\", "*spk"))
             {
                 FileInfo fi = new FileInfo(item);
                 string dfName = fi.Name.Split(".spk"[0])[0];
@@ -77,9 +83,11 @@ namespace SKIDLE
                 }
             }
 
-            foreach(var item in keywords)
+            
+
+            for (int i = 0; i < keywords.Count; i++)
             {
-                this.AddItem(item);
+                this.AddItem(keywords[i]);
             }
         }
     }
