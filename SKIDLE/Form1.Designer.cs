@@ -1,4 +1,6 @@
-﻿namespace SKIDLE
+﻿using SKIDLE.UI.VS;
+
+namespace SKIDLE
 {
     partial class skidle
     {
@@ -29,7 +31,19 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(skidle));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.tabControl = new Manina.Windows.Forms.TabControl();
+            this.leftMenu = new System.Windows.Forms.Panel();
+            this.run = new System.Windows.Forms.Button();
+            this.ExplorerMenu = new System.Windows.Forms.Button();
+            this.split = new System.Windows.Forms.SplitContainer();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.explorerPanelTitle = new System.Windows.Forms.Panel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.panelStructureTitle = new System.Windows.Forms.Panel();
+            this.structureTitle = new MetroFramework.Controls.MetroLabel();
+            this.explorer = new SKIDLE.BufferedTreeView();
+            this.structure = new SKIDLE.UserControls.StructureControl();
+            this.menuStrip = new SKIDLE.UI.VS.VSMenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьКакToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,36 +66,211 @@
             this.запуститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.терминалToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьТерминалToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl = new Manina.Windows.Forms.TabControl();
-            this.leftMenu = new System.Windows.Forms.Panel();
-            this.ExplorerMenu = new System.Windows.Forms.Button();
-            this.split = new System.Windows.Forms.SplitContainer();
-            this.explorer = new System.Windows.Forms.TreeView();
-            this.run = new System.Windows.Forms.Button();
-            this.menuStrip1.SuspendLayout();
+            this.explorerContMenu = new SKIDLE.UI.VS.VSContextMenuStrip();
+            this.createFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.openInExplorer = new System.Windows.Forms.ToolStripMenuItem();
+            this.переместитьModuleInModulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rename = new System.Windows.Forms.ToolStripMenuItem();
+            this.delete = new System.Windows.Forms.ToolStripMenuItem();
             this.leftMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.split)).BeginInit();
             this.split.Panel1.SuspendLayout();
             this.split.Panel2.SuspendLayout();
             this.split.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.explorerPanelTitle.SuspendLayout();
+            this.panelStructureTitle.SuspendLayout();
+            this.menuStrip.SuspendLayout();
+            this.explorerContMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // tabControl
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.menuStrip1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tabControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tabControl.CloseTabImage = ((System.Drawing.Image)(resources.GetObject("tabControl.CloseTabImage")));
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = -1;
+            this.tabControl.ShowCloseTabButtons = true;
+            this.tabControl.Size = new System.Drawing.Size(612, 384);
+            this.tabControl.TabIndex = 1;
+            // 
+            // leftMenu
+            // 
+            this.leftMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.leftMenu.Controls.Add(this.run);
+            this.leftMenu.Controls.Add(this.ExplorerMenu);
+            this.leftMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.leftMenu.Location = new System.Drawing.Point(0, 27);
+            this.leftMenu.Name = "leftMenu";
+            this.leftMenu.Size = new System.Drawing.Size(36, 384);
+            this.leftMenu.TabIndex = 2;
+            // 
+            // run
+            // 
+            this.run.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.run.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("run.BackgroundImage")));
+            this.run.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.run.Dock = System.Windows.Forms.DockStyle.Top;
+            this.run.FlatAppearance.BorderSize = 0;
+            this.run.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.run.Location = new System.Drawing.Point(0, 33);
+            this.run.Name = "run";
+            this.run.Size = new System.Drawing.Size(36, 33);
+            this.run.TabIndex = 3;
+            this.run.UseVisualStyleBackColor = false;
+            this.run.Click += new System.EventHandler(this.запуститьToolStripMenuItem_Click);
+            // 
+            // ExplorerMenu
+            // 
+            this.ExplorerMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.ExplorerMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ExplorerMenu.BackgroundImage")));
+            this.ExplorerMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ExplorerMenu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ExplorerMenu.FlatAppearance.BorderSize = 0;
+            this.ExplorerMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ExplorerMenu.Location = new System.Drawing.Point(0, 0);
+            this.ExplorerMenu.Name = "ExplorerMenu";
+            this.ExplorerMenu.Size = new System.Drawing.Size(36, 33);
+            this.ExplorerMenu.TabIndex = 2;
+            this.ExplorerMenu.UseVisualStyleBackColor = false;
+            this.ExplorerMenu.Click += new System.EventHandler(this.ExplorerMenu_Click);
+            // 
+            // split
+            // 
+            this.split.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.split.Location = new System.Drawing.Point(36, 27);
+            this.split.Name = "split";
+            // 
+            // split.Panel1
+            // 
+            this.split.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.split.Panel1.Controls.Add(this.splitContainer1);
+            // 
+            // split.Panel2
+            // 
+            this.split.Panel2.Controls.Add(this.tabControl);
+            this.split.Size = new System.Drawing.Size(746, 384);
+            this.split.SplitterDistance = 130;
+            this.split.TabIndex = 3;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.explorer);
+            this.splitContainer1.Panel1.Controls.Add(this.explorerPanelTitle);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.structure);
+            this.splitContainer1.Panel2.Controls.Add(this.panelStructureTitle);
+            this.splitContainer1.Size = new System.Drawing.Size(130, 384);
+            this.splitContainer1.SplitterDistance = 250;
+            this.splitContainer1.TabIndex = 0;
+            // 
+            // explorerPanelTitle
+            // 
+            this.explorerPanelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.explorerPanelTitle.Controls.Add(this.metroLabel1);
+            this.explorerPanelTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.explorerPanelTitle.Location = new System.Drawing.Point(0, 0);
+            this.explorerPanelTitle.Name = "explorerPanelTitle";
+            this.explorerPanelTitle.Size = new System.Drawing.Size(130, 33);
+            this.explorerPanelTitle.TabIndex = 1;
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel1.Location = new System.Drawing.Point(2, 4);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(112, 25);
+            this.metroLabel1.TabIndex = 0;
+            this.metroLabel1.Text = "Проводник";
+            this.metroLabel1.UseCustomBackColor = true;
+            this.metroLabel1.UseCustomForeColor = true;
+            // 
+            // panelStructureTitle
+            // 
+            this.panelStructureTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.panelStructureTitle.Controls.Add(this.structureTitle);
+            this.panelStructureTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelStructureTitle.Location = new System.Drawing.Point(0, 0);
+            this.panelStructureTitle.Name = "panelStructureTitle";
+            this.panelStructureTitle.Size = new System.Drawing.Size(130, 34);
+            this.panelStructureTitle.TabIndex = 3;
+            // 
+            // structureTitle
+            // 
+            this.structureTitle.AutoSize = true;
+            this.structureTitle.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.structureTitle.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.structureTitle.Location = new System.Drawing.Point(2, 4);
+            this.structureTitle.Name = "structureTitle";
+            this.structureTitle.Size = new System.Drawing.Size(101, 25);
+            this.structureTitle.TabIndex = 1;
+            this.structureTitle.Text = "Структура";
+            this.structureTitle.UseCustomBackColor = true;
+            this.structureTitle.UseCustomForeColor = true;
+            // 
+            // explorer
+            // 
+            this.explorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.explorer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.explorer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.explorer.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.explorer.FullRowSelect = true;
+            this.explorer.imageList = null;
+            this.explorer.ItemHeight = 22;
+            this.explorer.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.explorer.Location = new System.Drawing.Point(0, 33);
+            this.explorer.Name = "explorer";
+            this.explorer.ShowNodeToolTips = true;
+            this.explorer.ShowPlusMinus = false;
+            this.explorer.ShowRootLines = false;
+            this.explorer.Size = new System.Drawing.Size(130, 217);
+            this.explorer.TabIndex = 0;
+            this.explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.explorer_NodeMouseClick);
+            this.explorer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.explorer_MouseClick);
+            // 
+            // structure
+            // 
+            this.structure.BackColor = System.Drawing.SystemColors.Control;
+            this.structure.code = null;
+            this.structure.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.structure.Location = new System.Drawing.Point(0, 34);
+            this.structure.Name = "structure";
+            this.structure.Size = new System.Drawing.Size(130, 96);
+            this.structure.TabIndex = 0;
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.menuStrip.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
             this.правкаToolStripMenuItem,
             this.настройкиToolStripMenuItem,
             this.выполнитьToolStripMenuItem,
             this.терминалToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(782, 27);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
+            this.menuStrip.Size = new System.Drawing.Size(782, 27);
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "menuStrip1";
             // 
             // файлToolStripMenuItem
             // 
@@ -102,7 +291,7 @@
             // 
             // сохранитьToolStripMenuItem
             // 
-            this.сохранитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.сохранитьToolStripMenuItem.BackColor = System.Drawing.Color.Red;
             this.сохранитьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
             this.сохранитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
@@ -305,93 +494,53 @@
             this.открытьТерминалToolStripMenuItem.Text = "Открыть Терминал";
             this.открытьТерминалToolStripMenuItem.Click += new System.EventHandler(this.открытьТерминалToolStripMenuItem_Click);
             // 
-            // tabControl
+            // explorerContMenu
             // 
-            this.tabControl.CloseTabImage = ((System.Drawing.Image)(resources.GetObject("tabControl.CloseTabImage")));
-            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 0);
-            this.tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = -1;
-            this.tabControl.ShowCloseTabButtons = true;
-            this.tabControl.Size = new System.Drawing.Size(637, 384);
-            this.tabControl.TabIndex = 1;
+            this.explorerContMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.explorerContMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createFile,
+            this.openInExplorer,
+            this.переместитьModuleInModulesToolStripMenuItem,
+            this.rename,
+            this.delete});
+            this.explorerContMenu.Name = "explorerContMenu";
+            this.explorerContMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.explorerContMenu.Size = new System.Drawing.Size(253, 114);
             // 
-            // leftMenu
+            // createFile
             // 
-            this.leftMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.leftMenu.Controls.Add(this.run);
-            this.leftMenu.Controls.Add(this.ExplorerMenu);
-            this.leftMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.leftMenu.Location = new System.Drawing.Point(0, 27);
-            this.leftMenu.Name = "leftMenu";
-            this.leftMenu.Size = new System.Drawing.Size(36, 384);
-            this.leftMenu.TabIndex = 2;
+            this.createFile.Name = "createFile";
+            this.createFile.Size = new System.Drawing.Size(252, 22);
+            this.createFile.Text = "Создать";
+            this.createFile.Click += new System.EventHandler(this.createFile_Click);
             // 
-            // ExplorerMenu
+            // openInExplorer
             // 
-            this.ExplorerMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.ExplorerMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ExplorerMenu.BackgroundImage")));
-            this.ExplorerMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ExplorerMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ExplorerMenu.FlatAppearance.BorderSize = 0;
-            this.ExplorerMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ExplorerMenu.Location = new System.Drawing.Point(0, 0);
-            this.ExplorerMenu.Name = "ExplorerMenu";
-            this.ExplorerMenu.Size = new System.Drawing.Size(36, 33);
-            this.ExplorerMenu.TabIndex = 2;
-            this.ExplorerMenu.UseVisualStyleBackColor = false;
-            this.ExplorerMenu.Click += new System.EventHandler(this.ExplorerMenu_Click);
+            this.openInExplorer.Name = "openInExplorer";
+            this.openInExplorer.Size = new System.Drawing.Size(252, 22);
+            this.openInExplorer.Text = "Открыть в проводнике";
+            this.openInExplorer.Click += new System.EventHandler(this.openInExplorer_Click);
             // 
-            // split
+            // переместитьModuleInModulesToolStripMenuItem
             // 
-            this.split.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.split.Location = new System.Drawing.Point(36, 27);
-            this.split.Name = "split";
+            this.переместитьModuleInModulesToolStripMenuItem.Name = "переместитьModuleInModulesToolStripMenuItem";
+            this.переместитьModuleInModulesToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.переместитьModuleInModulesToolStripMenuItem.Text = "Переместить module in modules";
+            this.переместитьModuleInModulesToolStripMenuItem.Click += new System.EventHandler(this.переместитьModuleInModulesToolStripMenuItem_Click);
             // 
-            // split.Panel1
+            // rename
             // 
-            this.split.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.split.Panel1.Controls.Add(this.explorer);
+            this.rename.Name = "rename";
+            this.rename.Size = new System.Drawing.Size(252, 22);
+            this.rename.Text = "Переименовать";
+            this.rename.Click += new System.EventHandler(this.rename_Click);
             // 
-            // split.Panel2
+            // delete
             // 
-            this.split.Panel2.Controls.Add(this.tabControl);
-            this.split.Size = new System.Drawing.Size(746, 384);
-            this.split.SplitterDistance = 105;
-            this.split.TabIndex = 3;
-            // 
-            // explorer
-            // 
-            this.explorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.explorer.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.explorer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.explorer.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.explorer.FullRowSelect = true;
-            this.explorer.ItemHeight = 22;
-            this.explorer.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.explorer.Location = new System.Drawing.Point(0, 0);
-            this.explorer.Name = "explorer";
-            this.explorer.ShowPlusMinus = false;
-            this.explorer.ShowRootLines = false;
-            this.explorer.Size = new System.Drawing.Size(105, 384);
-            this.explorer.TabIndex = 0;
-            this.explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.explorer_NodeMouseClick);
-            // 
-            // run
-            // 
-            this.run.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.run.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("run.BackgroundImage")));
-            this.run.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.run.Dock = System.Windows.Forms.DockStyle.Top;
-            this.run.FlatAppearance.BorderSize = 0;
-            this.run.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.run.Location = new System.Drawing.Point(0, 33);
-            this.run.Name = "run";
-            this.run.Size = new System.Drawing.Size(36, 33);
-            this.run.TabIndex = 3;
-            this.run.UseVisualStyleBackColor = false;
-            this.run.Click += new System.EventHandler(this.запуститьToolStripMenuItem_Click);
+            this.delete.Name = "delete";
+            this.delete.Size = new System.Drawing.Size(252, 22);
+            this.delete.Text = "Удалить";
+            this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
             // skidle
             // 
@@ -401,7 +550,7 @@
             this.ClientSize = new System.Drawing.Size(782, 411);
             this.Controls.Add(this.split);
             this.Controls.Add(this.leftMenu);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -409,13 +558,22 @@
             this.Name = "skidle";
             this.Text = "SKIDLE";
             this.Load += new System.EventHandler(this.skidle_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.leftMenu.ResumeLayout(false);
             this.split.Panel1.ResumeLayout(false);
             this.split.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.split)).EndInit();
             this.split.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.explorerPanelTitle.ResumeLayout(false);
+            this.explorerPanelTitle.PerformLayout();
+            this.panelStructureTitle.ResumeLayout(false);
+            this.panelStructureTitle.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
+            this.explorerContMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -423,7 +581,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private VSMenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem создатьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытьФайлToolStripMenuItem;
@@ -440,7 +598,7 @@
         private System.Windows.Forms.SplitContainer split;
         private System.Windows.Forms.Button ExplorerMenu;
         private System.Windows.Forms.ToolStripMenuItem открытьПапкуToolStripMenuItem;
-        private System.Windows.Forms.TreeView explorer;
+        private BufferedTreeView explorer;
         private System.Windows.Forms.ToolStripMenuItem правкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem вырезатьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem копироватьToolStripMenuItem;
@@ -452,6 +610,18 @@
         private System.Windows.Forms.ToolStripMenuItem закрытьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выйтиToolStripMenuItem;
         private System.Windows.Forms.Button run;
+        private VSContextMenuStrip explorerContMenu;
+        private System.Windows.Forms.ToolStripMenuItem createFile;
+        private System.Windows.Forms.ToolStripMenuItem openInExplorer;
+        private System.Windows.Forms.ToolStripMenuItem rename;
+        private System.Windows.Forms.ToolStripMenuItem delete;
+        private System.Windows.Forms.Panel explorerPanelTitle;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private UserControls.StructureControl structure;
+        private System.Windows.Forms.Panel panelStructureTitle;
+        private MetroFramework.Controls.MetroLabel structureTitle;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ToolStripMenuItem переместитьModuleInModulesToolStripMenuItem;
     }
 }
 

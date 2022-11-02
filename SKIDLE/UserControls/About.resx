@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="aboutText.Text" xml:space="preserve">
+    <value>Здесь должен быть текст...
+Ленин пожалуйста давай ты будешь делать настройки
+мне это вобще делать лень
+я очень удивлен как я вообще до сюда дошел
+
+FrostySF - Programmer, designer, person
+Lenin - TypeOf(Programmer),kurator, write 6 lines code</value>
+  </data>
 </root>

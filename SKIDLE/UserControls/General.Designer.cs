@@ -31,6 +31,10 @@ namespace SKIDLE.UserControls
         {
             this.title = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pathToSPK = new MetroFramework.Controls.MetroTextBox();
+            this.themeComboBox = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // title
@@ -50,10 +54,86 @@ namespace SKIDLE.UserControls
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.panel1.Controls.Add(this.metroLabel1);
+            this.panel1.Controls.Add(this.themeComboBox);
+            this.panel1.Controls.Add(this.pathToSPK);
             this.panel1.Location = new System.Drawing.Point(0, 34);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(685, 461);
             this.panel1.TabIndex = 1;
+            // 
+            // pathToSPK
+            // 
+            this.pathToSPK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.pathToSPK.CustomButton.Image = null;
+            this.pathToSPK.CustomButton.Location = new System.Drawing.Point(657, 1);
+            this.pathToSPK.CustomButton.Name = "";
+            this.pathToSPK.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.pathToSPK.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.pathToSPK.CustomButton.TabIndex = 1;
+            this.pathToSPK.CustomButton.Text = "Ok";
+            this.pathToSPK.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.pathToSPK.CustomButton.UseSelectable = true;
+            this.pathToSPK.Lines = new string[0];
+            this.pathToSPK.Location = new System.Drawing.Point(3, 30);
+            this.pathToSPK.MaxLength = 32767;
+            this.pathToSPK.Name = "pathToSPK";
+            this.pathToSPK.PasswordChar = '\0';
+            this.pathToSPK.PromptText = "Compiler path";
+            this.pathToSPK.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.pathToSPK.SelectedText = "";
+            this.pathToSPK.SelectionLength = 0;
+            this.pathToSPK.SelectionStart = 0;
+            this.pathToSPK.ShortcutsEnabled = true;
+            this.pathToSPK.ShowButton = true;
+            this.pathToSPK.Size = new System.Drawing.Size(679, 23);
+            this.pathToSPK.TabIndex = 0;
+            this.pathToSPK.UseCustomBackColor = true;
+            this.pathToSPK.UseCustomForeColor = true;
+            this.pathToSPK.UseSelectable = true;
+            this.pathToSPK.UseStyleColors = true;
+            this.pathToSPK.WaterMark = "Compiler path";
+            this.pathToSPK.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.pathToSPK.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // themeComboBox
+            // 
+            this.themeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.themeComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.themeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.themeComboBox.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.themeComboBox.FormattingEnabled = true;
+            this.themeComboBox.ItemHeight = 23;
+            this.themeComboBox.Items.AddRange(new object[] {
+            "Light",
+            "Dark"});
+            this.themeComboBox.Location = new System.Drawing.Point(60, 70);
+            this.themeComboBox.Name = "themeComboBox";
+            this.themeComboBox.PromptText = "theme";
+            this.themeComboBox.Size = new System.Drawing.Size(622, 29);
+            this.themeComboBox.TabIndex = 1;
+            this.themeComboBox.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.themeComboBox.UseCustomBackColor = true;
+            this.themeComboBox.UseCustomForeColor = true;
+            this.themeComboBox.UseSelectable = true;
+            this.themeComboBox.SelectedIndexChanged += new System.EventHandler(this.themeComboBox_SelectedIndexChanged);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel1.Location = new System.Drawing.Point(0, 70);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(50, 19);
+            this.metroLabel1.TabIndex = 2;
+            this.metroLabel1.Text = "Theme";
+            this.metroLabel1.UseCustomBackColor = true;
+            this.metroLabel1.UseCustomForeColor = true;
             // 
             // General
             // 
@@ -67,6 +147,8 @@ namespace SKIDLE.UserControls
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "General";
             this.Size = new System.Drawing.Size(685, 495);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -76,5 +158,8 @@ namespace SKIDLE.UserControls
 
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Panel panel1;
+        private MetroFramework.Controls.MetroTextBox pathToSPK;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroComboBox themeComboBox;
     }
 }

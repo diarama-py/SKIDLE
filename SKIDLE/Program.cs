@@ -15,6 +15,7 @@ namespace SKIDLE
         [STAThread]
         static void Main(string[] args)
         {
+            AssociationFile.SelfCreateAssociation(".spk", AssociationFile.KeyHiveSmall.ClassesRoot, "Special Key source code");
             if (args != null && args.Length > 0)
             {
                 if (args.Length == 1)

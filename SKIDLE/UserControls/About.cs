@@ -16,5 +16,11 @@ namespace SKIDLE.UserControls
         {
             InitializeComponent();
         }
+
+        private void About_Load(object sender, EventArgs e)
+        {
+            aboutText.SelectionColor = Color.FromArgb(60, 60, 60, 60);
+            aboutText.SelectionBackColor = Color.FromArgb(60, 60, 60, 60);
+        }
     }
 }
