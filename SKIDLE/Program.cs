@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,7 +16,8 @@ namespace SKIDLE
         /// </summary>
         [STAThread]
         static void Main(string[] args)
-        {
+        {        
+
             AssociationFile.SelfCreateAssociation(".spk", AssociationFile.KeyHiveSmall.ClassesRoot, "Special Key source code");
             if (args != null && args.Length > 0)
             {
@@ -51,6 +54,13 @@ namespace SKIDLE
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new skidle());
             }
+        }
+
+        private static async void CheckGit()
+        {       
+            await Task.Run(() => {
+               
+            });         
         }
     }
 }

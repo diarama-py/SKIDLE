@@ -32,3 +32,4 @@ switch
 case
 enum
 ref
+return

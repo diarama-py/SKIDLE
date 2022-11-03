@@ -33,6 +33,9 @@ namespace SKIDLE.UserControls
         private ToolStripMenuItem replace;
         private ToolStripMenuItem comment;
         SplitContainer split;
+        private ToolStripItem bookmark;
+        private ToolStripItem delbookmark;
+
         public codeTab()
         {
             InitializeComponent();
@@ -48,14 +51,27 @@ namespace SKIDLE.UserControls
             Igoto.Click += Igoto_Click;
             replace.Click += Replace_Click;
             comment.Click += Comment_Click;
+            bookmark.Click += Bookmark_Click;
+            delbookmark.Click += Delbookmark_Click;
             code.KeyUp += Code_KeyUp;
             code.KeyDown += Code_KeyDown;
             code.MouseClick += Code_MouseClick;
         }
 
+        private void Delbookmark_Click(object sender, EventArgs e)
+        {
+            code.UnbookmarkLine(code.Selection.ToLine);
+        }
+
+        private void Bookmark_Click(object sender, EventArgs e)
+        {
+            code.BookmarkColor = Color.Red;
+            code.BookmarkLine(code.Selection.ToLine);    
+        }
+
         private void Comment_Click(object sender, EventArgs e)
         {
-            code.CommentSelected();
+            code.CommentSelected("#");
         }
 
         private void InitializeComponent()
@@ -71,6 +87,8 @@ namespace SKIDLE.UserControls
             this.find = new System.Windows.Forms.ToolStripMenuItem();
             this.Igoto = new System.Windows.Forms.ToolStripMenuItem();
             this.replace = new System.Windows.Forms.ToolStripMenuItem();
+            bookmark = new ToolStripMenuItem();
+            delbookmark = new ToolStripMenuItem();
             this.topMenuStrip = new System.Windows.Forms.MenuStrip();
             this.stripLabel = new System.Windows.Forms.ToolStripLabel();
             this.bottomMenuStrip = new System.Windows.Forms.MenuStrip();
@@ -115,7 +133,7 @@ namespace SKIDLE.UserControls
             this.code.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.code.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.code.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.code.Font = new System.Drawing.Font("Courier New", 9.75F);
+            this.code.Font = new System.Drawing.Font("Roboto", 9.75F);
             this.code.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.code.IndentBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.code.IsReplaceMode = false;
@@ -130,6 +148,8 @@ namespace SKIDLE.UserControls
             this.code.Zoom = 100;
             this.code.TextChanging += new System.EventHandler<FastColoredTextBoxNS.TextChangingEventArgs>(this.Code_TextChanging);
             this.code.Load += new System.EventHandler(this.Code_Load);
+            this.code.TextChangedDelayed += Code_TextChangedDelayed;
+            
             // 
             // contextMenu
             // 
@@ -138,10 +158,9 @@ namespace SKIDLE.UserControls
             this.cut,
             this.copy,
             this.paste,
-            this.find,
-            this.Igoto,
-            this.replace,
-            this.comment});
+            this.comment,
+            this.bookmark,
+            this.delbookmark});
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.Size = new System.Drawing.Size(127, 158);
             // 
@@ -180,6 +199,18 @@ namespace SKIDLE.UserControls
             this.replace.Name = "replace";
             this.replace.Size = new System.Drawing.Size(126, 22);
             this.replace.Text = "Replace";
+            // 
+            // bookmark
+            // 
+            this.bookmark.Name = "bookmark";
+            this.bookmark.Size = new System.Drawing.Size(126, 22);
+            this.bookmark.Text = "Bookmark";
+            // 
+            // delbookmark
+            // 
+            this.delbookmark.Name = "delbookmark";
+            this.delbookmark.Size = new System.Drawing.Size(126, 22);
+            this.delbookmark.Text = "Unbookmark";
             // 
             // ACmenu
             // 
@@ -266,7 +297,7 @@ namespace SKIDLE.UserControls
             // 
             this.comment.Name = "comment";
             this.comment.Size = new System.Drawing.Size(126, 22);
-            this.comment.Text = "comment";
+            this.comment.Text = "Comment";
             // 
             // codeTab
             // 
@@ -286,6 +317,11 @@ namespace SKIDLE.UserControls
             this.split.ResumeLayout(false);
             this.ResumeLayout(false);
 
+        }
+
+        private void Code_TextChangedDelayed(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
+        {
+            RefreshCode();
         }
 
         private void Code_KeyUp(object sender, KeyEventArgs e)
@@ -344,6 +380,7 @@ namespace SKIDLE.UserControls
 
         private void Code_Load(object sender, EventArgs e)
         {
+
             LoadTopMenuLabel();
             RefreshCode();
             ConfigFile config = new ConfigFile(Application.StartupPath + "\\configure.conf");
@@ -437,7 +474,7 @@ namespace SKIDLE.UserControls
         private void Code_TextChanging(object sender, FastColoredTextBoxNS.TextChangingEventArgs e)
         {
             LoadTopMenuLabel();
-            RefreshCode();
+            
             var line = code.PositionToPlace(code.SelectionStart);
             int ichar = line.iChar + 1;
             int iline = code.Selection.FromLine + 1;
@@ -457,7 +494,9 @@ namespace SKIDLE.UserControls
             await System.Threading.Tasks.Task.Run(() => {
                 code.TextChanged += new EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(highLighting._HighLighting);
                 Hints hint = new Hints();
-                hint.AddHint("var", "var var");
+                //hint.AddHint("var", "var var");
+                
+                
                 ACmenu.autoForce();
             });
            

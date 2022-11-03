@@ -10,5 +10,7 @@ namespace SKIDLE
     class Globals
     {
         public static string SpecialKey = Application.StartupPath + "\\Compiler\\";
+        public static string Main = Application.StartupPath + "\\";
+        public static string User = Application.StartupPath + "\\User\\";
     }
 }
