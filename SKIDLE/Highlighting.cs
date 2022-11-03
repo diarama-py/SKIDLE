@@ -18,6 +18,10 @@ namespace SKIDLE
         protected Regex SPKKeywordRegex;
         protected Regex SPKNumberRegex;
         protected Regex SPKStringRegex;
+        protected Regex SPKFunRegex;
+        protected Regex SPKFClassRegex;
+        protected Regex SPKEnumRegex;
+        protected Regex SPKVarRegex;
 
         protected static readonly Platform platformType = PlatformType.GetOperationSystemPlatform();
         public static RegexOptions RegexCompiledOption
@@ -31,8 +35,9 @@ namespace SKIDLE
             }
         }
 
+        private Style FunStyle = new TextStyle(new SolidBrush(Color.FromArgb(103, 216, 239)), null, FontStyle.Regular);
         private Style BlueSlateStyle = new TextStyle(Brushes.DarkSlateBlue, null, FontStyle.Regular);
-        private Style TealStyle = new TextStyle(Brushes.Teal, null, FontStyle.Regular);
+        private Style TealStyle = new TextStyle(new SolidBrush(Color.FromArgb(249,36,100)), null, FontStyle.Regular);
         private Style CommentStyle = new TextStyle(Brushes.Gray, null, FontStyle.Bold);
         private Style LightBlueStyle = new TextStyle(Brushes.LightBlue, null, FontStyle.Bold);
         private Style AddStyle = new TextStyle(Brushes.Orange, null, FontStyle.Regular);
@@ -66,7 +71,9 @@ namespace SKIDLE
             e.ChangedRange.SetStyle(CommentStyle, SPKCommentRegex3);
 
             e.ChangedRange.SetStyle(TealStyle, @"var");
-            e.ChangedRange.SetStyle(VSfc, @"fun|class|if|for|while|do|else|stop|continue|switch|case|enum");
+            e.ChangedRange.SetStyle(FunStyle, @"fun|class|switch|case");
+            e.ChangedRange.SetStyle(CharStyle, @"return");
+            e.ChangedRange.SetStyle(VSfc, @"if|for|while|do|else|stop|continue|enum");
             e.ChangedRange.SetStyle(TurquoiseStyle, @"toStr|toInt|toFloat|toByte|toShort|toLong|toDouble|ref|length|Array|strReplace|strSplit");
             e.ChangedRange.SetStyle(LightBlueStyle, @"Null|True|False|protected:|private:");
             e.ChangedRange.SetStyle(MediumPurpleStyle, @"input|out");
@@ -84,13 +91,37 @@ namespace SKIDLE
             {
                 try
                 {
-                    if (line[i].Contains("var") || line[i].Contains("fun") || line[i].Contains("enum"))
+                    if (line[i].Contains("var"))
                     {
                         string q = line[i].Trim(' ');
                         q = q.Split(' ')[1];
                         q = q.Split('=', ' ', '(', ')', '{', '}')[0];
-                        e.ChangedRange.SetStyle(BlueSlateStyle, q);
-                    }                   
+                        e.ChangedRange.SetStyle(BlueSlateStyle, SPKVarRegex);
+                    }
+                    else
+                     if (line[i].Contains("enum"))
+                    {
+                        string q = line[i].Trim(' ');
+                        q = q.Split(' ')[1];
+                        q = q.Split('=', ' ', '(', ')', '{', '}')[0];
+                        e.ChangedRange.SetStyle(BlueSlateStyle, SPKEnumRegex);
+                    }
+                    else
+                    if (line[i].Contains("class"))
+                    {
+                        string q = line[i].Trim(' ');
+                        q = q.Split(' ')[1];
+                        q = q.Split('=', ' ', '(', ')', '{', '}')[0];
+                        e.ChangedRange.SetStyle(BlueSlateStyle, SPKFClassRegex);
+                    }
+                    else
+                    if (line[i].Contains("fun"))
+                    {
+                        string q = line[i].Trim(' ');
+                        q = q.Split(' ')[1];
+                        q = q.Split('=', ' ', '(', ')', '{', '}')[0];
+                        e.ChangedRange.SetStyle(BlueSlateStyle, SPKFunRegex);
+                    }
                 }
                 catch { }
             }
@@ -204,9 +235,13 @@ namespace SKIDLE
                                           RegexCompiledOption);
             SPKAttributeRegex = new Regex(@"^\s*(?<range>\[.+?\])\s*$", RegexOptions.Multiline | RegexCompiledOption);
             SPKClassNameRegex = new Regex(@"\b(class|enum|fun)\s+(?<range>\w+?)\b", RegexCompiledOption);
+            SPKVarRegex = new Regex(@"\b(var)\s+(?<range>\w+?)\b", RegexCompiledOption);
+            SPKFClassRegex = new Regex(@"\b(class)\s+(?<range>\w+?)\b", RegexCompiledOption);
+            SPKEnumRegex = new Regex(@"\b(enum)\s+(?<range>\w+?)\b", RegexCompiledOption);
+            SPKFunRegex = new Regex(@"\b(fun)\s+(?<range>\w+?)\b", RegexCompiledOption);
             SPKKeywordRegex =
                 new Regex(
-                    @"\b(Add|fun|class|if|for|while|do|else|stop|continue|switch|case|enum|toStr|toInt|toFloat|toByte|toShort|toLong|toDouble|ref|length|Array|strReplace|strSplit|var|Null|True|False|protected:|private:|input|out)\b|#region\b|#endregion\b",
+                    @"\b(Add|fun|class|if|for|while|do|else|stop|continue|switch|case|enum|toStr|toInt|toFloat|toByte|toShort|toLong|toDouble|ref|length|Array|strReplace|strSplit|var|Null|True|False|protected:|private:|input|out|return)\b|#region\b|#endregion\b",
                     RegexCompiledOption);
         }
     }

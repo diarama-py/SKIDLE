@@ -1,16 +1,22 @@
-﻿using SKIDLE.UserControls;
+﻿using FastColoredTextBoxNS;
+using SKIDLE.UserControls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace SKIDLE
 {
     public class AutoForce : AutocompleteMenuNS.AutocompleteMenu
     {
         FastCTBox code;
+
+
         public AutoForce(FastCTBox code)
         {
             this.code = code;
+
         }
 
         public void autoForce()
@@ -83,7 +89,7 @@ namespace SKIDLE
                 }
             }
 
-            
+
 
             for (int i = 0; i < keywords.Count; i++)
             {

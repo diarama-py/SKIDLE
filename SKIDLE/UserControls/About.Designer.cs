@@ -81,9 +81,9 @@ namespace SKIDLE.UserControls
             this.propApp.AutoSize = true;
             this.propApp.Location = new System.Drawing.Point(3, 476);
             this.propApp.Name = "propApp";
-            this.propApp.Size = new System.Drawing.Size(63, 19);
+            this.propApp.Size = new System.Drawing.Size(323, 19);
             this.propApp.TabIndex = 1;
-            this.propApp.Text = "Authors "+ Application.CompanyName + " version " + Application.ProductVersion;
+            this.propApp.Text = "Authors Microsoft Corporation version 16.11.31729.503";
             this.propApp.UseCustomBackColor = true;
             this.propApp.UseCustomForeColor = true;
             // 

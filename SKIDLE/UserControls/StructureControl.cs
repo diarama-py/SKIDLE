@@ -34,25 +34,34 @@ namespace SKIDLE.UserControls
                 {
                     if (line.Contains("var") | line.Contains("class") | line.Contains("fun") | line.Contains("enum"))
                     {
-                        name = line.Split(' ')[1].Split('=', '(', '[', '{')[0].Trim(' ');
+                       
                         if (line.Contains("var"))
                         {
                             index = 1;
+                            name = line.Trim(' ').Split(' ')[1].Split('=', '(', '[', '{')[0].Trim(' ');
+                            if (line.Contains("for"))
+                            {
+                                index = 1;
+                                name = "  " + line.Trim(' ').Split(' ')[1].Split('=', '(', '[', '{')[0].Trim(' ');
+                            }
                         }
                         else
-                       if (line.Contains("class"))
+                        if (line.Contains("class"))
                         {
                             index = 0;
+                            name = line.Trim(' ').Split(' ')[1].Split('=', '(', '[', '{')[0].Trim(' ');
                         }
                         else
                         if (line.Contains("fun"))
                         {
                             index = 2;
+                            name = line.Trim(' ').Split(' ')[1].Split('=', '(', '[', '{')[0].Trim(' ');
                         }
                         else
                         if (line.Contains("enum"))
                         {
                             index = 4;
+                            name = line.Trim(' ').Split(' ')[1].Split('=', '(', '[', '{')[0].Trim(' ');
                         }
                         var nody = treeView.Nodes.Add(name, name, index, index);
                         nody.Tag = name;
@@ -60,49 +69,6 @@ namespace SKIDLE.UserControls
                 }
                 catch { }
             }        
-        }
-
-        public async void AsyncLoadStructure()
-        {
-            await Task.Run(() =>
-            {
-               
-                foreach (var line in code.Lines)
-                {
-                    try
-                    {
-                        treeView.Nodes.Clear();
-                        string name = null;
-                        int index = 0;
-                        if (line.Contains("var") | line.Contains("class") | line.Contains("fun") | line.Contains("enum"))
-                        {
-                            name = line.Split(' ')[1].Split('=', '(', '[', '{')[0].Trim(' ');
-                            if (line.Contains("var"))
-                            {
-                                index = 1;
-                            }
-                            else
-                           if (line.Contains("class"))
-                            {
-                                index = 0;
-                            }
-                            else
-                            if (line.Contains("fun"))
-                            {
-                                index = 2;
-                            }
-                            else
-                            if (line.Contains("enum"))
-                            {
-                                index = 4;
-                            }
-                            var nody = treeView.Nodes.Add(name, name, index, index);
-                            nody.Tag = name;
-                        }
-                    }
-                    catch { }
-                }             
-            });
         }
     }
 }

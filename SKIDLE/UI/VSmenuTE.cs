@@ -28,7 +28,7 @@ namespace SKIDLE.UI.VS
         {
             this.RenderMode = ToolStripRenderMode.Professional;
             gWidth = 110;
-            gHeight = 155;
+            gHeight = 135;
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, gWidth, gHeight, 12, 12));
         }

@@ -11,6 +11,7 @@ using SKIDLE.UserControls;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace SKIDLE
 {
@@ -35,13 +36,17 @@ namespace SKIDLE
                 tab.Text = fi.Name;
                 tab.Name = fi.FullName;
                 tab.LoadTopMenuLabel();
-                loadStruct();
+                loadStruct(tab.code.Text);
             }
         }
 
         private void открытьТерминалToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(Globals.SpecialKey + "SpecialKey.exe");
+            if(splitContainer2.Panel2Collapsed == true)
+                splitContainer2.Panel2Collapsed = false;
+            else
+                splitContainer2.Panel2Collapsed = true;
         }
 
         private void запуститьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -63,15 +68,18 @@ namespace SKIDLE
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
-            if(File.Exists(tabControl.SelectedTab.Name))
+         if(tabControl.Tabs.Count > 0)
             {
-                File.WriteAllText(tabControl.SelectedTab.Name, myCode.code.Text);
-                loadStruct();
-            }
-            else
-            {
-                сохранитьКакToolStripMenuItem_Click(sender, e);
+                var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
+                if (File.Exists(tabControl.SelectedTab.Name))
+                {
+                    File.WriteAllText(tabControl.SelectedTab.Name, myCode.code.Text);
+                    loadStruct(myCode.code.Text);
+                }
+                else
+                {
+                    сохранитьКакToolStripMenuItem_Click(sender, e);
+                }
             }
         }
 
@@ -87,7 +95,7 @@ namespace SKIDLE
                 myCode.Text = fi.Name;
                 myCode.Name = fi.FullName;
                 myCode.LoadTopMenuLabel();
-                loadStruct();
+                loadStruct(myCode.code.Text);
             }
         }
 
@@ -97,20 +105,50 @@ namespace SKIDLE
             tabControl.Tabs.Add(tab);
             tabControl.SelectedTab = tab;
             tab.Text = "untitled";
+            tab.code.Focus();
         }
 
         private void skidle_Load(object sender, EventArgs e)
         {
+            Hints hint = new Hints();
+            hint.Show();
+            ConsoleOpen();
             split.Panel1Collapsed = true;
+            splitContainer1.Panel2Collapsed = true;
+            splitContainer2.Panel2Collapsed = true;
             ConfigFile config = new ConfigFile(Application.StartupPath + "\\configure.conf");
             if (config.GetProperty("theme") == "dark")
                 DarkTheme();
             else
                 LightTheme();
-            if (config.GetProperty("language") == "ru")
-                RuLang();
-            else
-                EnLang();
+            Lang(config.GetProperty("language"));
+
+            //
+            //load user
+            //
+            if(File.Exists(Globals.User + "files.txt") && File.ReadAllLines(Globals.User + "files.txt").Length > 0)
+            {
+                foreach (var file in File.ReadAllLines(Globals.User + "files.txt"))
+                {
+                    FileInfo fi = new FileInfo(file);
+                    codeTab tab = new codeTab();
+                    tabControl.Tabs.Add(tab);
+                    tabControl.SelectedTab = tab;
+                    tab.code.OpenFile(fi.FullName);
+                    tab.Text = fi.Name;
+                    tab.Name = fi.FullName;
+                    tab.LoadTopMenuLabel();
+                    loadStruct(tab.code.Text);
+                }
+            }
+            if (File.Exists(Globals.User + "workfolder.txt") && File.ReadAllLines(Globals.User + "workfolder.txt").Length > 0)
+            {
+                explorer.Nodes.Clear();
+                split.Panel1Collapsed = false;
+                DirectoryInfo dfo = new DirectoryInfo(File.ReadAllText(Globals.User + "workfolder.txt"));
+                var nody = explorer.Nodes.Add(dfo.Name, dfo.Name);
+                nody.Tag = dfo;
+            }
         }
         private void ExplorerMenu_Click(object sender, EventArgs e)
         {
@@ -121,6 +159,11 @@ namespace SKIDLE
             else
             {
                 split.Panel1Collapsed = false;
+            }
+            if (splitContainer1.Panel1Collapsed == true)
+            {
+                splitContainer1.Panel2Collapsed = true;
+                splitContainer1.Panel1Collapsed = false;
             }
         }
 
@@ -134,7 +177,8 @@ namespace SKIDLE
             tab.Text = fi.Name;
             tab.Name = fi.FullName;
             tab.LoadTopMenuLabel();
-            loadStruct();
+            loadStruct(tab.code.Text);
+            tab.RefreshCode();
         }
 
         public void LoadFCMD(string[] files)
@@ -148,8 +192,9 @@ namespace SKIDLE
                 tab.code.OpenFile(fi.FullName);
                 tab.Text = fi.Name;
                 tab.Name = fi.FullName;
+                tab.RefreshCode();
                 tab.LoadTopMenuLabel();
-                loadStruct();
+                loadStruct(tab.code.Text);
             }
         }
 
@@ -200,7 +245,7 @@ namespace SKIDLE
                 tab.Text = fi.Name;
                 tab.Name = fi.FullName;
                 tab.LoadTopMenuLabel();
-                loadStruct();
+                loadStruct(tab.code.Text);
             }
         }
 
@@ -309,8 +354,7 @@ namespace SKIDLE
         }
         private void переместитьModuleInModulesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (explorer.SelectedNode.Tag.ToString().Contains("."))
-                Process.Start("CaU.exe", "mm " + explorer.SelectedNode.Tag.ToString());
+            File.Copy(tabControl.SelectedTab.Name, Globals.SpecialKey + "modules\\");
         }
         private void explorer_MouseClick(object sender, MouseEventArgs e)
         {
@@ -318,7 +362,7 @@ namespace SKIDLE
                 explorerContMenu.Show(explorer, e.Location);
         }
 
-        private void loadStruct()
+        private void loadStruct(string text)
         {
             var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
             structure.code = myCode.code;
@@ -356,12 +400,17 @@ namespace SKIDLE
             this.заменитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
             this.настройкиToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.настройкиToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.отчетToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.модулиToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.выполнитьToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.запуститьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
             this.терминалToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.открытьТерминалToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.отчетToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
+            this.модулиToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
             this.run.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.ExplorerMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.structureBTN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.split.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.explorerPanelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.panelStructureTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -403,12 +452,17 @@ namespace SKIDLE
             this.заменитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(63)))), ((int)(((byte)(226)))));
             this.настройкиToolStripMenuItem.ForeColor = Color.Black;
             this.настройкиToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(63)))), ((int)(((byte)(226)))));
+            this.отчетToolStripMenuItem.ForeColor = Color.Black;
+            this.отчетToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(63)))), ((int)(((byte)(226)))));
+            this.модулиToolStripMenuItem.ForeColor = Color.Black;
+            this.модулиToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(63)))), ((int)(((byte)(226)))));
             this.выполнитьToolStripMenuItem.ForeColor = Color.Black;
             this.запуститьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(63)))), ((int)(((byte)(226)))));
             this.терминалToolStripMenuItem.ForeColor = Color.Black;
             this.открытьТерминалToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(63)))), ((int)(((byte)(226)))));
             this.run.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
             this.ExplorerMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
+            this.structureBTN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
             this.split.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
             this.explorerPanelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.panelStructureTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -430,9 +484,9 @@ namespace SKIDLE
         //Languages
         //
         #region languages
-        private void EnLang()
+        private void Lang(string name)
         {
-            ConfigFile config = new ConfigFile(Application.StartupPath + "\\Languages\\en.conf");
+            ConfigFile config = new ConfigFile(Application.StartupPath + "\\Languages\\"+name+".conf");
             this.файлToolStripMenuItem.Text = config.GetProperty("file");
             this.сохранитьToolStripMenuItem.Text = config.GetProperty("save");
             this.сохранитьКакToolStripMenuItem.Text = config.GetProperty("saveAs");
@@ -455,6 +509,8 @@ namespace SKIDLE
             this.запуститьToolStripMenuItem.Text = config.GetProperty("subrun");
             this.терминалToolStripMenuItem.Text = config.GetProperty("terminal");
             this.открытьТерминалToolStripMenuItem.Text = config.GetProperty("subterminal");
+            this.отчетToolStripMenuItem.Text = config.GetProperty("log");
+            this.модулиToolStripMenuItem.Text = config.GetProperty("modules");
             this.metroLabel1.Text = config.GetProperty("explorer");
             this.structureTitle.Text = config.GetProperty("structure");
             this.createFile.Text = config.GetProperty("eCreate");
@@ -465,40 +521,72 @@ namespace SKIDLE
             this.Text = config.GetProperty("title");
         }
 
-        private void RuLang()
-        {
-            ConfigFile config = new ConfigFile(Application.StartupPath + "\\Languages\\ru.conf");
-            this.файлToolStripMenuItem.Text = config.GetProperty("file");
-            this.сохранитьToolStripMenuItem.Text = config.GetProperty("save");
-            this.сохранитьКакToolStripMenuItem.Text = config.GetProperty("saveAs");
-            this.открытьПапкуToolStripMenuItem.Text = config.GetProperty("openFolder");
-            this.открытьФайлToolStripMenuItem.Text = config.GetProperty("open");
-            this.создатьToolStripMenuItem.Text = config.GetProperty("create");
-            this.закрытьВсеToolStripMenuItem.Text = config.GetProperty("closeAll");
-            this.закрытьToolStripMenuItem.Text = config.GetProperty("close");
-            this.выйтиToolStripMenuItem.Text = config.GetProperty("exit");
-            this.правкаToolStripMenuItem.Text = config.GetProperty("edit");
-            this.вырезатьToolStripMenuItem.Text = config.GetProperty("cut");
-            this.копироватьToolStripMenuItem.Text = config.GetProperty("copy");
-            this.вставитьToolStripMenuItem.Text = config.GetProperty("paste");
-            this.найтиToolStripMenuItem.Text = config.GetProperty("find");
-            this.перейтиToolStripMenuItem.Text = config.GetProperty("goto");
-            this.заменитьToolStripMenuItem.Text = config.GetProperty("replace");
-            this.настройкиToolStripMenuItem.Text = config.GetProperty("settings");
-            this.настройкиToolStripMenuItem1.Text = config.GetProperty("subsettings");
-            this.выполнитьToolStripMenuItem.Text = config.GetProperty("run");
-            this.запуститьToolStripMenuItem.Text = config.GetProperty("subrun");
-            this.терминалToolStripMenuItem.Text = config.GetProperty("terminal");
-            this.открытьТерминалToolStripMenuItem.Text = config.GetProperty("subterminal");
-            this.metroLabel1.Text = config.GetProperty("explorer");
-            this.structureTitle.Text = config.GetProperty("structure");
-            this.createFile.Text = config.GetProperty("eCreate");
-            this.openInExplorer.Text = config.GetProperty("eOpenInExplorer");
-            this.переместитьModuleInModulesToolStripMenuItem.Text = config.GetProperty("eCopyInModules");
-            this.rename.Text = config.GetProperty("eRename");
-            this.delete.Text = config.GetProperty("eDelete");
-            this.Text = config.GetProperty("title");
-        }
         #endregion
+
+        private void structureBTN_Click(object sender, EventArgs e)
+        {
+            if(split.Panel1Collapsed == true)
+            {
+                split.Panel1Collapsed = false;
+            }
+            else
+            {
+                split.Panel1Collapsed = true;
+            }
+            if(splitContainer1.Panel2Collapsed == true)
+            {
+                splitContainer1.Panel2Collapsed = false;
+                splitContainer1.Panel1Collapsed = true;
+            }
+        }
+        private async void ConsoleOpen()
+        {
+            await Task.Run(() => {
+                bool stop = false;
+                string text = "";
+                do
+                {
+                    console.WriteLine("&> ");
+                    text = console.ReadLine();
+                    console.Command(text);
+                } while (text != "" && stop != true);
+                
+            });
+        }
+        private void отчетToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(File.ReadAllText(Globals.SpecialKey+"log.txt"),"Log");
+        }
+        private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl.Tabs.Remove(tabControl.SelectedTab);
+        }
+        private void модулиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ModuleToGit mtg = new ModuleToGit();
+            mtg.Show();
+        }
+
+        private void skidle_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            List<string> list = new List<string>();
+            if (tabControl.Tabs.Count > 0)
+            {
+                foreach (var item in tabControl.Tabs)
+                {
+                    if (item.Name.Contains("."))
+                    {
+                        list.Add(item.Name);
+                        File.WriteAllLines(Globals.User + "files.txt", list);
+                    }
+                }
+            }
+            else if (File.Exists(Globals.User + "files.txt"))
+                File.WriteAllText(Globals.User + "files.txt", "");
+           if(explorer.Nodes.Count > 0)
+                File.WriteAllText(Globals.User + "workfolder.txt", explorer.Nodes[0].Tag.ToString());
+            else if (File.Exists(Globals.User + "workfolder.txt"))
+                File.WriteAllText(Globals.User + "workfolder.txt", "");
+        }
     }
 }
