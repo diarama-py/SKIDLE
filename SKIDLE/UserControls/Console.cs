@@ -194,6 +194,14 @@ namespace SKIDLE.UserControls
                 this.WriteLine("Special Key " + getVer()+"\n");
                 this.WriteLine("================\n");
             }
+            else if (cmd.Contains("log"))
+            {
+                this.WriteLine(File.ReadAllText(Globals.SpecialKey + "log.txt")+"\n");
+            }
+            else if (cmd.Contains("clearLog"))
+            {
+                File.WriteAllText(Globals.SpecialKey + "log.txt", "");
+            }
             else if (cmd.Contains("close"))
             {
                 Clear();
