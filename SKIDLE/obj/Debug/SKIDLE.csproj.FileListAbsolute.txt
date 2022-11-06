@@ -22,3 +22,5 @@ C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.CoreCompi
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.exe
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.pdb
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.Hints.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.CrossFormsDesigner.Constructor.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.CrossFormsDesigner.Demo.resources

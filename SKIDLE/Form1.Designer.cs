@@ -42,12 +42,23 @@ namespace SKIDLE
             this.explorer = new SKIDLE.BufferedTreeView();
             this.explorerPanelTitle = new System.Windows.Forms.Panel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.structure = new SKIDLE.UserControls.StructureControl();
             this.panelStructureTitle = new System.Windows.Forms.Panel();
             this.structureTitle = new MetroFramework.Controls.MetroLabel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.DinRun = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.RunPath = new MetroFramework.Controls.MetroTextBox();
+            this.StatRun = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.RunLabel = new MetroFramework.Controls.MetroLabel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.console = new SKIDLE.UserControls.Console();
-            this.menuStrip = new SKIDLE.UI.VS.VSMenuStrip();
+            this.tabMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.переместитьModuleInModulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьКакToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,9 +88,6 @@ namespace SKIDLE
             this.openInExplorer = new System.Windows.Forms.ToolStripMenuItem();
             this.rename = new System.Windows.Forms.ToolStripMenuItem();
             this.delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.переместитьModuleInModulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leftMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.split)).BeginInit();
             this.split.Panel1.SuspendLayout();
@@ -90,15 +98,20 @@ namespace SKIDLE
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.explorerPanelTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.panelStructureTitle.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.console)).BeginInit();
+            this.tabMenu.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.explorerContMenu.SuspendLayout();
-            this.tabMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -139,7 +152,7 @@ namespace SKIDLE
             this.run.Size = new System.Drawing.Size(30, 25);
             this.run.TabIndex = 3;
             this.run.UseVisualStyleBackColor = false;
-            this.run.Click += new System.EventHandler(this.запуститьToolStripMenuItem_Click);
+            this.run.Click += new System.EventHandler(this.RunMenu_Click);
             // 
             // structureBTN
             // 
@@ -203,10 +216,9 @@ namespace SKIDLE
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.structure);
-            this.splitContainer1.Panel2.Controls.Add(this.panelStructureTitle);
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer1.Size = new System.Drawing.Size(131, 384);
-            this.splitContainer1.SplitterDistance = 250;
+            this.splitContainer1.SplitterDistance = 47;
             this.splitContainer1.TabIndex = 0;
             // 
             // explorer
@@ -224,7 +236,7 @@ namespace SKIDLE
             this.explorer.ShowNodeToolTips = true;
             this.explorer.ShowPlusMinus = false;
             this.explorer.ShowRootLines = false;
-            this.explorer.Size = new System.Drawing.Size(131, 217);
+            this.explorer.Size = new System.Drawing.Size(131, 14);
             this.explorer.TabIndex = 0;
             this.explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.explorer_NodeMouseClick);
             this.explorer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.explorer_MouseClick);
@@ -252,14 +264,39 @@ namespace SKIDLE
             this.metroLabel1.UseCustomBackColor = true;
             this.metroLabel1.UseCustomForeColor = true;
             // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.structure);
+            this.splitContainer3.Panel1.Controls.Add(this.panelStructureTitle);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.label2);
+            this.splitContainer3.Panel2.Controls.Add(this.DinRun);
+            this.splitContainer3.Panel2.Controls.Add(this.label1);
+            this.splitContainer3.Panel2.Controls.Add(this.RunPath);
+            this.splitContainer3.Panel2.Controls.Add(this.StatRun);
+            this.splitContainer3.Panel2.Controls.Add(this.panel1);
+            this.splitContainer3.Size = new System.Drawing.Size(131, 333);
+            this.splitContainer3.SplitterDistance = 47;
+            this.splitContainer3.TabIndex = 0;
+            // 
             // structure
             // 
             this.structure.BackColor = System.Drawing.SystemColors.Control;
             this.structure.code = null;
             this.structure.Dock = System.Windows.Forms.DockStyle.Fill;
             this.structure.Location = new System.Drawing.Point(0, 34);
+            this.structure.Margin = new System.Windows.Forms.Padding(2);
             this.structure.Name = "structure";
-            this.structure.Size = new System.Drawing.Size(131, 96);
+            this.structure.Size = new System.Drawing.Size(131, 13);
             this.structure.TabIndex = 0;
             // 
             // panelStructureTitle
@@ -284,6 +321,113 @@ namespace SKIDLE
             this.structureTitle.Text = "Структура";
             this.structureTitle.UseCustomBackColor = true;
             this.structureTitle.UseCustomForeColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(0, 133);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 28);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Запуск файла в\r\nвыбранной вкладке";
+            // 
+            // DinRun
+            // 
+            this.DinRun.AutoSize = true;
+            this.DinRun.Dock = System.Windows.Forms.DockStyle.Top;
+            this.DinRun.Location = new System.Drawing.Point(0, 109);
+            this.DinRun.Name = "DinRun";
+            this.DinRun.Size = new System.Drawing.Size(131, 24);
+            this.DinRun.TabIndex = 6;
+            this.DinRun.TabStop = true;
+            this.DinRun.Text = "Дин.Запуск";
+            this.DinRun.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(0, 81);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(108, 28);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Запуск только одного\r\nопр. файла";
+            // 
+            // RunPath
+            // 
+            this.RunPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            // 
+            // 
+            // 
+            this.RunPath.CustomButton.Image = null;
+            this.RunPath.CustomButton.Location = new System.Drawing.Point(109, 1);
+            this.RunPath.CustomButton.Name = "";
+            this.RunPath.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.RunPath.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.RunPath.CustomButton.TabIndex = 1;
+            this.RunPath.CustomButton.Text = "...";
+            this.RunPath.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.RunPath.CustomButton.UseSelectable = true;
+            this.RunPath.Dock = System.Windows.Forms.DockStyle.Top;
+            this.RunPath.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.RunPath.Lines = new string[0];
+            this.RunPath.Location = new System.Drawing.Point(0, 58);
+            this.RunPath.MaxLength = 32767;
+            this.RunPath.Name = "RunPath";
+            this.RunPath.PasswordChar = '\0';
+            this.RunPath.PromptText = "Path to file";
+            this.RunPath.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.RunPath.SelectedText = "";
+            this.RunPath.SelectionLength = 0;
+            this.RunPath.SelectionStart = 0;
+            this.RunPath.ShortcutsEnabled = true;
+            this.RunPath.ShowButton = true;
+            this.RunPath.Size = new System.Drawing.Size(131, 23);
+            this.RunPath.TabIndex = 7;
+            this.RunPath.UseCustomBackColor = true;
+            this.RunPath.UseCustomForeColor = true;
+            this.RunPath.UseSelectable = true;
+            this.RunPath.WaterMark = "Path to file";
+            this.RunPath.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.RunPath.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // StatRun
+            // 
+            this.StatRun.AutoSize = true;
+            this.StatRun.Dock = System.Windows.Forms.DockStyle.Top;
+            this.StatRun.Location = new System.Drawing.Point(0, 34);
+            this.StatRun.Name = "StatRun";
+            this.StatRun.Size = new System.Drawing.Size(131, 24);
+            this.StatRun.TabIndex = 5;
+            this.StatRun.TabStop = true;
+            this.StatRun.Text = "Стат. запуск";
+            this.StatRun.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.panel1.Controls.Add(this.RunLabel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(131, 34);
+            this.panel1.TabIndex = 4;
+            // 
+            // RunLabel
+            // 
+            this.RunLabel.AutoSize = true;
+            this.RunLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.RunLabel.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.RunLabel.Location = new System.Drawing.Point(2, 4);
+            this.RunLabel.Name = "RunLabel";
+            this.RunLabel.Size = new System.Drawing.Size(72, 25);
+            this.RunLabel.TabIndex = 1;
+            this.RunLabel.Text = "Запуск";
+            this.RunLabel.UseCustomBackColor = true;
+            this.RunLabel.UseCustomForeColor = true;
             // 
             // splitContainer2
             // 
@@ -326,6 +470,7 @@ namespace SKIDLE
             this.console.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.console.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.console.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.console.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.console.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.console.IndentBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.console.IsReadLineMode = false;
@@ -341,6 +486,28 @@ namespace SKIDLE
             this.console.Size = new System.Drawing.Size(617, 94);
             this.console.TabIndex = 0;
             this.console.Zoom = 100;
+            // 
+            // tabMenu
+            // 
+            this.tabMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.переместитьModuleInModulesToolStripMenuItem,
+            this.удалитьToolStripMenuItem});
+            this.tabMenu.Name = "tabMenu";
+            this.tabMenu.Size = new System.Drawing.Size(253, 48);
+            // 
+            // переместитьModuleInModulesToolStripMenuItem
+            // 
+            this.переместитьModuleInModulesToolStripMenuItem.Name = "переместитьModuleInModulesToolStripMenuItem";
+            this.переместитьModuleInModulesToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.переместитьModuleInModulesToolStripMenuItem.Text = "Переместить module in modules";
+            this.переместитьModuleInModulesToolStripMenuItem.Click += new System.EventHandler(this.переместитьModuleInModulesToolStripMenuItem_Click);
+            // 
+            // удалитьToolStripMenuItem
+            // 
+            this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.удалитьToolStripMenuItem.Text = "Удалить";
+            this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
             // 
             // menuStrip
             // 
@@ -639,28 +806,6 @@ namespace SKIDLE
             this.delete.Text = "Удалить";
             this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
-            // tabMenu
-            // 
-            this.tabMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.переместитьModuleInModulesToolStripMenuItem,
-            this.удалитьToolStripMenuItem});
-            this.tabMenu.Name = "tabMenu";
-            this.tabMenu.Size = new System.Drawing.Size(253, 48);
-            // 
-            // переместитьModuleInModulesToolStripMenuItem
-            // 
-            this.переместитьModuleInModulesToolStripMenuItem.Name = "переместитьModuleInModulesToolStripMenuItem";
-            this.переместитьModuleInModulesToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.переместитьModuleInModulesToolStripMenuItem.Text = "Переместить module in modules";
-            this.переместитьModuleInModulesToolStripMenuItem.Click += new System.EventHandler(this.переместитьModuleInModulesToolStripMenuItem_Click);
-            // 
-            // удалитьToolStripMenuItem
-            // 
-            this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.удалитьToolStripMenuItem.Text = "Удалить";
-            this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
-            // 
             // skidle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -690,17 +835,24 @@ namespace SKIDLE
             this.splitContainer1.ResumeLayout(false);
             this.explorerPanelTitle.ResumeLayout(false);
             this.explorerPanelTitle.PerformLayout();
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.panelStructureTitle.ResumeLayout(false);
             this.panelStructureTitle.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.console)).EndInit();
+            this.tabMenu.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.explorerContMenu.ResumeLayout(false);
-            this.tabMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -708,7 +860,7 @@ namespace SKIDLE
 
         #endregion
 
-        private VSMenuStrip menuStrip;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem создатьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытьФайлToolStripMenuItem;
@@ -756,6 +908,14 @@ namespace SKIDLE
         private System.Windows.Forms.ToolStripMenuItem переместитьModuleInModulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem модулиToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton DinRun;
+        private System.Windows.Forms.Label label1;
+        private MetroFramework.Controls.MetroTextBox RunPath;
+        private System.Windows.Forms.RadioButton StatRun;
+        private System.Windows.Forms.Panel panel1;
+        private MetroFramework.Controls.MetroLabel RunLabel;
     }
 }
 

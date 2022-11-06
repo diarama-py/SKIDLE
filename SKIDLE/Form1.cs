@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using SKIDLE.CrossFormsDesigner;
 
 namespace SKIDLE
 {
@@ -25,18 +26,31 @@ namespace SKIDLE
         private void открытьФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "Special Key source code (*.spk) | *.spk";
+            openFile.Filter = "Special Key source code (*.spk)|*.spk|Special Key CrossForms source code (*.cfml)|*.cfml|Text file(*.)|*.";
             if (openFile.ShowDialog() != DialogResult.Cancel)
             {
-                FileInfo fi = new FileInfo(openFile.FileName);
-                codeTab tab = new codeTab();
-                tabControl.Tabs.Add(tab);
-                tabControl.SelectedTab = tab;
-                tab.code.OpenFile(fi.FullName);
-                tab.Text = fi.Name;
-                tab.Name = fi.FullName;
-                tab.LoadTopMenuLabel();
-                loadStruct(tab.code.Text);
+                if (openFile.FileName.Contains(".cfml"))
+                {
+                    TabConstructor tab = new TabConstructor();
+                    FileInfo fi = new FileInfo(openFile.FileName);
+                    tab.con.LoadCFML(fi.FullName);
+                    tab.Name = openFile.FileName;
+                    tab.Text = fi.Name+" [Constructor]";
+                    tabControl.Tabs.Add(tab);
+                    tabControl.SelectedTab = tab;
+                }
+                else
+                {
+                    FileInfo fi = new FileInfo(openFile.FileName);
+                    codeTab tab = new codeTab();
+                    tabControl.Tabs.Add(tab);
+                    tabControl.SelectedTab = tab;
+                    tab.code.OpenFile(fi.FullName);
+                    tab.Text = fi.Name;
+                    tab.Name = fi.FullName;
+                    tab.LoadTopMenuLabel();
+                    loadStruct(tab.code.Text);
+                }
             }
         }
 
@@ -49,18 +63,54 @@ namespace SKIDLE
                 splitContainer2.Panel2Collapsed = true;
         }
 
+        private void RunMenu_Click(object sender, EventArgs e)
+        {
+            if (split.Panel1Collapsed == true)
+            {
+                split.Panel1Collapsed = false;
+            }
+            else
+            {
+                split.Panel1Collapsed = true;
+            }
+            if (splitContainer1.Panel2Collapsed == true)
+            {
+                splitContainer1.Panel2Collapsed = false;
+                splitContainer1.Panel1Collapsed = true;
+            }
+            if (splitContainer3.Panel2Collapsed == true)
+            {
+                splitContainer3.Panel2Collapsed = false;
+                splitContainer3.Panel1Collapsed = true;
+            }
+        }
         private void запуститьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                if (tabControl.SelectedTab.Name.Contains(".spk"))
+               if(DinRun.Checked == true)
+               {
+                    if (tabControl.SelectedTab.Name.Contains(".spk"))
+                    {
+                        сохранитьToolStripMenuItem_Click(sender, e);
+                        Process.Start(Globals.SpecialKey + "SpecialKey.exe", tabControl.SelectedTab.Name);
+                    }
+                    else
+                    {
+                        сохранитьКакToolStripMenuItem_Click(sender, e);
+                    }
+               }
+               else if(StatRun.Checked == true)
                 {
-                    сохранитьToolStripMenuItem_Click(sender, e);
-                    Process.Start(Globals.SpecialKey + "SpecialKey.exe", tabControl.SelectedTab.Name);
-                }
-                else
-                {
-                    сохранитьКакToolStripMenuItem_Click(sender, e);
+                    if (RunPath.Text.Contains(".spk") && RunPath.Text != "")
+                    {
+                        сохранитьToolStripMenuItem_Click(sender, e);
+                        Process.Start(Globals.SpecialKey + "SpecialKey.exe", RunPath.Text);
+                    }
+                    else
+                    {
+                        сохранитьКакToolStripMenuItem_Click(sender, e);
+                    }
                 }
             }
             catch { }
@@ -70,16 +120,23 @@ namespace SKIDLE
         {
          if(tabControl.Tabs.Count > 0)
             {
-                var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
-                if (File.Exists(tabControl.SelectedTab.Name))
+                if (!tabControl.SelectedTab.Text.Contains("[Constructor]"))
                 {
-                    File.WriteAllText(tabControl.SelectedTab.Name, myCode.code.Text);
-                    loadStruct(myCode.code.Text);
+                    var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
+                    if (File.Exists(tabControl.SelectedTab.Name))
+                    {
+                        File.WriteAllText(tabControl.SelectedTab.Name, myCode.code.Text);
+                        loadStruct(myCode.code.Text);
+                    }
+                    else
+                    {
+                        сохранитьКакToolStripMenuItem_Click(sender, e);
+                    }
                 }
-                else
-                {
-                    сохранитьКакToolStripMenuItem_Click(sender, e);
-                }
+            }
+            else
+            {
+              
             }
         }
 
@@ -110,12 +167,15 @@ namespace SKIDLE
 
         private void skidle_Load(object sender, EventArgs e)
         {
+            RunPath.CustomButton.Click += CustomButton_Click;
             Hints hint = new Hints();
             hint.Show();
             ConsoleOpen();
+            DinRun.Checked = true;
             split.Panel1Collapsed = true;
             splitContainer1.Panel2Collapsed = true;
             splitContainer2.Panel2Collapsed = true;
+            splitContainer3.Panel2Collapsed = true;
             ConfigFile config = new ConfigFile(Application.StartupPath + "\\configure.conf");
             if (config.GetProperty("theme") == "dark")
                 DarkTheme();
@@ -150,6 +210,16 @@ namespace SKIDLE
                 nody.Tag = dfo;
             }
         }
+
+        private void CustomButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                RunPath.Text = ofd.FileName;
+            }
+        }
+
         private void ExplorerMenu_Click(object sender, EventArgs e)
         {
             if(split.Panel1Collapsed == false)
@@ -537,6 +607,11 @@ namespace SKIDLE
             {
                 splitContainer1.Panel2Collapsed = false;
                 splitContainer1.Panel1Collapsed = true;
+            }
+            if (splitContainer3.Panel2Collapsed == false)
+            {
+                splitContainer3.Panel2Collapsed = true;
+                splitContainer3.Panel1Collapsed = false;
             }
         }
         private async void ConsoleOpen()
