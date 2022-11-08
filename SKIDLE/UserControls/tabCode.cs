@@ -380,10 +380,9 @@ namespace SKIDLE.UserControls
 
         private void Code_Load(object sender, EventArgs e)
         {
-
             LoadTopMenuLabel();
             RefreshCode();
-            ConfigFile config = new ConfigFile(Application.StartupPath + "\\configure.conf");
+            ConfigFile config = new ConfigFile(Globals.User + "configure.conf");
             if (config.GetProperty("theme") == "dark")
                 Dark();
             else

@@ -5,6 +5,8 @@ for
 if
 else
 else if
+try
+catch
 length()
 Array()
 toStr()
@@ -24,6 +26,7 @@ True
 False
 fun
 class
+struct
 protected:
 private:
 stop
@@ -33,3 +36,13 @@ case
 enum
 ref
 return
+this
+throw
+selref
+io.clear()
+length(obj)
+exec(str)
+eval(str)
+createVariable()
+getVariable()
+destruct()

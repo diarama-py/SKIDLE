@@ -30,7 +30,7 @@ namespace SKIDLE
 
         private void ModuleToGit_Load(object sender, EventArgs e)
         {
-            ConfigFile config = new ConfigFile(Globals.Main+"configure.conf");
+            ConfigFile config = new ConfigFile(Globals.User+"configure.conf");
             if (config.GetProperty("theme") == "dark")
                 Dark();
             else
@@ -43,9 +43,9 @@ namespace SKIDLE
             if(email.Text != "" && NameModule.Text != "" && pathtoFolder.Text != "" && versionModule.Text != "" && minSPK.Text != "" && author.Text != "" && desc.Text != "")
             {
                 FileInfo fi = new FileInfo(pathtoFolder.Text);
-                Directory.CreateDirectory(Globals.SpecialKey+"modules\\"+NameModule.Text +"\\").Create();
-                File.Copy(pathtoFolder.Text,Globals.SpecialKey+"modules\\"+NameModule.Text +"\\"+ fi.Name);
-                var xmlWriter = new XmlTextWriter(Globals.SpecialKey + "modules\\" + NameModule.Text + "\\" + NameModule.Text+".xml", null);
+                Directory.CreateDirectory(Globals.Main+"CreateModule\\"+NameModule.Text +"\\").Create();
+                File.Copy(pathtoFolder.Text, Globals.Main + "CreateModule"+NameModule.Text +"\\"+ fi.Name);
+                var xmlWriter = new XmlTextWriter(Globals.Main + "CreateModule" + NameModule.Text + "\\" + NameModule.Text+".xml", null);
 
                 xmlWriter.WriteStartDocument();
                 xmlWriter.WriteStartElement("module"); 

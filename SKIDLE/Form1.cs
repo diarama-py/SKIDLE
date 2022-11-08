@@ -93,7 +93,7 @@ namespace SKIDLE
                     if (tabControl.SelectedTab.Name.Contains(".spk"))
                     {
                         сохранитьToolStripMenuItem_Click(sender, e);
-                        Process.Start(Globals.SpecialKey + "SpecialKey.exe", tabControl.SelectedTab.Name);
+                        Process.Start("java", " -jar " + Globals.SpecialKey + "SpecialKey.jar "+ tabControl.SelectedTab.Name);
                     }
                     else
                     {
@@ -105,7 +105,7 @@ namespace SKIDLE
                     if (RunPath.Text.Contains(".spk") && RunPath.Text != "")
                     {
                         сохранитьToolStripMenuItem_Click(sender, e);
-                        Process.Start(Globals.SpecialKey + "SpecialKey.exe", RunPath.Text);
+                        Process.Start("java", " -jar " + Globals.SpecialKey + "SpecialKey.jar " + RunPath.Text);
                     }
                     else
                     {
@@ -176,7 +176,7 @@ namespace SKIDLE
             splitContainer1.Panel2Collapsed = true;
             splitContainer2.Panel2Collapsed = true;
             splitContainer3.Panel2Collapsed = true;
-            ConfigFile config = new ConfigFile(Application.StartupPath + "\\configure.conf");
+            ConfigFile config = new ConfigFile(Globals.User + "configure.conf");
             if (config.GetProperty("theme") == "dark")
                 DarkTheme();
             else

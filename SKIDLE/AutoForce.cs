@@ -28,6 +28,10 @@ namespace SKIDLE
             IList<string> lines = code.Lines;
 
             string file = Globals.SpecialKey + "spk-reserv.dict";
+            string stl = Globals.SpecialKey + "stl-base.dict";
+            string zip = Globals.SpecialKey + "zip-base.dict";
+            string json = Globals.SpecialKey + "json-base.dict";
+            string spkunit = Globals.SpecialKey + "spkunit-base.dict";
             string dict = Globals.SpecialKey + "autoforce.dict";
             foreach (var Ikey in File.ReadAllLines(file))
             {
@@ -59,6 +63,13 @@ namespace SKIDLE
                 catch { }
             }
 
+            foreach(var item in Directory.GetFiles(Globals.SpecialKey + "modules\\", "*spk"))
+            {
+                FileInfo fi = new FileInfo(item);
+                string name = fi.Name.Split(".spk"[0])[0];
+                keywords.Add(name);
+            }
+
             foreach (var item in Directory.GetFiles(Globals.SpecialKey + "modules\\", "*spk"))
             {
                 FileInfo fi = new FileInfo(item);
@@ -88,8 +99,38 @@ namespace SKIDLE
                     }
                 }
             }
-
-
+            if (code.Text.Contains("Add stl"))
+            {
+                foreach (var Ikey in File.ReadAllLines(stl))
+                {
+                    string line = Ikey.Trim(' ');
+                    this.AddItem(line);
+                }
+            }
+            else if (code.Text.Contains("Add zip"))
+            {
+                foreach (var Ikey in File.ReadAllLines(zip))
+                {
+                    string line = Ikey.Trim(' ');
+                    this.AddItem(line);
+                }
+            }
+            else if (code.Text.Contains("Add json"))
+            {
+                foreach (var Ikey in File.ReadAllLines(json))
+                {
+                    string line = Ikey.Trim(' ');
+                    this.AddItem(line);
+                }
+            }
+            else if(code.Text.Contains("Add spkunit"))
+            {
+                foreach (var Ikey in File.ReadAllLines(spkunit))
+                {
+                    string line = Ikey.Trim(' ');
+                    this.AddItem(line);
+                }
+            }
 
             for (int i = 0; i < keywords.Count; i++)
             {
