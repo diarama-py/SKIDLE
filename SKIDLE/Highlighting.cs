@@ -16,6 +16,13 @@ namespace SKIDLE
                       SPKCommentRegex3;
 
         protected Regex SPKKeywordRegex;
+
+        protected Regex SPKbaseRegex;
+        protected Regex SPKotherRegex;
+        protected Regex SPKaddRegex;
+        protected Regex SPKinoutRegex;
+        protected Regex SPKboolRegex;
+
         protected Regex SPKNumberRegex;
         protected Regex SPKStringRegex;
         protected Regex SPKFunRegex;
@@ -71,14 +78,15 @@ namespace SKIDLE
             e.ChangedRange.SetStyle(CommentStyle, SPKCommentRegex3);
 
             e.ChangedRange.SetStyle(TealStyle, @"var");
-            e.ChangedRange.SetStyle(FunStyle, @"fun|class|switch|case");
+            e.ChangedRange.SetStyle(FunStyle, SPKbaseRegex);
             e.ChangedRange.SetStyle(CharStyle, @"return");
-            e.ChangedRange.SetStyle(VSfc, @"if|for|while|do|else|stop|continue|enum");
+            e.ChangedRange.SetStyle(VSfc, SPKotherRegex);
             e.ChangedRange.SetStyle(TurquoiseStyle, @"toStr|toInt|toFloat|toByte|toShort|toLong|toDouble|ref|length|Array|strReplace|strSplit");
-            e.ChangedRange.SetStyle(LightBlueStyle, @"Null|True|False|protected:|private:");
-            e.ChangedRange.SetStyle(MediumPurpleStyle, @"input|out");
-            e.ChangedRange.SetStyle(AddStyle, @"Add");
+            e.ChangedRange.SetStyle(LightBlueStyle, SPKboolRegex);
+            e.ChangedRange.SetStyle(MediumPurpleStyle, SPKinoutRegex);
+            e.ChangedRange.SetStyle(AddStyle, SPKaddRegex);
             e.ChangedRange.SetStyle(CharStyle, @"{|}|[|]|""|""|\'|\'|:|;|(|)|!|@|#|$|%|^|&");
+            e.ChangedRange.SetStyle(CharStyle, SPKNumberRegex);
 
             //clear folding markers
             e.ChangedRange.ClearFoldingMarkers();
@@ -239,6 +247,11 @@ namespace SKIDLE
             SPKFClassRegex = new Regex(@"\b(class)\s+(?<range>\w+?)\b", RegexCompiledOption);
             SPKEnumRegex = new Regex(@"\b(enum)\s+(?<range>\w+?)\b", RegexCompiledOption);
             SPKFunRegex = new Regex(@"\b(fun)\s+(?<range>\w+?)\b", RegexCompiledOption);
+            SPKbaseRegex = new Regex(@"fun|class|switch|case", RegexCompiledOption);
+            SPKotherRegex = new Regex(@"if|for|while|do|else|stop|continue|enum", RegexCompiledOption);
+            SPKaddRegex = new Regex(@"Add", RegexCompiledOption);
+            SPKboolRegex = new Regex(@"Null|True|False|protected:|private:", RegexCompiledOption);
+            SPKinoutRegex = new Regex(@"input|out", RegexCompiledOption);
             SPKKeywordRegex =
                 new Regex(
                     @"\b(Add|fun|class|if|for|while|do|else|stop|continue|switch|case|enum|toStr|toInt|toFloat|toByte|toShort|toLong|toDouble|ref|length|Array|strReplace|strSplit|var|Null|True|False|protected:|private:|input|out|return)\b|#region\b|#endregion\b",

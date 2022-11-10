@@ -65,7 +65,7 @@ namespace SKIDLE
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(414, 61);
+            this.panel1.Size = new System.Drawing.Size(414, 49);
             this.panel1.TabIndex = 1;
             // 
             // close
@@ -74,7 +74,7 @@ namespace SKIDLE
             this.close.FlatAppearance.BorderSize = 0;
             this.close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.close.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.close.Location = new System.Drawing.Point(372, 3);
+            this.close.Location = new System.Drawing.Point(373, -1);
             this.close.Name = "close";
             this.close.Size = new System.Drawing.Size(42, 23);
             this.close.TabIndex = 1;
@@ -86,7 +86,7 @@ namespace SKIDLE
             // 
             this.q.AutoSize = true;
             this.q.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.q.Location = new System.Drawing.Point(26, 64);
+            this.q.Location = new System.Drawing.Point(25, 52);
             this.q.Name = "q";
             this.q.Size = new System.Drawing.Size(87, 19);
             this.q.TabIndex = 2;
@@ -96,7 +96,7 @@ namespace SKIDLE
             // 
             this.text.AutoSize = true;
             this.text.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.text.Location = new System.Drawing.Point(26, 96);
+            this.text.Location = new System.Drawing.Point(26, 80);
             this.text.Name = "text";
             this.text.Size = new System.Drawing.Size(79, 17);
             this.text.TabIndex = 3;
@@ -133,7 +133,7 @@ namespace SKIDLE
             int l = r.Next(4);
             if(l == 1)
             {
-                text.Text = "Мы не SKIDLE а фиг";
+                text.Text = "Мы не SKIDLE а фиг\nИспользуй #Add internal чтоб делать логи,\nпрям из встроенной консолию";
             }else
             if (l == 2)
             {
@@ -141,7 +141,7 @@ namespace SKIDLE
             }else
             if (l == 3)
             {
-                text.Text = "Слава Советскому Союзу!";
+                text.Text = "Слава Советскому Союзу!\nСоюз нерушимый,\nРеспублик сводных,\nСплотила на веки Великая Русь!";
             }
         }
 

@@ -39,6 +39,7 @@ return
 this
 throw
 selref
+io
 io.clear()
 length(obj)
 exec(str)

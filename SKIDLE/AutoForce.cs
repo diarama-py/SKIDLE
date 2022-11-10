@@ -32,6 +32,7 @@ namespace SKIDLE
             string zip = Globals.SpecialKey + "zip-base.dict";
             string json = Globals.SpecialKey + "json-base.dict";
             string spkunit = Globals.SpecialKey + "spkunit-base.dict";
+            string canvasAPI = Globals.SpecialKey + "canvasAPI.dict";
             string dict = Globals.SpecialKey + "autoforce.dict";
             foreach (var Ikey in File.ReadAllLines(file))
             {
@@ -107,7 +108,7 @@ namespace SKIDLE
                     this.AddItem(line);
                 }
             }
-            else if (code.Text.Contains("Add zip"))
+            if (code.Text.Contains("Add zip"))
             {
                 foreach (var Ikey in File.ReadAllLines(zip))
                 {
@@ -115,7 +116,7 @@ namespace SKIDLE
                     this.AddItem(line);
                 }
             }
-            else if (code.Text.Contains("Add json"))
+            if (code.Text.Contains("Add json"))
             {
                 foreach (var Ikey in File.ReadAllLines(json))
                 {
@@ -123,9 +124,17 @@ namespace SKIDLE
                     this.AddItem(line);
                 }
             }
-            else if(code.Text.Contains("Add spkunit"))
+            if(code.Text.Contains("Add spkunit"))
             {
                 foreach (var Ikey in File.ReadAllLines(spkunit))
+                {
+                    string line = Ikey.Trim(' ');
+                    this.AddItem(line);
+                }
+            }
+            if (code.Text.Contains("Add CanvasAPI"))
+            {
+                foreach (var Ikey in File.ReadAllLines(canvasAPI))
                 {
                     string line = Ikey.Trim(' ');
                     this.AddItem(line);

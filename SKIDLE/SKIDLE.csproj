@@ -207,6 +207,7 @@
     <Compile Include="UserControls\SettingsTabControl.Designer.cs">
       <DependentUpon>SettingsTabControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Libs\SpKeyLib.cs" />
     <Compile Include="UserControls\StructureControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

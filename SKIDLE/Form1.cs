@@ -56,7 +56,7 @@ namespace SKIDLE
 
         private void открытьТерминалToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(Globals.SpecialKey + "SpecialKey.exe");
+            Process.Start("java", " -jar " + Globals.SpecialKey + "SpecialKey.jar");
             if(splitContainer2.Panel2Collapsed == true)
                 splitContainer2.Panel2Collapsed = false;
             else

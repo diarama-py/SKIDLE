@@ -119,6 +119,7 @@ namespace SKIDLE
             this.tabControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tabControl.CloseTabImage = ((System.Drawing.Image)(resources.GetObject("tabControl.CloseTabImage")));
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl.Name = "tabControl";
@@ -126,6 +127,7 @@ namespace SKIDLE
             this.tabControl.ShowCloseTabButtons = true;
             this.tabControl.Size = new System.Drawing.Size(617, 286);
             this.tabControl.TabIndex = 1;
+            this.tabControl.TabSize = new System.Drawing.Size(75, 16);
             // 
             // leftMenu
             // 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -146,7 +147,7 @@ namespace SKIDLE.UserControls
         {
             String getVer()
             {
-                return "SPS2";
+                return "SPS3";
             }
             this.WriteLine("================\n");
             this.WriteLine("Special Key " + getVer()+"\n");
@@ -154,14 +155,25 @@ namespace SKIDLE.UserControls
 
             String cmd = this.ReadLine();
 
-            if (cmd.Contains("comp "))
+            if (cmd.Contains("run "))
             {
                 String path = cmd.Contains(".spk") ?
                         cmd.Split(' ')[1] :
                         cmd.Split(' ')[1] + ".spk";
                 try
                 {
-                    Process.Start(Globals.SpecialKey + "SpecialKey.exe",path);
+                    Process.Start("java", " -jar " + Globals.SpecialKey + "SpecialKey.jar " + path);
+
+                    if (SKIDLE.Libs.SpKeyLib.Run(path).Contains("#err"))
+                    {
+                        this.ForeColor = Color.Red;
+                        this.WriteLine(SKIDLE.Libs.SpKeyLib.Run(path));
+                    }
+                    else
+                    {
+                        this.ForeColor = Color.White;
+                        this.WriteLine(SKIDLE.Libs.SpKeyLib.Run(path));
+                    }
                 }
                 catch (FileNotFoundException e)
                 {
