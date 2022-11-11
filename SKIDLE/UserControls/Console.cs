@@ -127,7 +127,7 @@ namespace SKIDLE.UserControls
         public void Command(string text) {
             if (text == "clear")
                 Clear();
-            else if (text.Contains(".exe"))
+            else if (text.Contains(".exe") && text.Contains(".bat"))
             {
                 try
                 {
@@ -135,12 +135,25 @@ namespace SKIDLE.UserControls
                 }
                 catch { Process.Start(text.Split(' ')[0]); }
             }
-            else if(text.Contains("echo"))
-                this.WriteLine(text.Split("echo"[0])[1]+"\n");
+            else if (text.Contains("echo"))
+                this.WriteLine(text.Remove(0,4)+"\n");
             else if (text == "SpecialKey")
                 spaceSPK();
             else if (text == "help")
-                this.WriteLine("help  ,  clear  ,  SpecialKey\n");
+                this.WriteLine("help  ,  clear  ,  SpecialKey\ndir , delete , \n");
+            else if (text.StartsWith("delete") && File.Exists(text.Split(' ')[1]))
+                File.Delete(text.Split(' ')[1]);
+            else if (text.StartsWith("dir") && Directory.Exists(text.Split(' ')[1]))
+            {
+                foreach (string dir in Directory.GetDirectories(text.Split(' ')[1]))
+                {
+                    this.WriteLine(dir + "\n");
+                }
+                foreach (string dir in Directory.GetFiles(text.Split(' ')[1]))
+                {
+                    this.WriteLine(dir + "\n");
+                }
+            }
         }
 
         public void spaceSPK()
@@ -164,24 +177,15 @@ namespace SKIDLE.UserControls
                 {
                     Process.Start("java", " -jar " + Globals.SpecialKey + "SpecialKey.jar " + path);
 
-                    if (SKIDLE.Libs.SpKeyLib.Run(path).Contains("#err"))
-                    {
-                        this.ForeColor = Color.Red;
-                        this.WriteLine(SKIDLE.Libs.SpKeyLib.Run(path));
-                    }
-                    else
-                    {
-                        this.ForeColor = Color.White;
-                        this.WriteLine(SKIDLE.Libs.SpKeyLib.Run(path));
-                    }
+                    Libs.SpKeyLib.Run(path,this);
                 }
                 catch (FileNotFoundException e)
                 {
-                    this.WriteLine("File is not found!");
+                    this.WriteLine("File is not found!\n");
                 }
                 catch (IOException e)
                 {
-                    this.WriteLine("File read error!");
+                    this.WriteLine("File read error!\n");
                 }
             }
             else if (cmd.Contains("special-pm"))
@@ -221,7 +225,7 @@ namespace SKIDLE.UserControls
             }
             else
             {
-                this.WriteLine("Command not found!");
+                this.WriteLine("Command not found!\n");
             }
         }
     }

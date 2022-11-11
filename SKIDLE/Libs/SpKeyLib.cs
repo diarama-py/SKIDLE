@@ -1,42 +1,43 @@
 ﻿using System;
+using SKIDLE.UserControls;
 using System.IO;
 
 namespace SKIDLE.Libs
 {
     internal class SpKeyLib
     {
-        internal static string Run(string path)
+        internal static void Run(string path, SKIDLE.UserControls.Console console)
         {
             try
             {
                 FileInfo fi = new FileInfo(path);
                 string[] code = File.ReadAllLines(path);
-                if (code[0].Contains("#Add internal"))
+                foreach (var line in code)
                 {
-                    foreach(var line in code)
+                    if (File.ReadAllLines(path)[0].Contains("#Add internal"))
                     {
                         if (line.Contains("#"))
                         {
                             if (line.Contains("#out") && line.Contains(":") && line.Contains("\""))
                             {
-                                return line.Split('"')[1] + "\n";
+                                console.WriteLine("@"+line.Split('"')[1] + "\n");
                             }
                             else if (line.Contains("#authors"))
                             {
-                                return line.Split(' ')[1] + "\n";
+                                console.WriteLine("@"+line.Split(' ')[1] + "\n");
                             }
                             else if (line.Contains("#err"))
-                                return line + "\n";
+                                console.WriteLine("@"+line + "\n");
                         }
                     }
-                    return "\n0\n";
                 }
+                console.WriteLine("\n0\n");
+               
             }
             catch
             {
-                return "\nErrrrrorrrrr!!!!! Incorrect file or code\n";
+                console.WriteLine("\nErrrrrorrrrr!!!!! Incorrect file or code\n");
             }
-            return "";
         }
     }
 }
