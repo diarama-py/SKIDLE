@@ -18,7 +18,7 @@ namespace SKIDLE
         static void Main(string[] args)
         {
             ConfigFile config = new ConfigFile(Globals.User+"configure.conf");
-            AssociationFile.SelfCreateAssociation(".spk", AssociationFile.KeyHiveSmall.ClassesRoot, "Special Key source code");
+            try { AssociationFile.SelfCreateAssociation(".spk", AssociationFile.KeyHiveSmall.ClassesRoot, "Special Key source code"); } catch { MessageBox.Show("RegNode not created", "error"); }
             if (config.GetProperty("SWLFOH") == "true")
             {
                 if (args != null && args.Length > 0)

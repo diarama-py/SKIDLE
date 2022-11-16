@@ -645,6 +645,7 @@ namespace SKIDLE
         private void skidle_FormClosing(object sender, FormClosingEventArgs e)
         {
             List<string> list = new List<string>();
+            list.Clear();
             if (tabControl.Tabs.Count > 0)
             {
                 foreach (var item in tabControl.Tabs)

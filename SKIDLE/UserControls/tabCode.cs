@@ -380,6 +380,7 @@ namespace SKIDLE.UserControls
 
         private void Code_Load(object sender, EventArgs e)
         {
+            code.TextChangedDelayed += new EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(highLighting._HighLighting);
             LoadTopMenuLabel();
             RefreshCode();
             ConfigFile config = new ConfigFile(Globals.User + "configure.conf");
@@ -491,10 +492,7 @@ namespace SKIDLE.UserControls
         public async void RefreshCode()
         {
             await System.Threading.Tasks.Task.Run(() => {
-                code.TextChanged += new EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(highLighting._HighLighting);
-                Hints hint = new Hints();
-                //hint.AddHint("var", "var var");
-                
+                Hints hint = new Hints();                
                 
                 ACmenu.autoForce();
             });
