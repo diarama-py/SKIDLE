@@ -183,6 +183,7 @@
     <Compile Include="SWLFOH.Designer.cs">
       <DependentUpon>SWLFOH.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\RenRoundedShape.cs" />
     <Compile Include="UI\VSmenuTE.cs">
       <SubType>Component</SubType>
     </Compile>

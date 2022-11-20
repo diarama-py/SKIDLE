@@ -230,6 +230,7 @@ namespace SKIDLE.UserControls
             this.topMenuStrip.Name = "topMenuStrip";
             this.topMenuStrip.Size = new System.Drawing.Size(25, 24);
             this.topMenuStrip.TabIndex = 0;
+            this.topMenuStrip.Click += CodeTab_Click;
             // 
             // stripLabel
             // 
@@ -317,6 +318,19 @@ namespace SKIDLE.UserControls
             this.split.ResumeLayout(false);
             this.ResumeLayout(false);
 
+        }
+
+        private void CodeTab_Click(object sender, EventArgs e)
+        {
+            this.stripLabel.Click += StripLabel_Click;
+            if (stripLabel.Text != "")
+                Clipboard.SetText(this.Name);
+        }
+
+        private void StripLabel_Click(object sender, EventArgs e)
+        {
+            if (stripLabel.Text != "")
+                Clipboard.SetText(this.Name);
         }
 
         private void Code_TextChangedDelayed(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
@@ -497,6 +511,17 @@ namespace SKIDLE.UserControls
                 ACmenu.autoForce();
             });
            
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.D1))
+                this.code.Text = this.code.Text + "fun fun1{\n   \n}\n";
+            if (keyData == (Keys.Control | Keys.D2))
+                this.code.Text = this.code.Text + "struct struct1{\n   \n}\n";
+            if (keyData == (Keys.Control | Keys.D3))
+                this.code.Text = this.code.Text + "class class1{\n   \n}\n";
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
     public class FastCTBox : FastColoredTextBoxNS.FastColoredTextBox
