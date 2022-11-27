@@ -13,11 +13,14 @@ using System.IO;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using SKIDLE.CrossFormsDesigner;
+using FastColoredTextBoxNS;
+using SKIDLE.UI;
 
 namespace SKIDLE
 {
     public partial class skidle : Form
     {
+        bool menuIsActive = false;
         public skidle()
         {
             InitializeComponent();
@@ -56,7 +59,7 @@ namespace SKIDLE
 
         private void открытьТерминалToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(Globals.SpecialKey + "SpecialKey.exe");
+            Process.Start("java", " -jar " + Globals.SpecialKey + "SpecialKey.jar");
             if(splitContainer2.Panel2Collapsed == true)
                 splitContainer2.Panel2Collapsed = false;
             else
@@ -93,7 +96,7 @@ namespace SKIDLE
                     if (tabControl.SelectedTab.Name.Contains(".spk"))
                     {
                         сохранитьToolStripMenuItem_Click(sender, e);
-                        Process.Start(Globals.SpecialKey + "SpecialKey.exe", tabControl.SelectedTab.Name);
+                        Process.Start("java", " -jar " + Globals.SpecialKey + "SpecialKey.jar "+ tabControl.SelectedTab.Name);
                     }
                     else
                     {
@@ -105,7 +108,7 @@ namespace SKIDLE
                     if (RunPath.Text.Contains(".spk") && RunPath.Text != "")
                     {
                         сохранитьToolStripMenuItem_Click(sender, e);
-                        Process.Start(Globals.SpecialKey + "SpecialKey.exe", RunPath.Text);
+                        Process.Start("java", " -jar " + Globals.SpecialKey + "SpecialKey.jar " + RunPath.Text);
                     }
                     else
                     {
@@ -167,6 +170,7 @@ namespace SKIDLE
 
         private void skidle_Load(object sender, EventArgs e)
         {
+            structure.treeView.NodeMouseDoubleClick += TreeView_NodeMouseDoubleClick;
             RunPath.CustomButton.Click += CustomButton_Click;
             Hints hint = new Hints();
             hint.Show();
@@ -176,7 +180,7 @@ namespace SKIDLE
             splitContainer1.Panel2Collapsed = true;
             splitContainer2.Panel2Collapsed = true;
             splitContainer3.Panel2Collapsed = true;
-            ConfigFile config = new ConfigFile(Application.StartupPath + "\\configure.conf");
+            ConfigFile config = new ConfigFile(Globals.User + "configure.conf");
             if (config.GetProperty("theme") == "dark")
                 DarkTheme();
             else
@@ -209,6 +213,65 @@ namespace SKIDLE
                 var nody = explorer.Nodes.Add(dfo.Name, dfo.Name);
                 nody.Tag = dfo;
             }
+            //
+            //Render
+            //
+            RenRoundedShape.SetRoundedShape(leftMenu,15);
+        }
+        private void hideTimer_Tick(object sender, EventArgs e)
+        {
+            var p = this.leftMenu.PointToClient(MousePosition);
+            if (menuIsActive)
+                return;
+            if (leftMenu.ClientRectangle.Contains(p))
+                return;
+            foreach (Control item in leftMenu.Controls)
+                if (item.Visible)
+                    return;
+            this.leftMenu.Visible = false;
+        }
+
+        private void showTimer_Tick(object sender, EventArgs e)
+        {
+            var p = this.PointToClient(MousePosition);
+            if (this.ClientRectangle.Contains(p) && p.X < 10)
+                this.leftMenu.Visible = true;
+        }
+        private void leftMenu_MenuActivate(object sender, EventArgs e)
+        {
+            menuIsActive = true;
+        }
+        private void leftMenu_MenuDeactivate(object sender, EventArgs e)
+        {
+            menuIsActive = false;
+            this.BeginInvoke(new Action(() => { this.leftMenu.Visible = false; }));
+        }
+        private void TreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
+            RegexOptions opt = RegexOptions.None;
+            Range range = myCode.code.Selection.Clone();
+            Place startPlace = range.Start;
+            range.Normalize();
+            try
+            {
+                startPlace = range.Start;
+                //
+                if (range.Start >= startPlace)
+                    range.End = new Place(myCode.code.GetLineLength(myCode.code.LinesCount - 1), myCode.code.LinesCount - 1);
+                else
+                    range.End = startPlace;
+                foreach (var r in range.GetRangesByLines(e.Node.Text, opt))
+                {
+                    myCode.code.Selection = r;
+                    myCode.code.DoSelectionVisible();
+                    myCode.code.Invalidate();
+                    return;
+                }
+            }
+            catch{}
+
+           
         }
 
         private void CustomButton_Click(object sender, EventArgs e)
@@ -645,6 +708,7 @@ namespace SKIDLE
         private void skidle_FormClosing(object sender, FormClosingEventArgs e)
         {
             List<string> list = new List<string>();
+            list.Clear();
             if (tabControl.Tabs.Count > 0)
             {
                 foreach (var item in tabControl.Tabs)
@@ -662,6 +726,19 @@ namespace SKIDLE
                 File.WriteAllText(Globals.User + "workfolder.txt", explorer.Nodes[0].Tag.ToString());
             else if (File.Exists(Globals.User + "workfolder.txt"))
                 File.WriteAllText(Globals.User + "workfolder.txt", "");
+        }
+
+        private void tabControl_PageChanged(object sender, Manina.Windows.Forms.PageChangedEventArgs e)
+        {
+            if (tabControl.SelectedTab.Name.Contains(".spk"))
+            {
+                var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
+                myCode.code.TextChangedDelayed += Code_TextChangedDelayed;
+                void Code_TextChangedDelayed(object s, TextChangedEventArgs ex)
+                {
+                    structure.LoadStructure();
+                }
+            }
         }
     }
 }

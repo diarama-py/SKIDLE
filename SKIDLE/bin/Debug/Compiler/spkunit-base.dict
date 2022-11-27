@@ -1,0 +1,10 @@
+spkunit
+spkunit.startTimer()
+spkinit.stopTimer()
+spkunit.assertEquals()
+spkunit.assertNotEquals()
+spkunit.assertNull()
+spkunit.assertTrue()
+spkunit.point()
+spkunit.getLog()
+spkunit.clearLog()

@@ -1,0 +1,13 @@
+Canvas()
+Promt()
+keypressed
+mousehover
+line()
+oval()
+foval()
+rect()
+frect()
+clip
+drawstr()
+setcolor()
+redraw()

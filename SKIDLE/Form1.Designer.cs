@@ -88,6 +88,8 @@ namespace SKIDLE
             this.openInExplorer = new System.Windows.Forms.ToolStripMenuItem();
             this.rename = new System.Windows.Forms.ToolStripMenuItem();
             this.delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.hide = new System.Windows.Forms.Timer(this.components);
+            this.show = new System.Windows.Forms.Timer(this.components);
             this.leftMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.split)).BeginInit();
             this.split.Panel1.SuspendLayout();
@@ -119,6 +121,7 @@ namespace SKIDLE
             this.tabControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tabControl.CloseTabImage = ((System.Drawing.Image)(resources.GetObject("tabControl.CloseTabImage")));
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl.Name = "tabControl";
@@ -126,6 +129,8 @@ namespace SKIDLE
             this.tabControl.ShowCloseTabButtons = true;
             this.tabControl.Size = new System.Drawing.Size(617, 286);
             this.tabControl.TabIndex = 1;
+            this.tabControl.TabSize = new System.Drawing.Size(75, 16);
+            this.tabControl.PageChanged += new System.EventHandler<Manina.Windows.Forms.PageChangedEventArgs>(this.tabControl_PageChanged);
             // 
             // leftMenu
             // 
@@ -470,7 +475,6 @@ namespace SKIDLE
             this.console.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.console.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.console.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.console.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.console.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.console.IndentBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.console.IsReadLineMode = false;
@@ -527,6 +531,8 @@ namespace SKIDLE
             this.menuStrip.Size = new System.Drawing.Size(782, 27);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
+            this.menuStrip.MenuActivate += new System.EventHandler(this.leftMenu_MenuActivate);
+            this.menuStrip.MenuDeactivate += new System.EventHandler(this.leftMenu_MenuDeactivate);
             // 
             // файлToolStripMenuItem
             // 
@@ -806,6 +812,14 @@ namespace SKIDLE
             this.delete.Text = "Удалить";
             this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
+            // hide
+            // 
+            this.hide.Tick += new System.EventHandler(this.hideTimer_Tick);
+            // 
+            // show
+            // 
+            this.show.Tick += new System.EventHandler(this.showTimer_Tick);
+            // 
             // skidle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -916,6 +930,8 @@ namespace SKIDLE
         private System.Windows.Forms.RadioButton StatRun;
         private System.Windows.Forms.Panel panel1;
         private MetroFramework.Controls.MetroLabel RunLabel;
+        private System.Windows.Forms.Timer hide;
+        private System.Windows.Forms.Timer show;
     }
 }
 

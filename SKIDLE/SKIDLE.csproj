@@ -177,6 +177,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SWLFOH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SWLFOH.Designer.cs">
+      <DependentUpon>SWLFOH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\RenRoundedShape.cs" />
     <Compile Include="UI\VSmenuTE.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -207,6 +214,7 @@
     <Compile Include="UserControls\SettingsTabControl.Designer.cs">
       <DependentUpon>SettingsTabControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Libs\SpKeyLib.cs" />
     <Compile Include="UserControls\StructureControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -249,6 +257,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SWLFOH.resx">
+      <DependentUpon>SWLFOH.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\VSmenuTE.resx">
       <DependentUpon>VSmenuTE.cs</DependentUpon>
     </EmbeddedResource>
