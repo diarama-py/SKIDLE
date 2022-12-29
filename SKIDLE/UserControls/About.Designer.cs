@@ -65,7 +65,7 @@ namespace SKIDLE.UserControls
             // 
             // aboutText
             // 
-            this.aboutText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.aboutText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(50)))), ((int)(((byte)(54)))));
             this.aboutText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.aboutText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.aboutText.ForeColor = System.Drawing.SystemColors.HighlightText;
@@ -81,9 +81,9 @@ namespace SKIDLE.UserControls
             this.propApp.AutoSize = true;
             this.propApp.Location = new System.Drawing.Point(3, 476);
             this.propApp.Name = "propApp";
-            this.propApp.Size = new System.Drawing.Size(323, 19);
+            this.propApp.Size = new System.Drawing.Size(314, 19);
             this.propApp.TabIndex = 1;
-            this.propApp.Text = "Authors SKIDLE Corporation | version " + Application.ProductVersion;
+            this.propApp.Text = "Authors SKIDLE Corporation | version 16.11.31729.503";
             this.propApp.UseCustomBackColor = true;
             this.propApp.UseCustomForeColor = true;
             // 

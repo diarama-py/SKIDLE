@@ -21,7 +21,12 @@ C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.GenerateR
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.csproj.CoreCompileInputs.cache
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.exe
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.pdb
-C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.Hints.resources
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.CrossFormsDesigner.Constructor.resources
 C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.CrossFormsDesigner.Demo.resources
-C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.SWLFOH.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.LogMenu.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\PagedControl.dll
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\TabControl.dll
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UserControls.ConsoleTab.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UserControls.BrowserTab.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UserControls.ExtensionExp.resources
+C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\obj\Debug\SKIDLE.UserControls.ExtensionsUC.resources
