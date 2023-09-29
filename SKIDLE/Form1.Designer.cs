@@ -1,4 +1,4 @@
-﻿using SKIDLE.UI.VS;
+﻿using System.Net.Mail;
 
 namespace SKIDLE
 {
@@ -69,6 +69,7 @@ namespace SKIDLE
             this.сохранитьКакToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьВсеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьПапкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.настройкиToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.создатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.закрытьВсеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,8 +96,6 @@ namespace SKIDLE
             this.окнаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.терминалToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьТерминалToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.настройкиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.запуститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.запускToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leftMenu = new SKIDLE.UI.RenPanel();
@@ -104,7 +103,7 @@ namespace SKIDLE
             this.run = new System.Windows.Forms.Button();
             this.structureBTN = new System.Windows.Forms.Button();
             this.ExplorerMenu = new System.Windows.Forms.Button();
-            this.explorerContMenu = new SKIDLE.UI.VS.VSContextMenuStrip();
+            this.explorerContMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.createFile = new System.Windows.Forms.ToolStripMenuItem();
             this.openInExplorer = new System.Windows.Forms.ToolStripMenuItem();
             this.rename = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,18 +137,17 @@ namespace SKIDLE
             // split
             // 
             this.split.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.split.Location = new System.Drawing.Point(27, 27);
+            this.split.Location = new System.Drawing.Point(25, 27);
             this.split.Name = "split";
             // 
             // split.Panel1
             // 
-            this.split.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.split.Panel1.Controls.Add(this.splitContainer1);
             // 
             // split.Panel2
             // 
             this.split.Panel2.Controls.Add(this.splitContainer2);
-            this.split.Size = new System.Drawing.Size(1074, 546);
+            this.split.Size = new System.Drawing.Size(1076, 546);
             this.split.SplitterDistance = 186;
             this.split.TabIndex = 3;
             // 
@@ -175,20 +173,19 @@ namespace SKIDLE
             // explorer
             // 
             this.explorer.AllowDrop = true;
-            this.explorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.explorer.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.explorer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.explorer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.explorer.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.explorer.FullRowSelect = true;
             this.explorer.imageList = null;
             this.explorer.ItemHeight = 22;
             this.explorer.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.explorer.Location = new System.Drawing.Point(0, 30);
+            this.explorer.Location = new System.Drawing.Point(0, 19);
             this.explorer.Name = "explorer";
             this.explorer.ShowNodeToolTips = true;
             this.explorer.ShowPlusMinus = false;
             this.explorer.ShowRootLines = false;
-            this.explorer.Size = new System.Drawing.Size(186, 36);
+            this.explorer.Size = new System.Drawing.Size(186, 47);
             this.explorer.TabIndex = 0;
             this.explorer.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.explorer_ItemDrag);
             this.explorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.explorer_NodeMouseClick);
@@ -199,7 +196,6 @@ namespace SKIDLE
             // 
             // explorerPanelTitle
             // 
-            this.explorerPanelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.explorerPanelTitle.Controls.Add(this.createFolder);
             this.explorerPanelTitle.Controls.Add(this.cfExplorer);
             this.explorerPanelTitle.Controls.Add(this.updateExplorer);
@@ -208,69 +204,65 @@ namespace SKIDLE
             this.explorerPanelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.explorerPanelTitle.Location = new System.Drawing.Point(0, 0);
             this.explorerPanelTitle.Name = "explorerPanelTitle";
-            this.explorerPanelTitle.Size = new System.Drawing.Size(186, 30);
+            this.explorerPanelTitle.Size = new System.Drawing.Size(186, 19);
             this.explorerPanelTitle.TabIndex = 1;
             // 
             // createFolder
             // 
-            this.createFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.createFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.createFolder.BackgroundImage = global::SKIDLE.Properties.Resources.folder1;
+            this.createFolder.BackgroundImage = global::SKIDLE.Properties.Resources.folder;
             this.createFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.createFolder.Dock = System.Windows.Forms.DockStyle.Right;
             this.createFolder.FlatAppearance.BorderSize = 0;
             this.createFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.createFolder.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.createFolder.Location = new System.Drawing.Point(117, 1);
+            this.createFolder.Location = new System.Drawing.Point(110, 0);
             this.createFolder.Name = "createFolder";
-            this.createFolder.Size = new System.Drawing.Size(24, 22);
+            this.createFolder.Size = new System.Drawing.Size(19, 19);
             this.createFolder.TabIndex = 4;
             this.createFolder.UseVisualStyleBackColor = false;
             this.createFolder.Click += new System.EventHandler(this.createFile_Click);
             // 
             // cfExplorer
             // 
-            this.cfExplorer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cfExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.cfExplorer.BackgroundImage = global::SKIDLE.Properties.Resources.file1;
+            this.cfExplorer.BackgroundImage = global::SKIDLE.Properties.Resources.file;
             this.cfExplorer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.cfExplorer.Dock = System.Windows.Forms.DockStyle.Right;
             this.cfExplorer.FlatAppearance.BorderSize = 0;
             this.cfExplorer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cfExplorer.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cfExplorer.Location = new System.Drawing.Point(93, 1);
+            this.cfExplorer.Location = new System.Drawing.Point(129, 0);
             this.cfExplorer.Name = "cfExplorer";
-            this.cfExplorer.Size = new System.Drawing.Size(24, 22);
+            this.cfExplorer.Size = new System.Drawing.Size(19, 19);
             this.cfExplorer.TabIndex = 3;
             this.cfExplorer.UseVisualStyleBackColor = false;
             this.cfExplorer.Click += new System.EventHandler(this.createFile_Click);
             // 
             // updateExplorer
             // 
-            this.updateExplorer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.updateExplorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.updateExplorer.BackgroundImage = global::SKIDLE.Properties.Resources.update1;
+            this.updateExplorer.BackgroundImage = global::SKIDLE.Properties.Resources.update;
             this.updateExplorer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.updateExplorer.Dock = System.Windows.Forms.DockStyle.Right;
             this.updateExplorer.FlatAppearance.BorderSize = 0;
             this.updateExplorer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updateExplorer.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.updateExplorer.Location = new System.Drawing.Point(140, 1);
+            this.updateExplorer.Location = new System.Drawing.Point(148, 0);
             this.updateExplorer.Name = "updateExplorer";
-            this.updateExplorer.Size = new System.Drawing.Size(24, 22);
+            this.updateExplorer.Size = new System.Drawing.Size(19, 19);
             this.updateExplorer.TabIndex = 2;
             this.updateExplorer.UseVisualStyleBackColor = false;
             this.updateExplorer.Click += new System.EventHandler(this.updateExplorer_Click);
             // 
             // UnExpand
             // 
-            this.UnExpand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UnExpand.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.UnExpand.BackgroundImage = global::SKIDLE.Properties.Resources.collapse1;
+            this.UnExpand.BackgroundImage = global::SKIDLE.Properties.Resources.collapse;
             this.UnExpand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.UnExpand.Dock = System.Windows.Forms.DockStyle.Right;
             this.UnExpand.FlatAppearance.BorderSize = 0;
             this.UnExpand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.UnExpand.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.UnExpand.Location = new System.Drawing.Point(162, 1);
+            this.UnExpand.Location = new System.Drawing.Point(167, 0);
             this.UnExpand.Name = "UnExpand";
-            this.UnExpand.Size = new System.Drawing.Size(24, 22);
+            this.UnExpand.Size = new System.Drawing.Size(19, 19);
             this.UnExpand.TabIndex = 1;
             this.UnExpand.UseVisualStyleBackColor = false;
             this.UnExpand.Click += new System.EventHandler(this.UnExpand_Click);
@@ -278,6 +270,7 @@ namespace SKIDLE
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel1.Location = new System.Drawing.Point(0, 0);
             this.metroLabel1.Name = "metroLabel1";
@@ -317,25 +310,25 @@ namespace SKIDLE
             this.structure.BackColor = System.Drawing.SystemColors.Control;
             this.structure.code = null;
             this.structure.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.structure.Location = new System.Drawing.Point(0, 31);
+            this.structure.Location = new System.Drawing.Point(0, 19);
             this.structure.Margin = new System.Windows.Forms.Padding(2);
             this.structure.Name = "structure";
-            this.structure.Size = new System.Drawing.Size(186, 36);
+            this.structure.Size = new System.Drawing.Size(186, 48);
             this.structure.TabIndex = 0;
             // 
             // panelStructureTitle
             // 
-            this.panelStructureTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.panelStructureTitle.Controls.Add(this.structureTitle);
             this.panelStructureTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelStructureTitle.Location = new System.Drawing.Point(0, 0);
             this.panelStructureTitle.Name = "panelStructureTitle";
-            this.panelStructureTitle.Size = new System.Drawing.Size(186, 31);
+            this.panelStructureTitle.Size = new System.Drawing.Size(186, 19);
             this.panelStructureTitle.TabIndex = 3;
             // 
             // structureTitle
             // 
             this.structureTitle.AutoSize = true;
+            this.structureTitle.Dock = System.Windows.Forms.DockStyle.Left;
             this.structureTitle.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.structureTitle.Location = new System.Drawing.Point(0, 0);
             this.structureTitle.Name = "structureTitle";
@@ -350,7 +343,7 @@ namespace SKIDLE
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(0, 145);
+            this.label2.Location = new System.Drawing.Point(0, 133);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 28);
             this.label2.TabIndex = 9;
@@ -360,7 +353,7 @@ namespace SKIDLE
             // 
             this.DinRun.AutoSize = true;
             this.DinRun.Dock = System.Windows.Forms.DockStyle.Top;
-            this.DinRun.Location = new System.Drawing.Point(0, 123);
+            this.DinRun.Location = new System.Drawing.Point(0, 111);
             this.DinRun.Name = "DinRun";
             this.DinRun.Size = new System.Drawing.Size(186, 22);
             this.DinRun.TabIndex = 6;
@@ -373,7 +366,7 @@ namespace SKIDLE
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(0, 95);
+            this.label1.Location = new System.Drawing.Point(0, 83);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(108, 28);
             this.label1.TabIndex = 8;
@@ -381,7 +374,6 @@ namespace SKIDLE
             // 
             // RunPath
             // 
-            this.RunPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             // 
             // 
             // 
@@ -397,16 +389,14 @@ namespace SKIDLE
             this.RunPath.Dock = System.Windows.Forms.DockStyle.Top;
             this.RunPath.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.RunPath.Lines = new string[0];
-            this.RunPath.Location = new System.Drawing.Point(0, 74);
+            this.RunPath.Location = new System.Drawing.Point(0, 62);
             this.RunPath.MaxLength = 32767;
             this.RunPath.Name = "RunPath";
             this.RunPath.PasswordChar = '\0';
-            this.RunPath.PromptText = "Path to file";
             this.RunPath.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.RunPath.SelectedText = "";
             this.RunPath.SelectionLength = 0;
             this.RunPath.SelectionStart = 0;
-            this.RunPath.ShortcutsEnabled = true;
             this.RunPath.ShowButton = true;
             this.RunPath.Size = new System.Drawing.Size(186, 21);
             this.RunPath.TabIndex = 7;
@@ -421,7 +411,7 @@ namespace SKIDLE
             // 
             this.StatRun.AutoSize = true;
             this.StatRun.Dock = System.Windows.Forms.DockStyle.Top;
-            this.StatRun.Location = new System.Drawing.Point(0, 52);
+            this.StatRun.Location = new System.Drawing.Point(0, 40);
             this.StatRun.Name = "StatRun";
             this.StatRun.Size = new System.Drawing.Size(186, 22);
             this.StatRun.TabIndex = 5;
@@ -431,8 +421,6 @@ namespace SKIDLE
             // 
             // codeLaunchScript
             // 
-            this.codeLaunchScript.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.HistoryList;
-            this.codeLaunchScript.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             // 
             // 
             // 
@@ -448,16 +436,14 @@ namespace SKIDLE
             this.codeLaunchScript.Dock = System.Windows.Forms.DockStyle.Top;
             this.codeLaunchScript.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.codeLaunchScript.Lines = new string[0];
-            this.codeLaunchScript.Location = new System.Drawing.Point(0, 31);
+            this.codeLaunchScript.Location = new System.Drawing.Point(0, 19);
             this.codeLaunchScript.MaxLength = 32767;
             this.codeLaunchScript.Name = "codeLaunchScript";
             this.codeLaunchScript.PasswordChar = '\0';
-            this.codeLaunchScript.PromptText = "Script of Code Launch";
             this.codeLaunchScript.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.codeLaunchScript.SelectedText = "";
             this.codeLaunchScript.SelectionLength = 0;
             this.codeLaunchScript.SelectionStart = 0;
-            this.codeLaunchScript.ShortcutsEnabled = true;
             this.codeLaunchScript.ShowButton = true;
             this.codeLaunchScript.Size = new System.Drawing.Size(186, 21);
             this.codeLaunchScript.TabIndex = 10;
@@ -470,20 +456,20 @@ namespace SKIDLE
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.panel1.Controls.Add(this.metroLabel2);
             this.panel1.Controls.Add(this.RunLabel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(186, 31);
+            this.panel1.Size = new System.Drawing.Size(186, 19);
             this.panel1.TabIndex = 4;
             // 
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel2.Location = new System.Drawing.Point(0, 16);
+            this.metroLabel2.Location = new System.Drawing.Point(57, 0);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(71, 15);
             this.metroLabel2.TabIndex = 2;
@@ -494,6 +480,7 @@ namespace SKIDLE
             // RunLabel
             // 
             this.RunLabel.AutoSize = true;
+            this.RunLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.RunLabel.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.RunLabel.Location = new System.Drawing.Point(0, 0);
             this.RunLabel.Name = "RunLabel";
@@ -517,45 +504,38 @@ namespace SKIDLE
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.TabControlWithTerminals);
-            this.splitContainer2.Panel2.Controls.Add(this.menuStrip1);
-            this.splitContainer2.Size = new System.Drawing.Size(884, 546);
+            this.splitContainer2.Size = new System.Drawing.Size(886, 546);
             this.splitContainer2.SplitterDistance = 406;
             this.splitContainer2.TabIndex = 2;
             // 
             // tabControl
             // 
-            this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.tabControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tabControl.CloseTabImage = ((System.Drawing.Image)(resources.GetObject("tabControl.CloseTabImage")));
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabControl.Location = new System.Drawing.Point(0, 0);
-            this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = -1;
             this.tabControl.ShowCloseTabButtons = true;
-            this.tabControl.Size = new System.Drawing.Size(884, 406);
+            this.tabControl.Size = new System.Drawing.Size(886, 406);
             this.tabControl.TabIndex = 1;
-            this.tabControl.TabSize = new System.Drawing.Size(75, 16);
-            this.tabControl.PageChanged += new System.EventHandler<Manina.Windows.Forms.PageChangedEventArgs>(this.tabControl_PageChanged);
+            this.tabControl.TabSize = new System.Drawing.Size(125, 23);
+            this.tabControl.TabSizing = Manina.Windows.Forms.TabSizing.Fixed;
             // 
             // TabControlWithTerminals
             // 
-            this.TabControlWithTerminals.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.TabControlWithTerminals.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TabControlWithTerminals.CloseTabImage = ((System.Drawing.Image)(resources.GetObject("TabControlWithTerminals.CloseTabImage")));
             this.TabControlWithTerminals.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TabControlWithTerminals.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.TabControlWithTerminals.Location = new System.Drawing.Point(0, 24);
+            this.TabControlWithTerminals.Location = new System.Drawing.Point(0, 0);
             this.TabControlWithTerminals.Name = "TabControlWithTerminals";
             this.TabControlWithTerminals.SelectedIndex = -1;
             this.TabControlWithTerminals.ShowCloseTabButtons = true;
-            this.TabControlWithTerminals.Size = new System.Drawing.Size(884, 112);
+            this.TabControlWithTerminals.Size = new System.Drawing.Size(886, 136);
             this.TabControlWithTerminals.TabIndex = 0;
+            this.TabControlWithTerminals.TabSize = new System.Drawing.Size(95, 23);
+            this.TabControlWithTerminals.TabSizing = Manina.Windows.Forms.TabSizing.Fixed;
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.menuStrip1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newTerminalToolStripMenuItem,
@@ -565,13 +545,12 @@ namespace SKIDLE
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.menuStrip1.Size = new System.Drawing.Size(884, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(886, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // newTerminalToolStripMenuItem
             // 
-            this.newTerminalToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.newTerminalToolStripMenuItem.Name = "newTerminalToolStripMenuItem";
             this.newTerminalToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
             this.newTerminalToolStripMenuItem.Text = "New Terminal";
@@ -579,7 +558,6 @@ namespace SKIDLE
             // 
             // allProcessesToolStripMenuItem
             // 
-            this.allProcessesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.allProcessesToolStripMenuItem.Name = "allProcessesToolStripMenuItem";
             this.allProcessesToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
             this.allProcessesToolStripMenuItem.Text = "All processes";
@@ -610,7 +588,6 @@ namespace SKIDLE
             // 
             // menuStrip
             // 
-            this.menuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
             this.menuStrip.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
@@ -618,7 +595,6 @@ namespace SKIDLE
             this.видToolStripMenuItem,
             this.окнаToolStripMenuItem,
             this.терминалToolStripMenuItem,
-            this.настройкиToolStripMenuItem,
             this.запуститьToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -629,105 +605,97 @@ namespace SKIDLE
             // 
             // файлToolStripMenuItem
             // 
+            this.файлToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.сохранитьToolStripMenuItem,
             this.сохранитьКакToolStripMenuItem,
             this.сохранитьВсеToolStripMenuItem,
             this.открытьПапкуToolStripMenuItem,
+            this.настройкиToolStripMenuItem3,
             this.открытьФайлToolStripMenuItem,
             this.создатьToolStripMenuItem,
             this.закрытьВсеToolStripMenuItem,
             this.закрытьToolStripMenuItem,
             this.выйтиToolStripMenuItem});
             this.файлToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.файлToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(52, 21);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // сохранитьToolStripMenuItem
             // 
-            this.сохранитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.сохранитьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
             this.сохранитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
             // сохранитьКакToolStripMenuItem
             // 
-            this.сохранитьКакToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.сохранитьКакToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
             this.сохранитьКакToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.сохранитьКакToolStripMenuItem.Text = "Сохранить как";
             this.сохранитьКакToolStripMenuItem.Click += new System.EventHandler(this.сохранитьКакToolStripMenuItem_Click);
             // 
             // сохранитьВсеToolStripMenuItem
             // 
             this.сохранитьВсеToolStripMenuItem.Name = "сохранитьВсеToolStripMenuItem";
-            this.сохранитьВсеToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.сохранитьВсеToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.сохранитьВсеToolStripMenuItem.Text = "Сохранить Все";
             this.сохранитьВсеToolStripMenuItem.Click += new System.EventHandler(this.сохранитьВсеToolStripMenuItem_Click);
             // 
             // открытьПапкуToolStripMenuItem
             // 
-            this.открытьПапкуToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.открытьПапкуToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.открытьПапкуToolStripMenuItem.Name = "открытьПапкуToolStripMenuItem";
             this.открытьПапкуToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.O)));
-            this.открытьПапкуToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.открытьПапкуToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.открытьПапкуToolStripMenuItem.Text = "Открыть папку";
             this.открытьПапкуToolStripMenuItem.Click += new System.EventHandler(this.открытьПапкуToolStripMenuItem_Click);
             // 
+            // настройкиToolStripMenuItem3
+            // 
+            this.настройкиToolStripMenuItem3.Name = "настройкиToolStripMenuItem3";
+            this.настройкиToolStripMenuItem3.Size = new System.Drawing.Size(265, 22);
+            this.настройкиToolStripMenuItem3.Text = "Настройки";
+            this.настройкиToolStripMenuItem3.Click += new System.EventHandler(this.настройкиToolStripMenuItem1_Click);
+            // 
             // открытьФайлToolStripMenuItem
             // 
-            this.открытьФайлToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.открытьФайлToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.открытьФайлToolStripMenuItem.Name = "открытьФайлToolStripMenuItem";
             this.открытьФайлToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.открытьФайлToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.открытьФайлToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.открытьФайлToolStripMenuItem.Text = "Открыть файл";
             this.открытьФайлToolStripMenuItem.Click += new System.EventHandler(this.открытьФайлToolStripMenuItem_Click);
             // 
             // создатьToolStripMenuItem
             // 
-            this.создатьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.создатьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
             this.создатьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.создатьToolStripMenuItem.Text = "Создать новый файл ";
             this.создатьToolStripMenuItem.Click += new System.EventHandler(this.создатьToolStripMenuItem_Click);
             // 
             // закрытьВсеToolStripMenuItem
             // 
-            this.закрытьВсеToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.закрытьВсеToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.закрытьВсеToolStripMenuItem.Name = "закрытьВсеToolStripMenuItem";
-            this.закрытьВсеToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.закрытьВсеToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.закрытьВсеToolStripMenuItem.Text = "Закрыть все";
             this.закрытьВсеToolStripMenuItem.Click += new System.EventHandler(this.закрытьВсеToolStripMenuItem_Click);
             // 
             // закрытьToolStripMenuItem
             // 
-            this.закрытьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.закрытьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
-            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.закрытьToolStripMenuItem.Text = "Закрыть";
             this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
             // 
             // выйтиToolStripMenuItem
             // 
-            this.выйтиToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.выйтиToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.выйтиToolStripMenuItem.Name = "выйтиToolStripMenuItem";
-            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.выйтиToolStripMenuItem.Text = "Выйти";
             this.выйтиToolStripMenuItem.Click += new System.EventHandler(this.выйтиToolStripMenuItem_Click);
             // 
@@ -740,15 +708,12 @@ namespace SKIDLE
             this.найтиToolStripMenuItem,
             this.перейтиToolStripMenuItem,
             this.заменитьToolStripMenuItem});
-            this.правкаToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
             this.правкаToolStripMenuItem.Size = new System.Drawing.Size(65, 21);
             this.правкаToolStripMenuItem.Text = "Правка";
             // 
             // вырезатьToolStripMenuItem
             // 
-            this.вырезатьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.вырезатьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.вырезатьToolStripMenuItem.Name = "вырезатьToolStripMenuItem";
             this.вырезатьToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.вырезатьToolStripMenuItem.Text = "Вырезать";
@@ -756,8 +721,6 @@ namespace SKIDLE
             // 
             // копироватьToolStripMenuItem
             // 
-            this.копироватьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.копироватьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.копироватьToolStripMenuItem.Name = "копироватьToolStripMenuItem";
             this.копироватьToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.копироватьToolStripMenuItem.Text = "Копировать";
@@ -765,8 +728,6 @@ namespace SKIDLE
             // 
             // вставитьToolStripMenuItem
             // 
-            this.вставитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.вставитьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.вставитьToolStripMenuItem.Name = "вставитьToolStripMenuItem";
             this.вставитьToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.вставитьToolStripMenuItem.Text = "Вставить";
@@ -774,8 +735,6 @@ namespace SKIDLE
             // 
             // найтиToolStripMenuItem
             // 
-            this.найтиToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.найтиToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.найтиToolStripMenuItem.Name = "найтиToolStripMenuItem";
             this.найтиToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.найтиToolStripMenuItem.Text = "Найти";
@@ -783,8 +742,6 @@ namespace SKIDLE
             // 
             // перейтиToolStripMenuItem
             // 
-            this.перейтиToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.перейтиToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.перейтиToolStripMenuItem.Name = "перейтиToolStripMenuItem";
             this.перейтиToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.перейтиToolStripMenuItem.Text = "Перейти";
@@ -792,8 +749,6 @@ namespace SKIDLE
             // 
             // заменитьToolStripMenuItem
             // 
-            this.заменитьToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.заменитьToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.заменитьToolStripMenuItem.Name = "заменитьToolStripMenuItem";
             this.заменитьToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.заменитьToolStripMenuItem.Text = "Заменить";
@@ -812,7 +767,6 @@ namespace SKIDLE
             this.расширенияToolStripMenuItem1,
             this.настройкиToolStripMenuItem2,
             this.воВесьЭкранToolStripMenuItem});
-            this.видToolStripMenuItem.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.видToolStripMenuItem.Name = "видToolStripMenuItem";
             this.видToolStripMenuItem.Size = new System.Drawing.Size(43, 21);
             this.видToolStripMenuItem.Text = "Вид";
@@ -869,6 +823,7 @@ namespace SKIDLE
             this.расширенияToolStripMenuItem1.Name = "расширенияToolStripMenuItem1";
             this.расширенияToolStripMenuItem1.Size = new System.Drawing.Size(169, 22);
             this.расширенияToolStripMenuItem1.Text = "Расширения";
+            this.расширенияToolStripMenuItem1.Visible = false;
             this.расширенияToolStripMenuItem1.Click += new System.EventHandler(this.extensions_Click);
             // 
             // настройкиToolStripMenuItem2
@@ -876,6 +831,7 @@ namespace SKIDLE
             this.настройкиToolStripMenuItem2.Name = "настройкиToolStripMenuItem2";
             this.настройкиToolStripMenuItem2.Size = new System.Drawing.Size(169, 22);
             this.настройкиToolStripMenuItem2.Text = "Настройки";
+            this.настройкиToolStripMenuItem2.Visible = false;
             this.настройкиToolStripMenuItem2.Click += new System.EventHandler(this.настройкиToolStripMenuItem1_Click);
             // 
             // воВесьЭкранToolStripMenuItem
@@ -883,10 +839,11 @@ namespace SKIDLE
             this.воВесьЭкранToolStripMenuItem.Name = "воВесьЭкранToolStripMenuItem";
             this.воВесьЭкранToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.воВесьЭкранToolStripMenuItem.Text = "Во весь экран";
+            this.воВесьЭкранToolStripMenuItem.Click += new System.EventHandler(this.воВесьЭкранToolStripMenuItem_Click);
             // 
             // окнаToolStripMenuItem
             // 
-            this.окнаToolStripMenuItem.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.окнаToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.окнаToolStripMenuItem.Name = "окнаToolStripMenuItem";
             this.окнаToolStripMenuItem.Size = new System.Drawing.Size(52, 21);
             this.окнаToolStripMenuItem.Text = "Окна";
@@ -898,38 +855,16 @@ namespace SKIDLE
             this.терминалToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.открытьТерминалToolStripMenuItem});
             this.терминалToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.терминалToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.терминалToolStripMenuItem.Name = "терминалToolStripMenuItem";
             this.терминалToolStripMenuItem.Size = new System.Drawing.Size(81, 21);
             this.терминалToolStripMenuItem.Text = "Терминал";
             // 
             // открытьТерминалToolStripMenuItem
             // 
-            this.открытьТерминалToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.открытьТерминалToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.открытьТерминалToolStripMenuItem.Name = "открытьТерминалToolStripMenuItem";
             this.открытьТерминалToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.открытьТерминалToolStripMenuItem.Text = "Открыть Терминал";
             this.открытьТерминалToolStripMenuItem.Click += new System.EventHandler(this.открытьТерминалToolStripMenuItem_Click);
-            // 
-            // настройкиToolStripMenuItem
-            // 
-            this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.настройкиToolStripMenuItem1});
-            this.настройкиToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.настройкиToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(86, 21);
-            this.настройкиToolStripMenuItem.Text = "Настройки";
-            // 
-            // настройкиToolStripMenuItem1
-            // 
-            this.настройкиToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(113)))));
-            this.настройкиToolStripMenuItem1.ForeColor = System.Drawing.Color.Silver;
-            this.настройкиToolStripMenuItem1.Name = "настройкиToolStripMenuItem1";
-            this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(142, 22);
-            this.настройкиToolStripMenuItem1.Text = "Настройки";
-            this.настройкиToolStripMenuItem1.Click += new System.EventHandler(this.настройкиToolStripMenuItem1_Click);
             // 
             // запуститьToolStripMenuItem
             // 
@@ -948,7 +883,6 @@ namespace SKIDLE
             // 
             // leftMenu
             // 
-            this.leftMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.leftMenu.Controls.Add(this.extensions);
             this.leftMenu.Controls.Add(this.run);
             this.leftMenu.Controls.Add(this.structureBTN);
@@ -956,72 +890,70 @@ namespace SKIDLE
             this.leftMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftMenu.Location = new System.Drawing.Point(0, 27);
             this.leftMenu.Name = "leftMenu";
-            this.leftMenu.Size = new System.Drawing.Size(27, 546);
+            this.leftMenu.Size = new System.Drawing.Size(25, 546);
             this.leftMenu.TabIndex = 2;
             // 
             // extensions
             // 
-            this.extensions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.extensions.BackgroundImage = global::SKIDLE.Properties.Resources.download;
+            this.extensions.BackgroundImage = global::SKIDLE.Properties.Resources.download__2_;
             this.extensions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.extensions.Dock = System.Windows.Forms.DockStyle.Top;
             this.extensions.FlatAppearance.BorderSize = 0;
             this.extensions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.extensions.Location = new System.Drawing.Point(0, 66);
             this.extensions.Name = "extensions";
-            this.extensions.Size = new System.Drawing.Size(27, 22);
+            this.extensions.Size = new System.Drawing.Size(25, 22);
             this.extensions.TabIndex = 5;
             this.extensions.UseVisualStyleBackColor = false;
+            this.extensions.Visible = false;
             this.extensions.Click += new System.EventHandler(this.extensions_Click);
             // 
             // run
             // 
-            this.run.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.run.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("run.BackgroundImage")));
+            this.run.BackgroundImage = global::SKIDLE.Properties.Resources.run2;
             this.run.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.run.Dock = System.Windows.Forms.DockStyle.Top;
             this.run.FlatAppearance.BorderSize = 0;
             this.run.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.run.Location = new System.Drawing.Point(0, 44);
             this.run.Name = "run";
-            this.run.Size = new System.Drawing.Size(27, 22);
+            this.run.Size = new System.Drawing.Size(25, 22);
             this.run.TabIndex = 3;
             this.run.UseVisualStyleBackColor = false;
             this.run.Click += new System.EventHandler(this.RunMenu_Click);
             // 
             // structureBTN
             // 
-            this.structureBTN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.structureBTN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("structureBTN.BackgroundImage")));
+            this.structureBTN.BackgroundImage = global::SKIDLE.Properties.Resources.classBTN;
             this.structureBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.structureBTN.Dock = System.Windows.Forms.DockStyle.Top;
             this.structureBTN.FlatAppearance.BorderSize = 0;
             this.structureBTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.structureBTN.Location = new System.Drawing.Point(0, 22);
             this.structureBTN.Name = "structureBTN";
-            this.structureBTN.Size = new System.Drawing.Size(27, 22);
+            this.structureBTN.Size = new System.Drawing.Size(25, 22);
             this.structureBTN.TabIndex = 4;
             this.structureBTN.UseVisualStyleBackColor = false;
+            this.structureBTN.Visible = false;
             this.structureBTN.Click += new System.EventHandler(this.structureBTN_Click);
             // 
             // ExplorerMenu
             // 
-            this.ExplorerMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.ExplorerMenu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ExplorerMenu.BackgroundImage")));
+            this.ExplorerMenu.BackgroundImage = global::SKIDLE.Properties.Resources.files2;
             this.ExplorerMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ExplorerMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.ExplorerMenu.FlatAppearance.BorderSize = 0;
             this.ExplorerMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExplorerMenu.Location = new System.Drawing.Point(0, 0);
             this.ExplorerMenu.Name = "ExplorerMenu";
-            this.ExplorerMenu.Size = new System.Drawing.Size(27, 22);
+            this.ExplorerMenu.Size = new System.Drawing.Size(25, 22);
             this.ExplorerMenu.TabIndex = 2;
             this.ExplorerMenu.UseVisualStyleBackColor = false;
             this.ExplorerMenu.Click += new System.EventHandler(this.ExplorerMenu_Click);
             // 
             // explorerContMenu
             // 
-            this.explorerContMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.explorerContMenu.BackColor = System.Drawing.Color.White;
             this.explorerContMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.createFile,
             this.openInExplorer,
@@ -1065,14 +997,12 @@ namespace SKIDLE
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(11)))), ((int)(((byte)(11)))));
             this.ClientSize = new System.Drawing.Size(1101, 573);
             this.Controls.Add(this.split);
             this.Controls.Add(this.leftMenu);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -1104,7 +1034,6 @@ namespace SKIDLE
             this.panel1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -1127,11 +1056,8 @@ namespace SKIDLE
         private System.Windows.Forms.ToolStripMenuItem открытьФайлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сохранитьКакToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem терминалToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытьТерминалToolStripMenuItem;
-        private Manina.Windows.Forms.TabControl tabControl;
         private UI.RenPanel leftMenu;
         private System.Windows.Forms.SplitContainer split;
         private System.Windows.Forms.Button ExplorerMenu;
@@ -1148,7 +1074,7 @@ namespace SKIDLE
         private System.Windows.Forms.ToolStripMenuItem закрытьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выйтиToolStripMenuItem;
         private System.Windows.Forms.Button run;
-        private VSContextMenuStrip explorerContMenu;
+        private System.Windows.Forms.ContextMenuStrip explorerContMenu;
         private System.Windows.Forms.ToolStripMenuItem createFile;
         private System.Windows.Forms.ToolStripMenuItem openInExplorer;
         private System.Windows.Forms.ToolStripMenuItem rename;
@@ -1172,7 +1098,6 @@ namespace SKIDLE
         private System.Windows.Forms.RadioButton StatRun;
         private System.Windows.Forms.Panel panel1;
         private MetroFramework.Controls.MetroLabel RunLabel;
-        private Manina.Windows.Forms.TabControl TabControlWithTerminals;
         private System.Windows.Forms.ToolStripMenuItem сохранитьВсеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem окнаToolStripMenuItem;
@@ -1198,6 +1123,9 @@ namespace SKIDLE
         private MetroFramework.Controls.MetroTextBox codeLaunchScript;
         private System.Windows.Forms.ToolStripMenuItem запуститьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem запускToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem3;
+        private Manina.Windows.Forms.TabControl tabControl;
+        private Manina.Windows.Forms.TabControl TabControlWithTerminals;
     }
 }
 

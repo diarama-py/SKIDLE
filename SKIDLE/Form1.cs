@@ -16,11 +16,17 @@ using SKIDLE.CrossFormsDesigner;
 using FastColoredTextBoxNS;
 using SKIDLE.UI;
 using SKIDLE.Properties;
+using Microsoft.CSharp;
+using System.CodeDom.Compiler;
+using System.Reflection;
+using System.Linq.Expressions;
 
 namespace SKIDLE
 {
     public partial class skidle : Form
     {
+        IMenuStrip ims = new IMenuStrip();
+        bool fullscreen = false;
         public skidle()
         {
             InitializeComponent();
@@ -53,7 +59,7 @@ namespace SKIDLE
                 splitContainer2.Panel2Collapsed = false;
             else
                 splitContainer2.Panel2Collapsed = true;
-            Theme();
+            //Theme();
             UseWaitCursor = false;
         }
 
@@ -91,7 +97,11 @@ namespace SKIDLE
                     if (tabControl.SelectedTab.Text.Split('.')[1] == item.Split('.')[0])
                     {
                         ConfigFile c = new ConfigFile(item);
-                        Process.Start(codeLaunchScript.Text.Trim(' ').Split(';')[0], codeLaunchScript.Text.Split(';')[1] + " " + tabControl.SelectedTab.Name);
+                        if(c.GetProperty("ext").Split('|')[2].Contains(".jar"))
+                            Process.Start("java","-jar "+ c.GetProperty("ext").Split('|')[2] + " "+tabControl.SelectedTab.Name);
+                        else
+                            Process.Start(c.GetProperty("ext").Split('|')[2], tabControl.SelectedTab.Name);
+                        MessageBox.Show("java "+"-jar "+ c.GetProperty("ext").Split('|')[2] + " " + tabControl.SelectedTab.Name);
                     }
                 }
             }
@@ -103,7 +113,10 @@ namespace SKIDLE
                     if (tabControl.SelectedTab.Text.Split('.')[1] == item.Split('.')[0])
                     {
                         ConfigFile c = new ConfigFile(item);
-                        Process.Start(codeLaunchScript.Text.Trim(' ').Split(';')[0], codeLaunchScript.Text.Split(';')[1]  + " " + RunPath.Text);
+                        if (c.GetProperty("ext").Split('|')[2].Contains(".jar"))
+                            Process.Start("java", "-jar " + c.GetProperty("ext").Split('|')[2] + " " + RunPath.Text);
+                        else
+                            Process.Start(c.GetProperty("ext").Split('|')[2], RunPath.Text);
                     }
                 }
             }
@@ -173,14 +186,53 @@ namespace SKIDLE
             splitContainer3.Panel2Collapsed = true;
             ConfigFile config = new ConfigFile(Globals.User + "configure.conf");
 
-            Theme(Globals.themes + config.GetProperty("theme"));
-            try {  } catch { LightTheme(); }
+            //Theme(Globals.themes + config.GetProperty("theme"));
             Lang(config.GetProperty("language"));
             //
             //load user
             //
             loadUserFiles();
+            menuStrip.Renderer = new ToolStripProfessionalRenderer(ims);
+           // LaunchCodeApp(sender, e, Globals.User+"main.cs");
             UseWaitCursor = false;
+        }
+        /// <summary>
+        /// Launch dinamic compilation no work((
+        /// </summary>
+        public void LaunchCodeApp(object sender, EventArgs e, string src)
+        {
+            открытьТерминалToolStripMenuItem_Click(sender, e);
+            var console = (ConsoleTab)TabControlWithTerminals.Tabs[TabControlWithTerminals.SelectedIndex];
+            var param = new CompilerParameters
+            {
+                GenerateExecutable = false,
+                IncludeDebugInformation = false,
+                GenerateInMemory = true
+            };
+            param.ReferencedAssemblies.Add("System.dll");
+            param.ReferencedAssemblies.Add("System.Xml.dll");
+            param.ReferencedAssemblies.Add("System.Data.dll");
+            param.ReferencedAssemblies.Add("System.Core.dll");
+            param.ReferencedAssemblies.Add("System.Xml.Linq.dll");
+            param.ReferencedAssemblies.Add("System.Windows.Forms.dll");
+
+            var codeProvider = new CSharpCodeProvider();
+            var results = codeProvider.CompileAssemblyFromFile(param, src);
+
+            if (results.Errors.HasErrors)
+            {
+                foreach (var error in results.Errors)
+                {
+                    console.WriteLine(error.ToString());
+                }
+            }
+            else
+            {
+                object o = results.
+                            CompiledAssembly.
+                            CreateInstance("runtime.Program");
+                console.WriteLine(o.ToString());
+            }
         }
         private void loadUserFiles()
         {
@@ -189,29 +241,50 @@ namespace SKIDLE
             {
                 foreach (var file in File.ReadAllLines(Globals.User + "files.txt"))
                 {
-                    FileInfo fi = new FileInfo(file);
-                    codeTab tab = new codeTab();
-                    tabControl.Tabs.Add(tab);
-                    tabControl.SelectedTab = tab;
-                    tab.code.OpenFile(fi.FullName);
-                    tab.Text = fi.Name;
-                    tab.Name = fi.FullName;
-                    tab.LoadTopMenuLabel();
-                    loadStruct(tab.code.Text);
+                    try
+                    {
+                        FileInfo fi = new FileInfo(file);
+                        codeTab tab = new codeTab();
+                        tabControl.Tabs.Add(tab);
+                        tabControl.SelectedTab = tab;
+                        tab.code.OpenFile(fi.FullName);
+                        tab.Text = fi.Name;
+                        tab.Name = fi.FullName;
+                        tab.LoadTopMenuLabel();
+                        loadStruct(tab.code.Text);
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }
             if (File.Exists(Globals.User + "workfolder.txt") && File.ReadAllLines(Globals.User + "workfolder.txt").Length > 0)
             {
-                explorer.Nodes.Clear();
-                split.Panel1Collapsed = false;
-                DirectoryInfo dfo = new DirectoryInfo(File.ReadAllText(Globals.User + "workfolder.txt"));
-                var nody = explorer.Nodes.Add(dfo.Name, dfo.Name);
-                nody.Tag = dfo;
+                try
+                {
+                    explorer.Nodes.Clear();
+                    split.Panel1Collapsed = false;
+                    DirectoryInfo dfo = new DirectoryInfo(File.ReadAllText(Globals.User + "workfolder.txt"));
+                    var nody = explorer.Nodes.Add(dfo.Name, dfo.Name);
+                    nody.Tag = dfo;
+                }
+                catch
+                {
+
+                }
             }
-            foreach(var item in tabControl.Tabs)
+            foreach(Manina.Windows.Forms.Tab item in tabControl.Tabs)
             {
-                if (item.Text == new ConfigFile(Globals.User + "user.txt").GetProperty("selfile"))
-                    tabControl.SelectedTab = item;
+                try
+                {
+                    if (item.Text == new ConfigFile(Globals.User + "user.txt").GetProperty("selfile"))
+                        tabControl.SelectedTab = item;
+                }
+                catch
+                {
+
+                }
             }
             UseWaitCursor = false;
         }
@@ -278,7 +351,7 @@ namespace SKIDLE
             UseWaitCursor = true;
             if (tabControl.Tabs.Count > 0)
             {
-                foreach (var item in tabControl.Tabs)
+                foreach (Manina.Windows.Forms.Tab item in tabControl.Tabs)
                 {
                     if (file !=item.Name)
                     {
@@ -319,7 +392,7 @@ namespace SKIDLE
             {
                 foreach (var file in files)
                 {
-                    foreach (var item in tabControl.Tabs)
+                    foreach (Manina.Windows.Forms.Tab item in tabControl.Tabs)
                     {
                         if (file != item.Name)
                         {
@@ -490,7 +563,7 @@ namespace SKIDLE
             SettingsTabControl settings = new SettingsTabControl();
             settings.Dock = DockStyle.Fill;
             tab.Controls.Add(settings);
-            Theme();
+            //Theme();
             UseWaitCursor = false;
         }
 
@@ -568,15 +641,16 @@ namespace SKIDLE
         #region themes
         public void Theme() => Theme(Globals.themes + new ConfigFile(Globals.User + "configure.conf").GetProperty("theme"));
         private void Theme(string data)
-        {
+        {/*
             UseWaitCursor = true;
             ConfigFile c = new ConfigFile(data);
             ExplorerMenu.BackgroundImage = Resources.files1;
             run.BackgroundImage = Resources.run1;
             structureBTN.BackgroundImage = Resources.classBTN1;
             extensions.BackgroundImage = Resources.download;
-            menuStrip.BackColor =c.GetColor("menuStripBackColor");
+            menuStrip.BackColor = c.GetColor("menuStripBackColor");
             menuStrip.ForeColor = c.GetColor("menuStripForeColor");
+            ims.BackColor = c.GetColor("menuStripBackColor");
             leftMenu.BackColor = c.GetColor("leftMenuBackColor");
             split.Panel1.BackColor = c.GetColor("splitPanel1BackColor");
             explorerPanelTitle.BackColor = c.GetColor("explorerPanelTitleBackColor");
@@ -589,13 +663,13 @@ namespace SKIDLE
             ForeColor = c.GetColor("ForeColor");
             explorerContMenu.ForeColor = c.GetColor("explorerContMenuForeColor");
             explorerContMenu.BackColor = c.GetColor("explorerContMenuBackColor");
-            foreach(Control item in leftMenu.Controls)
+            foreach (Control item in leftMenu.Controls)
             {
                 item.BackColor = c.GetColor("leftMenuItem");
             }
             foreach (ToolStripMenuItem item in menuStrip.Items)
             {
-                item.ForeColor =c.GetColor("itemForeColor");
+                item.ForeColor = c.GetColor("itemForeColor");
                 item.BackColor = c.GetColor("itemBackColor");
                 foreach (ToolStripMenuItem item1 in item.DropDownItems)
                 {
@@ -603,55 +677,14 @@ namespace SKIDLE
                     item1.BackColor = c.GetColor("item1BackColor");
                 }
             }
-            foreach(var item in tabControl.Tabs)
+            foreach (Manina.Windows.Forms.Tab item in tabControl.Tabs)
             {
                 item.BackColor = c.GetColor("backcoloredit");
                 item.ForeColor = c.GetColor("ForeColor");
             }
             UseWaitCursor = false;
+            */
         }
-        //
-        //Light
-        //
-        #region light
-        private void LightTheme()
-        {
-            UseWaitCursor = true;
-            ExplorerMenu.BackgroundImage = Resources.files2;
-            run.BackgroundImage = Resources.run2;
-            structureBTN.BackgroundImage = Resources.classBTN;
-            extensions.BackgroundImage = Resources.download__2_;
-            menuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(63)))), ((int)(((byte)(226)))));
-            menuStrip.ForeColor = Color.Black;
-            leftMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            split.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            explorerPanelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            panelStructureTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            explorer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            explorer.ForeColor = System.Drawing.Color.Black;
-            structure.treeView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            structure.treeView.ForeColor = System.Drawing.Color.Black;
-            BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
-            ForeColor = Color.Black;
-            explorerContMenu.ForeColor = Color.Black;
-            explorerContMenu.BackColor = Color.FromArgb(220,220,220);
-            foreach (Control item in leftMenu.Controls)
-            {
-                item.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
-            }
-            foreach (ToolStripMenuItem item in menuStrip.Items)
-            {
-                item.ForeColor = Color.White;
-                item.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(63)))), ((int)(((byte)(226)))));
-                foreach(ToolStripMenuItem item1 in item.DropDownItems)
-                {
-                    item1.ForeColor = Color.White;
-                    item1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(63)))), ((int)(((byte)(226)))));
-                }
-            }
-            UseWaitCursor = false;
-        }
-        #endregion
 
         #endregion
 
@@ -679,8 +712,7 @@ namespace SKIDLE
             найтиToolStripMenuItem.Text = config.GetProperty("find");
             перейтиToolStripMenuItem.Text = config.GetProperty("goto");
             заменитьToolStripMenuItem.Text = config.GetProperty("replace");
-            настройкиToolStripMenuItem.Text = config.GetProperty("settings");
-            запуститьToolStripMenuItem.Text = config.GetProperty("subsettings");
+            настройкиToolStripMenuItem3.Text = config.GetProperty("settings");
             запуститьToolStripMenuItem.Text = config.GetProperty("run");
             запускToolStripMenuItem.Text = config.GetProperty("subrun");
             терминалToolStripMenuItem.Text = config.GetProperty("terminal");
@@ -731,7 +763,7 @@ namespace SKIDLE
             tab.Text = "new terminal";
             TabControlWithTerminals.Tabs.Add(tab);
             allProcessesToolStripMenuItem.DropDownItems.Clear();
-            foreach(var item in TabControlWithTerminals.Tabs)
+            foreach(Manina.Windows.Forms.Tab item in TabControlWithTerminals.Tabs)
                 allProcessesToolStripMenuItem.DropDownItems.Add(item.Text);
         }
         private void отчетToolStripMenuItem_Click(object sender, EventArgs e)
@@ -753,53 +785,56 @@ namespace SKIDLE
         private void skidle_FormClosing(object sender, FormClosingEventArgs e)
         {
             UseWaitCursor = true;
-            List<string> list = new List<string>();
-            list.Clear();
-            File.WriteAllText(Globals.User + "user.txt", "");
-            new ConfigFile(Globals.User + "user.txt").SetProperty("selfile", tabControl.SelectedTab.Text);
-            if (tabControl.Tabs.Count > 0)
-            {
-                foreach (var item in tabControl.Tabs)
+            try {
+                List<string> list = new List<string>();
+                list.Clear();
+                File.WriteAllText(Globals.User + "user.txt", "");
+                new ConfigFile(Globals.User + "user.txt").SetProperty("selfile", tabControl.SelectedTab.Text);
+                if (tabControl.Tabs.Count > 0)
                 {
-                    if (item.Text != "Settings" && item.Text != "Extensions Browser")
+                    foreach (Manina.Windows.Forms.Tab item in tabControl.Tabs)
                     {
-                        tabControl.SelectedTab = item;
-                        var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
-                        if (File.Exists(item.Name))
-                        {
-                            File.WriteAllText(item.Name, myCode.code.Text);
-                            loadStruct(myCode.code.Text);
-                        }
-                        else
+                        if (item.Text != "Settings" && item.Text != "Extensions Browser")
                         {
                             tabControl.SelectedTab = item;
-                            myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
-                            SaveFileDialog save = new SaveFileDialog();
-                            save.Filter = "All files (*.) | *.";
-                            if (save.ShowDialog() != DialogResult.Cancel)
+                            var myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
+                            if (File.Exists(item.Name))
                             {
-                                FileInfo fi = new FileInfo(save.FileName);
-                                File.WriteAllText(fi.FullName, myCode.code.Text);
-                                myCode.Text = fi.Name;
-                                myCode.Name = fi.FullName;
-                                myCode.LoadTopMenuLabel();
+                                File.WriteAllText(item.Name, myCode.code.Text);
                                 loadStruct(myCode.code.Text);
                             }
+                            else
+                            {
+                                tabControl.SelectedTab = item;
+                                myCode = (codeTab)tabControl.Tabs[tabControl.SelectedIndex];
+                                SaveFileDialog save = new SaveFileDialog();
+                                save.Filter = "All files (*.) | *.";
+                                if (save.ShowDialog() != DialogResult.Cancel)
+                                {
+                                    FileInfo fi = new FileInfo(save.FileName);
+                                    File.WriteAllText(fi.FullName, myCode.code.Text);
+                                    myCode.Text = fi.Name;
+                                    myCode.Name = fi.FullName;
+                                    myCode.LoadTopMenuLabel();
+                                    loadStruct(myCode.code.Text);
+                                }
+                            }
+                        }
+                        if (item.Name.Contains("."))
+                        {
+                            list.Add(item.Name);
+                            File.WriteAllLines(Globals.User + "files.txt", list);
                         }
                     }
-                    if (item.Name.Contains("."))
-                    {
-                        list.Add(item.Name);
-                        File.WriteAllLines(Globals.User + "files.txt", list);
-                    }
                 }
+                else if (File.Exists(Globals.User + "files.txt"))
+                    File.WriteAllText(Globals.User + "files.txt", "");
+                if (explorer.Nodes.Count > 0)
+                    File.WriteAllText(Globals.User + "workfolder.txt", explorer.Nodes[0].Tag.ToString());
+                else if (File.Exists(Globals.User + "workfolder.txt"))
+                    File.WriteAllText(Globals.User + "workfolder.txt", "");
             }
-            else if (File.Exists(Globals.User + "files.txt"))
-                File.WriteAllText(Globals.User + "files.txt", "");
-           if(explorer.Nodes.Count > 0)
-                File.WriteAllText(Globals.User + "workfolder.txt", explorer.Nodes[0].Tag.ToString());
-            else if (File.Exists(Globals.User + "workfolder.txt"))
-                File.WriteAllText(Globals.User + "workfolder.txt", "");
+            catch { }
             UseWaitCursor = false;
         }
 
@@ -812,7 +847,7 @@ namespace SKIDLE
         {
             UseWaitCursor = true;
             allProcessesToolStripMenuItem.DropDownItems.Clear();
-            foreach (var item in TabControlWithTerminals.Tabs)
+            foreach (Manina.Windows.Forms.Tab item in TabControlWithTerminals.Tabs)
                 allProcessesToolStripMenuItem.DropDownItems.Add(item.Text);
             UseWaitCursor = false;
         }
@@ -820,7 +855,7 @@ namespace SKIDLE
         private void allProcessesToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             UseWaitCursor = true;
-            foreach (var item in TabControlWithTerminals.Tabs)
+            foreach (Manina.Windows.Forms.Tab item in TabControlWithTerminals.Tabs)
             {
                 if (item.Text == e.ClickedItem.Text)
                     TabControlWithTerminals.SelectedTab = item;
@@ -837,7 +872,7 @@ namespace SKIDLE
             new ConfigFile(Globals.User + "user.txt").SetProperty("selfile", tabControl.SelectedTab.Text);
             if (tabControl.Tabs.Count > 0)
             {
-                foreach (var item in tabControl.Tabs)
+                foreach (Manina.Windows.Forms.Tab item in tabControl.Tabs)
                 {
                     if (item.Text != "Settings" && item.Text != "Extensions Browser")
                     {
@@ -947,16 +982,16 @@ namespace SKIDLE
         {
             UseWaitCursor = true;
             окнаToolStripMenuItem.DropDownItems.Clear();
-            foreach(var item in tabControl.Tabs)
+            foreach(Manina.Windows.Forms.Tab item in tabControl.Tabs)
                 окнаToolStripMenuItem.DropDownItems.Add(item.Text);
-            Theme();
+            //Theme();
             UseWaitCursor = false;
         }
 
         private void окнаToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             UseWaitCursor = true;
-            foreach (var item in tabControl.Tabs)
+            foreach (Manina.Windows.Forms.Tab item in tabControl.Tabs)
             {
                 if (item.Text == e.ClickedItem.Text)
                     tabControl.SelectedTab = item;
@@ -995,9 +1030,48 @@ namespace SKIDLE
             catch { }
             UseWaitCursor = false;
         }
+        private void воВесьЭкранToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(fullscreen == false)
+            {
+                fullscreen = true;
+                this.TopMost = true;
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                fullscreen = false;
+                this.TopMost = false;
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
     }
     class Obj:object
     {
 
     }
+    public class IMenuStrip : ProfessionalColorTable
+    {
+        public Color BackColor { get; set; }
+        public IMenuStrip()
+        {
+            // see notes
+            base.UseSystemColors = false;
+        }
+        public override System.Drawing.Color MenuBorder
+        {
+            get { return Color.Red; }
+        }
+        public override System.Drawing.Color MenuItemBorder
+        {
+            get { return BackColor; }
+        }
+        public override Color MenuItemSelected
+        {
+            get { return Color.FromArgb(95,20,20,20); }
+        }
+    }
 }
+

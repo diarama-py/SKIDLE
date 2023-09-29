@@ -1,6 +1,0 @@
-D:\Program Files\nodejs\install_tools.bat
-C:\Users\User\Desktop\My\FSFproj\CF Design Editor\bin\Debug\explame.cfml
-C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\resources\app\themes\dark-by-frostysf.conf
-C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\resources\app\langs\SpecialKey\syntaxes\syntax.sf
-C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\User\configure.conf
-C:\Users\User\Desktop\My\FSFproj\SKIDLE\SKIDLE\bin\Debug\resources\app\langs\SpecialKey\modules\Sperhino.spk

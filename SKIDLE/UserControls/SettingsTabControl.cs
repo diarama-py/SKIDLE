@@ -8,6 +8,7 @@ namespace SKIDLE.UserControls
         General Igeneral = new General();
         TextEditor ItextEditor = new TextEditor();
         About Iabout = new About();
+        bool expand = false;
         public SettingsTabControl()
         {
             InitializeComponent();
@@ -87,7 +88,9 @@ namespace SKIDLE.UserControls
             main.ForeColor = c.GetColor("ForeColor");
             leftPanel.BackColor = c.GetColor("BackColor");
             leftPanel.ForeColor = c.GetColor("ForeColor");
-            foreach(Control p in main.Controls)
+            panel.BackColor = c.GetColor("BackColor");
+            panel.ForeColor = c.GetColor("ForeColor");
+            foreach (Control p in main.Controls)
             {
                 p.BackColor = c.GetColor("BackColor");
                 p.ForeColor = c.GetColor("ForeColor");
@@ -112,6 +115,53 @@ namespace SKIDLE.UserControls
                     r.ForeColor = c.GetColor("ForeColor");
                 }
             }
+            foreach (Control p in panel.Controls)
+            {
+                p.BackColor = c.GetColor("BackColor");
+                p.ForeColor = c.GetColor("ForeColor");
+                foreach (Control r in p.Controls)
+                {
+                    r.BackColor = c.GetColor("BackColor");
+                    r.ForeColor = c.GetColor("ForeColor");
+                }
+            }
+        }
+
+        private void panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            anim.Start();
+        }
+
+        private void anim_Tick(object sender, EventArgs e)
+        {
+            if (expand)
+            {
+                panel.Width -= 10;
+                if(panel.Width <= 40)
+                {
+                    expand = false;
+                    anim.Stop();
+                }
+            }
+            else
+            {
+                panel.Width += 10;
+                if(panel.Width >= 125)
+                {
+                    expand = true;
+                    anim.Stop();
+                }
+            }
+        }
+
+        private void main_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -3,28 +3,25 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace SKIDLE
 {
     public class HighLighting
     {
-        public string local = "";
-        protected Regex AttributeRegex,
-                      ClassNameRegex;
+        protected Regex SPKAttributeRegex,
+                      SPKClassNameRegex;
 
-        protected Regex CommentRegex1,
-                      CommentRegex2,
-                      CommentRegex3;
+        protected Regex SPKCommentRegex1,
+                      SPKCommentRegex2,
+                      SPKCommentRegex3;
 
-        protected Regex KeywordRegex;
-
-        protected Regex baseRegex;
-
-        protected Regex NumberRegex;
-        protected Regex StringRegex;
-        protected Regex FunRegex;
-        protected Regex ClassRegex;
+        protected Regex SPKKeywordRegex;
+        protected Regex SPKNumberRegex;
+        protected Regex SPKStringRegex;
+        protected Regex SPKFunRegex;
+        protected Regex SPKFClassRegex;
+        protected Regex SPKEnumRegex;
+        protected Regex SPKVarRegex;
 
         protected static readonly Platform platformType = PlatformType.GetOperationSystemPlatform();
         public static RegexOptions RegexCompiledOption
@@ -38,9 +35,13 @@ namespace SKIDLE
             }
         }
 
-        private Style CommentStyle = new TextStyle(Brushes.Gray, null, FontStyle.Regular);
-        private Style LightBlueStyle = new TextStyle(Brushes.LightBlue, null, FontStyle.Regular);
-        private Style VSfc = new TextStyle(new SolidBrush(Color.FromArgb(155,77,220)), null, FontStyle.Italic);
+        private Style FunStyle = new TextStyle(new SolidBrush(Color.FromArgb(103, 216, 239)), null, FontStyle.Regular);
+        private Style BlueSlateStyle = new TextStyle(Brushes.DarkSlateBlue, null, FontStyle.Regular);
+        private Style TealStyle = new TextStyle(new SolidBrush(Color.FromArgb(249, 36, 100)), null, FontStyle.Regular);
+        private Style CommentStyle = new TextStyle(Brushes.Gray, null, FontStyle.Bold);
+        private Style LightBlueStyle = new TextStyle(Brushes.LightBlue, null, FontStyle.Bold);
+        private Style AddStyle = new TextStyle(Brushes.Orange, null, FontStyle.Regular);
+        private Style VSfc = new TextStyle(new SolidBrush(Color.FromArgb(155, 77, 220)), null, FontStyle.Italic);
         private Style TurquoiseStyle = new TextStyle(Brushes.Turquoise, null, FontStyle.Regular);
         private Style MediumPurpleStyle = new TextStyle(Brushes.Fuchsia, null, FontStyle.Regular);
         private Style CharStyle = new TextStyle(Brushes.DarkOrange, null, FontStyle.Regular);
@@ -59,29 +60,99 @@ namespace SKIDLE
 
             e.ChangedRange.tb.AutoIndentCharsPatterns = @"{|}|[|]|""|""|(|)";
 
-            e.ChangedRange.ClearStyle(MediumPurpleStyle, CommentStyle, TurquoiseStyle, VSfc, LightBlueStyle, CharStyle);
-            if (StringRegex == null)
+            e.ChangedRange.ClearStyle(MediumPurpleStyle, CommentStyle, TurquoiseStyle, VSfc, AddStyle, LightBlueStyle);
+            if (SPKStringRegex == null)
                 InitSPKRegex();
 
-            e.ChangedRange.SetStyle(CharStyle, StringRegex);
+            e.ChangedRange.SetStyle(CharStyle, SPKStringRegex);
 
-            e.ChangedRange.SetStyle(CommentStyle, CommentRegex1);
-            e.ChangedRange.SetStyle(CommentStyle, CommentRegex2);
-            e.ChangedRange.SetStyle(CommentStyle, CommentRegex3);
+            e.ChangedRange.SetStyle(CommentStyle, SPKCommentRegex1);
+            e.ChangedRange.SetStyle(CommentStyle, SPKCommentRegex2);
+            e.ChangedRange.SetStyle(CommentStyle, SPKCommentRegex3);
 
+            e.ChangedRange.SetStyle(TealStyle, @"var");
+            e.ChangedRange.SetStyle(FunStyle, @"fun|class|switch|case");
+            e.ChangedRange.SetStyle(CharStyle, @"return");
+            e.ChangedRange.SetStyle(VSfc, @"if|for|while|do|else|stop|continue|enum");
+            e.ChangedRange.SetStyle(TurquoiseStyle, @"toStr|toInt|toFloat|toByte|toShort|toLong|toDouble|ref|length|Array|strReplace|strSplit");
+            e.ChangedRange.SetStyle(LightBlueStyle, @"Null|True|False|protected:|private:");
+            e.ChangedRange.SetStyle(MediumPurpleStyle, @"input|out");
+            e.ChangedRange.SetStyle(AddStyle, @"Add");
             e.ChangedRange.SetStyle(CharStyle, @"{|}|[|]|""|""|\'|\'|:|;|(|)|!|@|#|$|%|^|&");
-            e.ChangedRange.SetStyle(CharStyle, NumberRegex);
-           
+
             //clear folding markers
             e.ChangedRange.ClearFoldingMarkers();
             //set folding markers
             e.ChangedRange.SetFoldingMarkers("{", "}"); //allow to collapse brackets block
-            //e.ChangedRange.SetFoldingMarkers(@"#region\b", @"#endregion\b"); //allow to collapse #region blocks
+            e.ChangedRange.SetFoldingMarkers(@"#region\b", @"#endregion\b"); //allow to collapse #region blocks
 
             IList<string> line = e.ChangedRange.tb.Lines;
-        }
+            for (int i = 0; i < line.Count; i++)
+            {
+                try
+                {
+                    if (line[i].Contains("var"))
+                    {
+                        string q = line[i].Trim(' ');
+                        q = q.Split(' ')[1];
+                        q = q.Split('=', ' ', '(', ')', '{', '}')[0];
+                        e.ChangedRange.SetStyle(BlueSlateStyle, SPKVarRegex);
+                    }
+                    else
+                     if (line[i].Contains("enum"))
+                    {
+                        string q = line[i].Trim(' ');
+                        q = q.Split(' ')[1];
+                        q = q.Split('=', ' ', '(', ')', '{', '}')[0];
+                        e.ChangedRange.SetStyle(BlueSlateStyle, SPKEnumRegex);
+                    }
+                    else
+                    if (line[i].Contains("class"))
+                    {
+                        string q = line[i].Trim(' ');
+                        q = q.Split(' ')[1];
+                        q = q.Split('=', ' ', '(', ')', '{', '}')[0];
+                        e.ChangedRange.SetStyle(BlueSlateStyle, SPKFClassRegex);
+                    }
+                    else
+                    if (line[i].Contains("fun"))
+                    {
+                        string q = line[i].Trim(' ');
+                        q = q.Split(' ')[1];
+                        q = q.Split('=', ' ', '(', ')', '{', '}')[0];
+                        e.ChangedRange.SetStyle(BlueSlateStyle, SPKFunRegex);
+                    }
+                }
+                catch { }
+            }
 
-        protected void AutoIndentNeeded(object sender, AutoIndentEventArgs args)
+            foreach (var item in Directory.GetFiles(Globals.SpecialKey + "modules\\", "*.spk"))
+            {
+                FileInfo fi = new FileInfo(item);
+                string dfName = fi.Name.Split(".spk"[0])[0];
+                if (e.ChangedRange.tb.Text.Contains("Add " + dfName))
+                {
+                    List<string> LinesFromFile = new List<string>(File.ReadAllLines(item));
+
+                    for (int i = 0; i < LinesFromFile.Count; i++)
+                    {
+                        try
+                        {
+                            if (LinesFromFile[i].Contains("fun") || LinesFromFile[i].Contains("enum") || LinesFromFile[i].Contains("class"))
+                            {
+                                string q = LinesFromFile[i].Trim(' ');
+                                q = q.Split(' ')[1];
+                                q = q.Split('=', ' ', '(', ')', '{', '}')[0];
+                                e.ChangedRange.SetStyle(BlueSlateStyle, q);
+                            }
+                        }
+                        catch { }
+                    }
+                }
+                else { }
+            }
+        }
+        protected void SPKAutoIndentNeeded(object sender, AutoIndentEventArgs args)
         {
             //block {}
             if (Regex.IsMatch(args.LineText, @"^[^""']*\{.*\}[^""']*$"))
@@ -121,7 +192,7 @@ namespace SKIDLE
         protected void InitSPKRegex()
         {
 
-            StringRegex =
+            SPKStringRegex =
                 new Regex(
                     @"
                             # Character definitions:
@@ -156,13 +227,22 @@ namespace SKIDLE
                     RegexCompiledOption
                     );
 
-            CommentRegex1 = new Regex(@"#.*$", RegexOptions.Multiline | RegexCompiledOption);
-            CommentRegex2 = new Regex(@"(/#*.*?\*/)|(/\*.*)", RegexOptions.Singleline | RegexCompiledOption);
-            CommentRegex3 = new Regex(@"(/#*.*?\*/)|(.*\*/)",
+            SPKCommentRegex1 = new Regex(@"#.*$", RegexOptions.Multiline | RegexCompiledOption);
+            SPKCommentRegex2 = new Regex(@"(/#*.*?\*/)|(/\*.*)", RegexOptions.Singleline | RegexCompiledOption);
+            SPKCommentRegex3 = new Regex(@"(/#*.*?\*/)|(.*\*/)",
                                             RegexOptions.Singleline | RegexOptions.RightToLeft | RegexCompiledOption);
-            NumberRegex = new Regex(@"\b\d+[\.]?\d*([eE]\-?\d+)?[lLdDfF]?\b|\b0x[a-fA-F\d]+\b",
+            SPKNumberRegex = new Regex(@"\b\d+[\.]?\d*([eE]\-?\d+)?[lLdDfF]?\b|\b0x[a-fA-F\d]+\b",
                                           RegexCompiledOption);
-            AttributeRegex = new Regex(@"^\s*(?<range>\[.+?\])\s*$", RegexOptions.Multiline | RegexCompiledOption);            
+            SPKAttributeRegex = new Regex(@"^\s*(?<range>\[.+?\])\s*$", RegexOptions.Multiline | RegexCompiledOption);
+            SPKClassNameRegex = new Regex(@"\b(class|enum|fun)\s+(?<range>\w+?)\b", RegexCompiledOption);
+            SPKVarRegex = new Regex(@"\b(var)\s+(?<range>\w+?)\b", RegexCompiledOption);
+            SPKFClassRegex = new Regex(@"\b(class)\s+(?<range>\w+?)\b", RegexCompiledOption);
+            SPKEnumRegex = new Regex(@"\b(enum)\s+(?<range>\w+?)\b", RegexCompiledOption);
+            SPKFunRegex = new Regex(@"\b(fun)\s+(?<range>\w+?)\b", RegexCompiledOption);
+            SPKKeywordRegex =
+                new Regex(
+                    @"\b(Add|fun|class|if|for|while|do|else|stop|continue|switch|case|enum|toStr|toInt|toFloat|toByte|toShort|toLong|toDouble|ref|length|Array|strReplace|strSplit|var|Null|True|False|protected:|private:|input|out|return)\b|#region\b|#endregion\b",
+                    RegexCompiledOption);
         }
     }
 }

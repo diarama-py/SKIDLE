@@ -27,6 +27,8 @@ namespace SKIDLE
             [STAThread]
         static void Main(string[] args)
         {
+
+            Application.EnableVisualStyles();
             LoadAllExtAndLibs.Load();
             bool isNotRunning = true;
             ConfigFile config = new ConfigFile(Globals.User + "configure.conf");

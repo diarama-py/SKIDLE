@@ -116,12 +116,11 @@ namespace SKIDLE.UserControls
             this.pathToSPK.MaxLength = 32767;
             this.pathToSPK.Name = "pathToSPK";
             this.pathToSPK.PasswordChar = '\0';
-            this.pathToSPK.PromptText = "Compiler path";
+            //this.pathToSPK.PromptText = "Compiler path";
             this.pathToSPK.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.pathToSPK.SelectedText = "";
             this.pathToSPK.SelectionLength = 0;
             this.pathToSPK.SelectionStart = 0;
-            this.pathToSPK.ShortcutsEnabled = true;
             this.pathToSPK.ShowButton = true;
             this.pathToSPK.Size = new System.Drawing.Size(679, 23);
             this.pathToSPK.TabIndex = 0;

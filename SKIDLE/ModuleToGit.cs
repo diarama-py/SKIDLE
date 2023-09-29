@@ -93,14 +93,14 @@ namespace SKIDLE
             ConfigFile config = new ConfigFile(Globals.Main+"\\Languages\\"+name+".conf");
             this.Text = config.GetProperty("mtitle");
             this.title.Text = config.GetProperty("mtitlePar");
-            this.pathtoFolder.PromptText = config.GetProperty("pathToFile");
-            this.email.PromptText = config.GetProperty("memail");
-            this.author.PromptText = config.GetProperty("mauthor");
-            this.versionModule.PromptText = config.GetProperty("mversion");
-            this.NameModule.PromptText = config.GetProperty("mname");
+            //this.pathtoFolder.PromptText = config.GetProperty("pathToFile");
+            //this.email.PromptText = config.GetProperty("memail");
+            //this.author.PromptText = config.GetProperty("mauthor");
+            //this.versionModule.PromptText = config.GetProperty("mversion");
+            //this.NameModule.PromptText = config.GetProperty("mname");
             this.minSPK.PromptText = config.GetProperty("mminspk");
             this.metroLabel1.Text = config.GetProperty("minfoTitle");
-            this.desc.PromptText = config.GetProperty("mdesc");
+            //this.desc.PromptText = config.GetProperty("mdesc");
             this.pub.Text = config.GetProperty("mpub");
         }
     }

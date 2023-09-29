@@ -1,5 +1,4 @@
 ﻿using FastColoredTextBoxNS;
-using SKIDLE.UI.VS;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -27,7 +26,7 @@ namespace SKIDLE.UserControls
         public int linesForDocMap = 150;
         FastColoredTextBoxNS.DocumentMap documentMap;
         private System.ComponentModel.IContainer components;
-        private VSContextMenuStripTE contextMenu;
+        private ContextMenuStrip contextMenu;
         private ToolStripMenuItem cut;
         private ToolStripMenuItem copy;
         private ToolStripMenuItem paste;
@@ -82,7 +81,7 @@ namespace SKIDLE.UserControls
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(codeTab));
             this.code = new SKIDLE.UserControls.FastCTBox();
-            this.contextMenu = new SKIDLE.UI.VS.VSContextMenuStripTE();
+            this.contextMenu = new ContextMenuStrip();
             this.ACmenu = new AutoForce(code);
             this.cut = new System.Windows.Forms.ToolStripMenuItem();
             this.copy = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,7 +128,7 @@ namespace SKIDLE.UserControls
     "(?<range>:)\\s*(?<range>[^;]+);";
             this.code.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.code.BackBrush = null;
-            this.code.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.code.BackColor = Color.WhiteSmoke;
             this.code.CharHeight = 14;
             this.code.CharWidth = 8;
             this.code.ContextMenuStrip = this.contextMenu;
@@ -137,10 +136,10 @@ namespace SKIDLE.UserControls
             this.code.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.code.Dock = System.Windows.Forms.DockStyle.Fill;
             this.code.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.code.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.code.IndentBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.code.ForeColor = System.Drawing.Color.Black;
+            this.code.IndentBackColor = Color.Azure;
             this.code.IsReplaceMode = false;
-            this.code.LineNumberColor = System.Drawing.Color.WhiteSmoke;
+            this.code.LineNumberColor = System.Drawing.Color.Black;
             this.code.Location = new System.Drawing.Point(0, 24);
             this.code.Name = "code";
             this.code.Paddings = new System.Windows.Forms.Padding(0);
@@ -152,11 +151,12 @@ namespace SKIDLE.UserControls
             this.code.TextChanging += new System.EventHandler<FastColoredTextBoxNS.TextChangingEventArgs>(this.Code_TextChanging);
             this.code.Load += new System.EventHandler(this.Code_Load);
             this.code.TextChangedDelayed += Code_TextChangedDelayed;
+            this.code.SelectionColor = Color.Aqua;
             
             // 
             // contextMenu
             // 
-            contextMenu.gWidth = 20;
+            contextMenu.Width = 20;
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cut,
             this.copy,
@@ -226,7 +226,7 @@ namespace SKIDLE.UserControls
             // 
             // topMenuStrip
             // 
-            this.topMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.topMenuStrip.BackColor = Color.White;
             this.topMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stripLabel});
             this.topMenuStrip.Location = new System.Drawing.Point(0, 0);
@@ -237,7 +237,7 @@ namespace SKIDLE.UserControls
             // 
             // stripLabel
             // 
-            this.stripLabel.ForeColor = System.Drawing.Color.White;
+            this.stripLabel.ForeColor = System.Drawing.Color.Black;
             this.stripLabel.Name = "stripLabel";
             this.stripLabel.Size = new System.Drawing.Size(0, 17);
             // 
@@ -268,7 +268,7 @@ namespace SKIDLE.UserControls
             // 
             // documentMap
             // 
-            this.documentMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.documentMap.BackColor = Color.WhiteSmoke;
             this.documentMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.documentMap.ForeColor = System.Drawing.Color.Maroon;
             this.documentMap.Location = new System.Drawing.Point(0, 0);
@@ -306,9 +306,9 @@ namespace SKIDLE.UserControls
             // codeTab
             // 
             this.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(115)))));
+           // this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(0)))), ((int)(((byte)(115)))));
             this.Controls.Add(this.split);
-            this.ForeColor = System.Drawing.Color.White;
+            this.ForeColor = System.Drawing.Color.Black;
             ((System.ComponentModel.ISupportInitialize)(this.code)).EndInit();
             this.contextMenu.ResumeLayout(false);
             this.topMenuStrip.ResumeLayout(false);
@@ -413,7 +413,7 @@ namespace SKIDLE.UserControls
             RefreshCode();
             ConfigFile config = new ConfigFile(Globals.User + "configure.conf");
             try { LoadConfig(config); } catch { }
-            Theme(Globals.themes + config.GetProperty("theme"));
+            //Theme(Globals.themes + config.GetProperty("theme"));
             Lang(Globals.locales + config.GetProperty("language") + ".conf");
             
             code.Select();
@@ -449,7 +449,6 @@ namespace SKIDLE.UserControls
                 code.Language = Language.PHP;
             else
                 code.TextChangedDelayed += new EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(highLighting._HighLighting);
-            highLighting.local = this.Name;
             code.Name = this.Name;
         }
 
@@ -461,7 +460,7 @@ namespace SKIDLE.UserControls
                 code.IsReplaceMode = false;
             code.Zoom = int.Parse(config.GetProperty("zoom"));
             linesForDocMap = int.Parse(config.GetProperty("documentmapMinLines"));
-            code.BackColor = Color.FromArgb(int.Parse(config.GetProperty("backcolor").Split(',')[0]), int.Parse(config.GetProperty("backcolor").Split(',')[1]),int.Parse(config.GetProperty("backcolor").Split(',')[2]));
+            //code.BackColor = Color.FromArgb(int.Parse(config.GetProperty("backcolor").Split(',')[0]), int.Parse(config.GetProperty("backcolor").Split(',')[1]),int.Parse(config.GetProperty("backcolor").Split(',')[2]));
         }
 
 
@@ -478,6 +477,7 @@ namespace SKIDLE.UserControls
 
         private void Theme(string data)
         {
+            /*
             ConfigFile c = new ConfigFile(data);
             this.BackColor = c.GetColor("backcoloredit");
             this.documentMap.BackColor = c.GetColor("docmapBackColor");
@@ -491,6 +491,7 @@ namespace SKIDLE.UserControls
             this.code.SelectionColor = c.GetColor("selectionColor");
             this.code.LineNumberColor = c.GetColor("linenumberColor");
             code.ForeColor = c.GetColor("forecolor");
+            */
         }
 
         public void LoadTopMenuLabel()
